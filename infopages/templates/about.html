@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+    <div class="col-11 m-auto">
+        <h4>Frequently asked questions:</h4>
+        {% for topic in faq %}
+        <p><b>{{ topic.question }}</b><br>
+        {{ topic.answer }}</p>
+        <hr class="hr-small bss-red">
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

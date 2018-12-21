@@ -1,15 +1,19 @@
-{% extends "base.html" %}
-{% load materializecss %}
+{% extends "base.html" %} 
+{% load crispy_forms_tags %} 
 {% block content %}
-    <form method="post" action="{% url 'login' %}?next={{ next }}" class="accountform">
-        <fieldset class="form-group">
-            <legend>Login</legend>
-            {% csrf_token %}
-            {{ user_form | materializecss }}
-            
-             <p><a href="{% url 'password_reset' %}">Forgot my password</a></p>
-             
+<div class="row">
+    <div class="col-8 m-auto">
+        <form method="post" action="{% url 'login' %}?next={{ next }}" class="accountform">
+            <h4>Login</h4>
+            {% csrf_token %} {{ user_form | crispy }}
+            <div class="m-auto">
+                <div class="col-3"><a href="{% url 'password_reset' %}">Forgot password?</a></div>
+                <div class="col-3"><a href="{% url 'register' %}">Register</a></div>
+                
+                
+            </div>
             <button type="submit" class="btn btn-primary">Login</button>
-        </fieldset>
-    </form>
+        </form>
+    </div>
+</div>
 {% endblock %}

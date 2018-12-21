@@ -6,27 +6,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/customstyle.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+    <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js"></script>
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <title>Brick Sticker Shop</title>
 </head>
 
 <body>
+    <header>
+    <div class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-light bss-red">
+            <a class="navbar-brand" href="#"><img src="{% static 'img/logo.png' %}" width="300"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span><i class="fas fa-bars"></i></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto mr-0">
+                    <li class="nav-item active">
+                        <a class="nav-link bss-white-text" href="{% url 'index' %}"><i class="fas fa-home"></i>
+                            <span class="sr-only">(current)</span> Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle bss-white-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-info-circle"></i> Information
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
+                            <a class="dropdown-item" href="{% url 'about' %}">About the Stickers</a>
+                            <a class="dropdown-item" href="{% url 'privacy' %}">Privacy Statement</a>
+                            <a class="dropdown-item" href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>
+                            <a class="dropdown-item" href="{% url 'returns' %}">Returns</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link bss-white-text" href="#"><i class="fas fa-edit"></i> Contact</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link bss-white-text" href="{% url 'logout' %}"><i class="fas fa-user-circle"></i> Sign Out</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="fas fa-user-circle"></i> Sign In</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <div class="d-block d-sm-none">
+                    <form class="form-inline my-2 my-lg-0 mr-auto">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bss-red bss-white-text no-border" id="basic-search"><i class="fas fa-search"></i></span>
+                            </div>
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
+                            <button class="btn btn-light bss-red bss-white-text no-border" type="submit">Go</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-expand-lg navbar-light bss-red">
+            <a class="nav-link dropdown-toggle bss-white-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="far fa-list-alt"></i> Categories</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">  <!-- Genereren vanuit products app? -->
+                <a class="dropdown-item" href="#">Legoland</a>
+                <a class="dropdown-item" href="#">Fabuland</a>
+                <a class="dropdown-item" href="#">Classic Town</a>
+                <a class="dropdown-item" href="#">Town</a>
+                <a class="dropdown-item" href="#">World City</a>
+                <a class="dropdown-item" href="#">City</a>
+                <a class="dropdown-item" href="#">Trains</a>
+                <a class="dropdown-item" href="#">Racers</a>
+                <a class="dropdown-item" href="#">Space</a>
+                <a class="dropdown-item" href="#">Homemaker</a>
+                <a class="dropdown-item" href="#">Expert Builder</a>
+                <a class="dropdown-item" href="#">Harbour</a>
+                <a class="dropdown-item" href="#">Ferry</a>
+                <a class="dropdown-item" href="#">TECHNIC</a>
+                <a class="dropdown-item" href="#">Creator</a>
+            </div>
+            <div class="d-none d-sm-block">
+                <form class="form-inline my-2 my-lg-0 mr-auto">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bss-red bss-white-text no-border" id="basic-search"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
+                        <button class="btn btn-light bss-red bss-white-text no-border" type="submit">Go</button>
+                    </div>
+                </form>
+            </div>
+            <a class="nav-link bss-white-text ml-auto mr-0" href="#"><i class="fas fa-shopping-cart"></i> Cart</a>
+        </nav>
+    </div>
+    </header>
 
-    <nav>
-        <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Logo</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a href="sass.html">Sass</a></li>
-                <li><a href="badges.html">Components</a></li>
-                <li><a href="collapsible.html">JavaScript</a></li>
-            </ul>
-        </div>
-    </nav>
-
+    <main role="main" class="container">
     {% block content %} {% endblock %}
+    </main>
+    
+    <footer role="footer" class="footer">
+        <div class="container">
+            <!--<span class="m-auto">Made by me, need to make this look better</span>-->
+            <div class="row">
+                <div class="col-12 col-sm-4">
+                    <div class="card simply-square my-2">
+                    <div class="card-header bss-yellow"><b>Sign up for our Newsletter</b></div>
+                        <div class="card-body">
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

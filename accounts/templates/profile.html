@@ -1,5 +1,22 @@
-{% extends "base.html" %}
-{% block content %}
-    <h2>Success!</h2>
-    <p>You are logged in as {{ user.email }} </p>
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<div class="row">
+    <div class="col-8 m-auto">
+        <h4>Your Saved Information:</h4>
+        <p> Your username is: <b>{{ user.username }}</b></p>
+        <p>You are logged in as: <b>{{ user.email }}</b></p>
+        <p>Your First Name: <b>{{ user.first_name }}</b></p>
+        <p>Your Last name: <b>{{ user.last_name }}</b></p>
+        <p></p>
+        <hr>
+        <p>Your Addressdata:</p>
+        <p><b>{{ userdata.address_1 }}</b></p>
+        <p>{{ userdata.address_2 }}</p>
+        <p>{{ userdata.postal_code }}</p>
+        <p>{{ userdata.town_or_city }}</p>
+        <p>{{ userdata.state_or_province }}</p>
+        <p>{{ userdata.country }}</p>
+        <hr>
+    </div>
+</div>
+
 {% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %} {% block content %} {% load static from staticfiles %}
+
+    {% for product in products %}
+<div class="row">
+    <div class="col-12 mx-auto my-1 display card card-default">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image1 }}')"></div>
+                </div>
+                <div class="col-12 col-md-9">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-9">
+                        <h5>{{ product.name }}</h5>
+                    <p class="product-description">{{ product.description }}</p>
+                    
+                    </div>
+                    <div class="col-6 d-block d-sm-none">
+                        <h5>&euro; {{ product.price }}</h5>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-3">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <div class="input-group input-group-sm">
+                            <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
+                            <span class="input-group-append">
+                                <button class="btn btn-sm bss-white-text bss-red" type="submit">Add</button>
+                            </span>
+                        </div>
+                    </form><br>
+                    <div class="d-none d-sm-block">
+                        <h5>&euro; {{ product.price }}</h5>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    {% endfor %}
+{% endblock %}

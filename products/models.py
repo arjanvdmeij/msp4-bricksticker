@@ -9,9 +9,8 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     image1 = models.ImageField(upload_to='img')
     image2 = models.ImageField(upload_to='img')
-    main_category = models.CharField(max_length=100, default='')
-    sub_category = models.CharField(max_length=100, default='')
-    
+    category = models.CharField(max_length=100, default='')
+
     def __str__(self):
         return self.name
     

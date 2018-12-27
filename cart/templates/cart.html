@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% load static from staticfiles %} {% load crispy_forms_tags %} {% block content %} {% for item in cart_items %}
+
+<div class="row">
+    <div class="col-12 mx-auto my-1 display card card-default">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-sm-3">
+                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ item.product.image1 }}')"></div>
+                </div>
+                <div class="col-12 col-sm-9">
+                    <div class="row">
+                        <div class="col-12 col-sm-8">
+                            <h5>{{ item.product.name }}</h5>
+                            <p class="product-description">{{ item.product.description }}</p>
+
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <form method="post" action="{% url 'adjust_cart' item.id %}">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="exampleInputAmount" class="sr-only">New Qty</label>
+                                    <div class="input-group input-group-sm">
+                                        <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text">{{item.quantity}}</span></div>
+                                        <input name="quantity" type="number" min="0" max="999" class="form-control">
+                                        <div class="input-group-append">
+                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Adjust</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form><br>
+                            <h5>&euro; {{ item.product.price }}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+<div class="row">
+    <div class="col-12 no-padding">
+        <div class="float-right">
+            <div class="input-group input-group-sm">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Total: </span>
+                </div>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">&euro; {{ total }} </span>
+                </div>
+                <div class="input-group-append">
+                    <a href="#" class="btn btn-success" role="button">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

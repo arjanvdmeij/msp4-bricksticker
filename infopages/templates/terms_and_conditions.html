@@ -1,9 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% load static from staticfiles %}
 
 {% block content %}
 <div class="row">
     <div class="col-11 m-auto">
-        <h4>Terms and Conditions (version January 2018) <a href="/static/files/T_C_Brickstickershop.pdf" target="_blank"><i class="bss-red-text far fa-file-pdf"></i></a></h4>
+        <h4>Terms and Conditions (version January 2018) <a href="{% static 'files/T_C_Brickstickershop.pdf' %}" target="_blank"><i class="bss-red-text far fa-file-pdf"></i></a></h4>
         <p><b>Index:</b><br>
         <ul type="none">
             <li><a href="#A1">Article 1 - Definitions</a></li>
@@ -14,9 +14,9 @@
             <li><a href="#A6">Article 6 - Right of withdrawal</a></li>
             <li><a href="#A7">Article 7 - Costs in case of withdrawal</a></li>
             <li><a href="#A8">Article 8 - Exclusion of right of withdrawal</a></li>
-            <li><a href="#A9">Article 9 - The price</a></li>
+            <li><a href="#A9">Article 9 - The price</a></li><div id="A1"></div>
             <li><a href="#A10">Article 10 - Conformity and guarantee</a></li>
-            <li><a href="#A11">Article 11 - Delivery and execution</a></li><div id="A1"></div>
+            <li><a href="#A11">Article 11 - Delivery and execution</a></li>
             <li><a href="#A12">Article 12 - Duration transactions: duration, cancellation and extension</a></li>
             <li><a href="#A13">Article 13 - Payment</a></li>
             <li><a href="#A14">Article 14 - Complaints procedure</a></li>
@@ -33,9 +33,9 @@
             <li><b>Transaction Duration:</b> a distance contract relating to a series of products and / or services, the supply and / or purchase obligation of which is spread over time;</li>
             <li><b>Durable data carrier:</b> any means that enables the consumer or trader to store information that is addressed to him personally in a way that makes future consultation and unaltered reproduction of the stored information possible;</li>
             <li><b>Right of withdrawal:</b> the possibility for the consumer to withdraw from the distance contract within the cooling-off period;</li>
-            <li><b>Cooling-off period:</b> the period within which the consumer can make use of his right of withdrawal;</li>
+            <li><b>Cooling-off period:</b> the period within which the consumer can make use of his right of withdrawal;</li><div id="A2"></div>
             <li><b>Model form:</b> the model withdrawal form that the entrepreneur provides that a consumer can fill in when he wants to make use of his right of withdrawal;</li>
-            <li><b>Entrepreneur:</b> the natural or legal person that offers products and / or services to consumers at a distance;</li><div id="A2"></div>
+            <li><b>Entrepreneur:</b> the natural or legal person that offers products and / or services to consumers at a distance;</li>
             <li><b>Distance contract:</b> an agreement whereby, within the framework of a system organized by the entrepreneur for distance selling of products and / or services, up to and including the conclusion of the agreement only one or more communication techniques are used. distance;</li>
             <li><b>Technique for distance communication:</b> means that can be used for concluding an agreement, without the consumer and trader being in the same room at the same time;</li>
             <li><b>General Terms and Conditions:</b> these General Terms and Conditions of the entrepreneur.</li>
@@ -45,9 +45,9 @@
         <p>BrickStickerShop<br>
         Streetaddress 111<br>
         1234AA Towncity<br>
-        Country<br>
+        Country<br><div id="A3"></div>
         Tel: 555-1234-1234<br>
-        E-mail address: info@example.com<br><div id="A3"></div>
+        E-mail address: info@example.com<br>
         Chamber of Commerce number: 12348765<br>
         VAT identification number: XX102938475B52S<br>
         IBAN: XX88QQQQ0111111111<br>
@@ -66,9 +66,9 @@
         the request of the consumer by electronic means or otherwise. In the event that specific product or service conditions apply 
         in addition to these general terms and conditions, the second and third paragraphs shall apply mutatis mutandis and the 
         consumer may in the event of conflicting general terms and conditions always invoke the applicable provision that is most 
-        favorable to him. If one or more provisions in these general terms and conditions at any time are wholly or partially 
+        favorable to him. <span id="A4"></span>If one or more provisions in these general terms and conditions at any time are wholly or partially 
         void or destroyed, then the agreement and these conditions remain intact and the stipulation in question will be replaced 
-        by a provision that the scope of the original approached as much as possible. <span id="A4"></span>Situations that are not regulated in these 
+        by a provision that the scope of the original approached as much as possible. Situations that are not regulated in these 
         general terms and conditions must be assessed 'in the spirit' of these general terms and conditions. Lack of clarity about 
         the explanation or content of one or more provisions of our conditions, should be explained 'in the spirit' of these general conditions.</p>
         <hr class="hr-small bss-red">
@@ -90,9 +90,9 @@
             <li>the method of payment, delivery and execution of the agreement;</li>
             <li>the period for accepting the offer or the period within which the entrepreneur guarantees the price;</li>
             <li>the level of the tariff for distance communication if the costs of using the technique for distance communication are calculated on a basis other 
-            than the regular basic tariff for the means of communication used;</li>
+            than the regular basic tariff for the means of communication used;</li><div id="A5"></div>
             <li>whether the agreement is archived after the conclusion and, if so, how it can be consulted by the consumer;</li>
-            <li>the way in which the consumer, prior to concluding the contract, can check the data provided by him under the contract and repair it if necessary;</li><div id="A5"></div>
+            <li>the way in which the consumer, prior to concluding the contract, can check the data provided by him under the contract and repair it if necessary;</li>
             <li>any other languages in which, in addition to Dutch, the agreement can be concluded;</li>
             <li>the codes of conduct to which the trader is subject and the way in which the consumer can consult these codes of conduct electronically;</li>
             <li>the minimum duration of the distance contract in case of an extended transaction.</li>
@@ -114,9 +114,9 @@
             <li>the visiting address of the business location of the trader where the consumer can go with complaints;</li>
             <li>the conditions under which and the manner in which the consumer can exercise the right of withdrawal, or a clear 
             statement regarding the exclusion of the right of withdrawal;</li>
-            <li>the information about guarantees and existing service after purchase;</li>
+            <li>the information about guarantees and existing service after purchase;</li><span id="A6"></span>
             <li>the information included in article 4 paragraph 3 of these conditions, unless the entrepreneur has already provided this information 
-            to the consumer before the execution of the agreement;</li><span id="A6"></span>
+            to the consumer before the execution of the agreement;</li>
             <li>the requirements for terminating the agreement if the agreement has a duration of more than one year or is indefinite.</li>
         </ol>
         In the case of an extended transaction, the provision in the previous paragraph only applies to the first delivery.
@@ -134,16 +134,16 @@
         obligated to make this known to the entrepreneur within 14 days after receipt of the product. The consumer must make this known 
         by means of the model form. After the consumer has made it known that he wishes to make use of his right of withdrawal, the 
         customer must return the product within 14 days. The consumer must prove that the delivered goods have been returned in time, 
-        for example by means of a proof of shipment. If the customer has not made it known that he wishes to make use of his right of 
+        for example by means of a proof of shipment. <span id="A7"></span>If the customer has not made it known that he wishes to make use of his right of 
         withdrawal or withdrawal after the expiry of the terms mentioned in paragraphs 2 and 3. the product has not been returned to 
         the entrepreneur, the sale is a fact.<br><br>
-        <em><b>When delivering services:</b></em><br><span id="A7"></span>
+        <em><b>When delivering services:</b></em><br>
         When providing services, the consumer has the option to dissolve the agreement without giving any reason for at least 14 days, 
         starting on the day of entering into the agreement. In order to make use of his right of withdrawal, the consumer will focus 
-        on the reasonable and clear instructions provided by the entrepreneur with the offer and / or at the latest on delivery.</p>
+        on the reasonable and clear instructions provided by the entrepreneur with the offer and / or at the latest on delivery.</p><span id="A8">
         <hr class="hr-small bss-red">
         <h6><b>Article 7 - Costs in case of withdrawal</b></h6>
-        <p>If the consumer exercises <span id="A8"></span> his right of withdrawal, the costs of returning the goods are at the most. If the consumer has 
+        <p>If the consumer exercises </span> his right of withdrawal, the costs of returning the goods are at the most. If the consumer has 
         paid an amount, the entrepreneur will refund this amount as soon as possible but no later than 14 days after cancellation.
         However, the condition is that the product has already been received back by the merchant or conclusive proof of complete 
         return can be submitted.</p>
@@ -155,10 +155,9 @@
         <ol type="a">
             <li>that have been created by the entrepreneur in accordance with the specifications of the consumer;</li>
             <li>that are clearly personal in nature;</li>
-            <li>which can not be returned due to their nature;</li>
+            <li>which can not be returned due to their nature;</li><span id="A9"></span>
             <li>that can spoil or age quickly;</li>
             <li>the price of which is subject to fluctuations in the financial market on which the entrepreneur has no influence;</li>
-            <span id="A9"></span>
             <li>for loose newspapers and magazines;</li>
             <li>for audio and video recordings and computer software of which the consumer has broken the seal;</li>
             <li>for hygienic products of which the consumer has broken the seal.</li>
@@ -173,10 +172,10 @@
         they are the result of statutory regulations or provisions. Price increases from 3 months after the conclusion of the 
         contract are only allowed if the entrepreneur has stipulated this and:
         <ol type="a">
+        <span id="A10"></span>
             <li>they are the result of statutory regulations or stipulations; or</li>
             <li>the consumer has the authority to cancel the agreement with effect from the day on which the price increase takes effect.</li>
         </ol>
-        <span id="A10"></span>
         The prices mentioned in the offer of products or services include VAT. All prices are subject to printing and typing errors. 
         No liability is accepted for the consequences of printing and typing errors. In the case of printing and typing errors, the 
         entrepreneur is not obligated to deliver the product at the wrong price.</p>
@@ -188,11 +187,10 @@
         A guarantee provided by the entrepreneur, manufacturer or importer does not affect the legal rights and claims that the consumer can assert 
         against the entrepreneur under the contract. Any defects or incorrectly delivered products must be reported to the entrepreneur in 
         writing within 4 weeks after delivery. Return of the products must be in the original packaging and in new condition. The entrepreneur's 
-        warranty period corresponds to the manufacturer's warranty period. However, the entrepreneur is never responsible for the ultimate 
+        warranty period corresponds to the manufacturer's warranty period. <span id="A11"></span>However, the entrepreneur is never responsible for the ultimate 
         suitability of the products for each individual application by the consumer, nor for any advice regarding the use or application 
         of the products. The guarantee does not apply if:
         <ol type="a">
-            <span id="A11"></span>
             <li>The consumer has repaired the delivered products himself and / or processed or has third parties repaired and / or processed;</li>
             <li>The delivered products are exposed to abnormal conditions or otherwise careless handling or contrary to the instructions of 
             the entrepreneur and / or the packaging are treated;</li>
@@ -209,9 +207,8 @@
         the consumer has the right to terminate the contract without any costs. The consumer is not entitled to compensation.
         All delivery terms are indicative. The consumer can not derive any rights from any periods mentioned. Exceeding a term does not entitle 
         the consumer to compensation. In case of dissolution in accordance with paragraph 3 of this article, the entrepreneur will refund 
-        the amount that the consumer has paid as soon as possible but no later than 14 days after termination. If delivery of an ordered 
+        <span id="A12"></span>the amount that the consumer has paid as soon as possible but no later than 14 days after termination. If delivery of an ordered 
         product proves to be impossible, the entrepreneur will endeavor to make a replacement article available. At the latest at the time 
-        <span id="A12"></span>
         of delivery, it will be stated in a clear and comprehensible manner that a replacement item will be delivered. For replacement items 
         right of withdrawal can not be excluded. The costs of any return shipment are at the expense of the entrepreneur.
         The risk of damage and / or loss of products rests with the entrepreneur until the moment of delivery to the consumer or a 
@@ -237,17 +234,17 @@
         renewed for a fixed term of a maximum of three months, if the consumer agrees to this extended agreement. the end of the extension can 
         be canceled with a notice period of no more than one month. A contract that has been entered into for a definite period and that extends 
         to the regular delivery of products or services may only be tacitly renewed for an indefinite period if the consumer may cancel at any 
-        time with a notice period of no more than one month and a notice period of at most three months in case the agreement extends to the 
+        time with a notice period of no more than one month <span id="A13"></span>and a notice period of at most three months in case the agreement extends to the 
         regular, but less than once a month, delivery of daily, news and weekly newspapers and magazines. A contract of limited duration to the 
         regular delivery of daily, news and weekly newspapers and magazines (trial or introductory subscription) is not tacitly continued and 
-        ends automatically after the trial or introductory period.<br><span id="A13"></span><br>
+        ends automatically after the trial or introductory period.<br><br>
         <em><b>Duration</b></em><br>
         If an agreement has a duration of more than one year, the consumer may terminate the agreement at any time with a notice period of no 
         more than one month, unless the reasonableness and fairness oppose cancellation before the end of the agreed term.</p>
         <hr class="hr-small bss-red">
-        <h6><b>Article 13 - Payment</b></h6>
+        <h6><b>Article 13 - Payment</b></h6><span id="A14"></span>
         <p>Unless otherwise agreed, the amounts owed by the consumer must be paid within 7 working days after the commencement of the 
-        cooling-off period as referred to in article 6 paragraph 1. <span id="A14"></span>In case of an agreement to provide a service, this period will start 
+        cooling-off period as referred to in article 6 paragraph 1. In case of an agreement to provide a service, this period will start 
         after the consumer has received the confirmation of the agreement. The consumer has the duty to report inaccuracies in provided 
         or stated payment details to the entrepreneur without delay. In the event of default by the consumer, the entrepreneur has the 
         right, subject to legal restrictions, to charge the reasonable costs made known to the consumer beforehand.</p>
@@ -258,9 +255,9 @@
         the consumer has discovered the defects. Complaints submitted to the entrepreneur will be answered within a period of 14 days from 
         the date of receipt. If a complaint requires a foreseeable longer processing time, the entrepreneur will respond within the period 
         of 14 days with a notice of receipt and an indication when the consumer can expect a more detailed answer. If the complaint can not 
-        be resolved by mutual agreement, a dispute arises that is susceptible to the dispute settlement. In case of complaints, a consumer 
+        be resolved by mutual agreement, a dispute arises that is susceptible to the dispute settlement. <span id="A15"></span>In case of complaints, a consumer 
         must first turn to the entrepreneur. For complaints that can not be resolved in mutual consultation, the consumer can register 
-        complaints via the <a href="http://ec.europa.eu/odr" target="_blank">European ODR platform</a>. <span id="A15"></span>A complaint does not suspend the 
+        complaints via the <a href="http://ec.europa.eu/odr" target="_blank">European ODR platform</a>. A complaint does not suspend the 
         obligations of the entrepreneur, unless the entrepreneur indicates otherwise in writing. If a complaint is found to be well-founded 
         by the entrepreneur, the entrepreneur will replace or repair the products at its option or the delivered products free of charge.</p>
         <span id="A16"></span><span id="A17"></span>

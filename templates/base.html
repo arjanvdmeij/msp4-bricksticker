@@ -21,122 +21,74 @@
         <nav class="navbar navbar-expand-lg navbar-light bss-red">
             <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" width="300"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span><i class="fas fa-bars"></i></span>
-        </button>
+                <span><i class="fas fa-bars"></i></span>
+            </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mr-0">
                     <li class="nav-item active">
-                        <a class="nav-link bss-white-text" href="{% url 'index' %}"><i class="fas fa-home"></i>
+                        <a class="nav-link bss-white-text" href="{% url 'index' %}"><i class="bss-yellow-text fas fa-home"></i>
                             <span class="sr-only">(current)</span> Home</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle bss-white-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-info-circle"></i> Information
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-                            <a class="dropdown-item" href="{% url 'about' %}">About the Stickers</a>
-                            <a class="dropdown-item" href="{% url 'privacy' %}">Privacy Statement</a>
-                            <a class="dropdown-item" href="{% url 'terms_and_conditions' %}">Terms and Conditions</a>
-                            <a class="dropdown-item" href="{% url 'returns' %}">Returns</a>
-                        </div>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="#"><i class="fas fa-edit"></i> Contact</a>
+                        <a class="nav-link bss-white-text" href="#"><i class="bss-yellow-text fas fa-edit"></i> Contact</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'logout' %}"><i class="fas fa-user-circle"></i> Sign Out</a>
+                        <a class="nav-link bss-white-text" href="{% url 'logout' %}"><i class="bss-yellow-text fas fa-user-circle"></i> Sign Out</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="fas fa-user-circle"></i> Sign In</a>
+                        <a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="bss-yellow-text fas fa-user-circle"></i> Sign In</a>
                     </li>
                     {% endif %}
                 </ul>
-                <div class="d-block d-sm-none">
-                    <form class="form-inline my-2 my-lg-0 mr-auto">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text bss-red bss-white-text no-border" id="basic-search"><i class="fas fa-search"></i></span>
-                            </div>
-                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
-                            <button class="btn btn-light bss-red bss-white-text no-border" type="submit">Go</button>
-                        </div>
-                    </form>
-                </div>
             </div>
         </nav>
         <nav class="navbar navbar-expand-lg navbar-light bss-red">
-            <a class="nav-link dropdown-toggle bss-white-text" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="far fa-list-alt"></i> Categories</a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">  <!-- Genereren vanuit products app? -->
-                <a class="dropdown-item" href="#">Legoland</a>
-                <a class="dropdown-item" href="#">Fabuland</a>
-                <a class="dropdown-item" href="#">Classic Town</a>
-                <a class="dropdown-item" href="#">Town</a>
-                <a class="dropdown-item" href="#">World City</a>
-                <a class="dropdown-item" href="#">City</a>
-                <a class="dropdown-item" href="#">Trains</a>
-                <a class="dropdown-item" href="#">Racers</a>
-                <a class="dropdown-item" href="#">Space</a>
-                <a class="dropdown-item" href="#">Homemaker</a>
-                <a class="dropdown-item" href="#">Expert Builder</a>
-                <a class="dropdown-item" href="#">Harbour</a>
-                <a class="dropdown-item" href="#">Ferry</a>
-                <a class="dropdown-item" href="#">TECHNIC</a>
-                <a class="dropdown-item" href="#">Creator</a>
-            </div>
-            <div class="d-none d-sm-block">
-                <form class="form-inline my-2 my-lg-0 mr-auto">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bss-red bss-white-text no-border" id="basic-search"><i class="fas fa-search"></i></span>
-                        </div>
-                        <input class="form-control" type="search" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
-                        <button class="btn btn-light bss-red bss-white-text no-border" type="submit">Go</button>
-                    </div>
-                </form>
-            </div>
+            {% block search %} {% endblock %}
             <a class="nav-link bss-white-text ml-auto mr-0" href="{% url 'view_cart' %}">
-                <i class="fas fa-shopping-cart fa-lg"></i>
+                <i class="bss-yellow-text fas fa-shopping-cart fa-lg"></i>
                 {% if product_count > 0 %}
-                <label class="cover-cart badge badge-pill badge-dark">{{ product_count }}</label>
-                {% endif %}</a>
+                <sup><label class="cover-cart badge badge-pill badge-dark">{{ product_count }}</label></sup>
+                {% endif %}
+            </a>
         </nav>
     </div>
     </header>
 
     <main role="main" class="container">
     {% if messages %}
-    <div class="alert alert-success">
+    <div class="alert alert-success alert-dismissable fade show" role="alert">
         <div class="messages">
             {% for message in messages %}
                 {{ message }}
             {% endfor %}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
         </div>
     </div>
     {% endif %}
+    
+    
     {% block content %} {% endblock %}
     </main>
     
     <footer role="footer" class="footer">
         <div class="container">
-            <!--<span class="m-auto">Made by me, need to make this look better</span>-->
-            <div class="row">
-                <div class="col-12 col-sm-4">
-                    <div class="card simply-square my-2">
-                    <div class="card-header card-header-padding bss-yellow"><b>Sign up for our Newsletter</b></div>
-                        <div class="card-body">
-                            <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                            {% block newsletter %}{% endblock %}
-                            <form>
-                                <input type="text" name=""/>
-                                <input type="text" name=""/>
-                                <input type="submit" value="Submit"/>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+            <div class="row footer-lineheight">
+                <!--<div class="col-12 col-sm-4">-->
+                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'about' %}"><i class="bss-yellow-text fas fa-question-circle"></i> About the Stickers</a></div>
+                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'privacy' %}"><i class="bss-yellow-text fas fa-info-circle"></i> Privacy Statement</a></div>
+                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'terms_and_conditions' %}"><i class="bss-yellow-text far fa-handshake"></i> Terms and Conditions</a></div>
+                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'returns' %}"><i class="bss-yellow-text fas fa-undo-alt"></i> Returns</a></div>
+                   <!--<div class="card card-default">-->
+                   <!--    <div class="card-body">-->
+                   <!--        Footer-->
+                   <!--    </div>-->
+                   <!--</div>-->
+                    
+                <!--</div>-->
             </div>
         </div>
     </footer>

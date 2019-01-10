@@ -1,42 +1,59 @@
-{% extends 'base.html' %} {% block content %} {% load static from staticfiles %}
+{% extends 'base.html' %} 
 
-    {% for product in products %}
+{% block search %}
+<form class="form-inline my-2 my-lg-0 mr-auto" action="{% url 'search' %}" method="get">
+    <div class="input-group">
+        <input class="form-control hard-borderradius" type="search" name="q" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
+        <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>
+    </div>
+</form>
+{% endblock %}
+
+{% block content %} {% load static from staticfiles %}
+
 <div class="row">
-    <div class="col-12 mx-auto my-1 display card card-default">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-md-3">
-                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ product.image1 }}')"></div>
-                </div>
-                <div class="col-12 col-md-9">
+{% for product in products %}
+    <div class="col-12 col-md-6 my-1">
+        <div class="display card card-default border-red">
+            <div class="card-header">
+                {{product.name}}
+            </div>
+            <div class="card-body">
                 <div class="row">
-                    <div class="col-12 col-sm-6 col-md-9">
-                        <h5>{{ product.name }}</h5>
-                    <p class="product-description">{{ product.description }}</p>
-                    
-                    </div>
-                    <div class="col-6 d-block d-sm-none">
-                        <h5>&euro; {{ product.price }}</h5>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-3">
-                        <form method="post" action="{% url 'add_to_cart' product.id %}">
-                        {% csrf_token %}
-                        <div class="input-group input-group-sm">
-                            <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
-                            <span class="input-group-append">
-                                <button class="btn btn-sm bss-white-text bss-red" type="submit">Add</button>
-                            </span>
+                    <div class="col-12 col-md-4">
+                        <div class="product">
+                            <center>
+                                <a href="#"><img src="{{ MEDIA_URL }}{{ product.image1 }}"><br>Detail</a>
+                                <span class="d-none d-sm-block zoom-in fade show"><img src="{{ MEDIA_URL }}{{ product.image1 }}"></span>
+                            </center>
                         </div>
-                    </form><br>
-                    <div class="d-none d-sm-block">
-                        <h5>&euro; {{ product.price }}</h5>
-                    </div>
-                    </div>
                 </div>
+                    <div class="col-12 col-md-8">
+                        <div class="row">
+                            <div class="col-12"><sup>{{product.description}}</sup></div>
+                            <div class="col-12"><sup>Category: {{product.category}}</sup></div>
+                        </div>
+                </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-8"><h6>&euro; {{ product.price }}</h6></div>
+                    <div class="col-4">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <div class="input-group input-group-sm">
+                                <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
+                                <span class="input-group-append">
+                                    <button class="btn btn-sm bss-white-text bss-red" type="submit">Add</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+{% endfor %}
 </div>
-    {% endfor %}
 {% endblock %}

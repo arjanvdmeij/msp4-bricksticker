@@ -2,8 +2,6 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
-from .models import UserData
-
 
 class UserLoginForm(forms.Form):
     username_or_email = forms.CharField()
@@ -50,20 +48,3 @@ class UserRegistrationForm(UserCreationForm):
 
         return password2
 
-class UserDataForm(forms.ModelForm):
-    address_1=forms.CharField(label="Address Line 1")
-    address_2=forms.CharField(label="Address Line 2", required=False)
-    postal_code=forms.CharField(label="Postal Code")
-    town_or_city=forms.CharField(label="Town or City")
-    country=forms.CharField(label="Country")
-    class Meta:
-        model=UserData
-        fields=[
-            'address_1', 
-            'address_2', 
-            'postal_code', 
-            'town_or_city', 
-            'state_or_province', 
-            'country',
-        ]
-        

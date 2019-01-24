@@ -2,20 +2,13 @@
 <div class="row">
     <div class="col-8 m-auto">
         <h4>Your Saved Information:</h4>
+        <hr class="bss-red">
+        <p>Your user ID is: <b>{{ user.id }}</b></p>
         <p> Your username is: <b>{{ user.username }}</b></p>
         <p>You are logged in as: <b>{{ user.email }}</b></p>
         <p>Your First Name: <b>{{ user.first_name }}</b></p>
         <p>Your Last name: <b>{{ user.last_name }}</b></p>
-        <p></p>
-        <hr>
-        <p>Your Addressdata:</p>
-        <p><b>{{ userdata.address_1 }}</b></p>
-        <p>{{ userdata.address_2 }}</p>
-        <p>{{ userdata.postal_code }}</p>
-        <p>{{ userdata.town_or_city }}</p>
-        <p>{{ userdata.state_or_province }}</p>
-        <p>{{ userdata.country }}</p>
-        <hr>
+        <hr class="bss-red">
     </div>
 </div>
 

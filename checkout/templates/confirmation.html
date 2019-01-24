@@ -1,0 +1,194 @@
+{% autoescape off %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+        }
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+        .m-auto {
+            margin: auto!important;
+        }
+        .m-tiny {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+        .col {
+            -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+            max-width: none;
+            position: relative;
+            width: 80%;
+            min-height: 1px;
+            padding: 0;
+        }
+        .col img {
+            display: block;
+            max-width: 100%;
+            max-height: 75px;
+        }
+        table {
+            border-collapse: collapse;
+            background-color:#f7f7f7;
+        }
+        .table {
+            margin-bottom: .5rem;
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        tbody {
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        .table td, .table th {
+            padding: .5rem;
+            vertical-align: top;
+        }
+        tr {
+            display: table-row;
+            border: 1px solid #c9190a;
+            vertical-align: inherit;
+        }
+        td, th {
+            display: table-cell;
+            vertical-align: inherit;
+            border: 0;
+        }
+        th {
+            text-align: left;
+            background-color: #c9190a;
+            color: #faec06;
+        }
+        .list {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="row" style="background-color:#c9190a">
+        <div class="col">
+            <img src="https://{{ site }}/static/images/logo.png">
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col" style="margin-left:5px;margin-right:5px">
+            <p>Hello,</p>
+            <p>Thank you for your order at <a style="color:#c9190a" href="https://{{ site }}"><b>Brickstickershop</b></a>.</p>
+            <p>Your order has been given the following orderID: <b>{{ order.id }}</b><br>
+            Please refer to this orderID in case you have any questions.</p>
+            <p>If needed, please contact us through the following link: <a style="color:#c9190a" href="https://{{ site }}/contact">Contact</a></p>
+            <p>Below is an overview of the item(s) you've chosen to buy:</p>
+        </div>
+        <div class="col m-tiny">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Item</th>
+                        <th></th>
+                        <th></th>
+                        <th>Item Total</th>
+                    </tr>
+                    {% for item in order_items %}
+                    <tr style="border-bottom:0;">
+                        <td><b>{{ item.product.setnumber}}</b> - {{ item.product.name}}</td>
+                        <td></td>
+                        <td></td>
+                        <td>€ {{ item.total_item_price }}</td>
+                    </tr>
+                    <tr style="border-top:0;">
+                        <td><b>Price:</b> € {{ item.product.price }}</td>
+                        <td><b>Qty:</b> {{ item.quantity }}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Total amount paid: </th>
+                        <th>€ {{ total }}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col m-tiny">
+            <br>
+            Your purchase(s) will be shipped to the following address:
+            <br>&nbsp;<br>
+            <table class="table">
+                <tbody>
+                    <tr style="border-top:0;border-bottom:0;">
+                        <th>
+                            Shipping Address
+                        </th>
+                    </tr>
+                    <tr style="border-top:0;border-bottom:0;">
+                        <td>
+                            {{ order.full_name }}
+                        </td>
+                    </tr>
+                    <tr style="border-top:0;border-bottom:0;">
+                        <td>
+                            {{ order.address1 }}
+                        </td>
+                    </tr>
+                    {% if order.address2 %}
+                    <tr style="border-top:0;border-bottom:0;">
+                        <td>
+                            {{ order.address2 }}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    <tr style="border-top:0;border-bottom:0;">
+                        <td>
+                            {% if order.postcode %}{{ order.postcode }} {% endif %}{{ order.town_or_city}}
+                        </td>
+                    </tr>
+                    <tr style="border-top:0;">
+                        <td>
+                            {% if order.state_or_province %}{{ order.state_or_province }} {% endif %}{{ order.country }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="margin-left:5px;margin-right:5px">
+            <h4>Thank you for shopping with us!</h4>
+            <p>Kindest regards,</p>
+            <p>The team at <a style="color:#c9190a" href="https://{{ site }}"><b>Brickstickershop</b></a>.</p>
+        </div>
+    </div>
+</body>
+
+</html>
+
+{% endautoescape %}

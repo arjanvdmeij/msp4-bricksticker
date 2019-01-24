@@ -1,0 +1,144 @@
+{% extends 'base.html' %} {% load static from staticfiles %} {% load crispy_forms_tags %} {% block head_stripe_js %}
+
+<script src="https://js.stripe.com/v2/"></script>
+<script>
+    //<![CDATA[
+    Stripe.setPublishableKey('{{ stripe_pk }}');
+    //]]>
+</script>
+<script src="{% static 'js/stripe.js' %}"></script>
+
+{% endblock %} {% block content %}
+
+<div class="row">
+    <div class="col-auto mx-auto">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+            <i class="fas fa-shoe-prints bss-yellow-text"></i> Continue Shopping</a>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+
+<div id="checkout">
+    <div class="card">
+        <div class="card-header bss-red" id="headingCart">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCart" aria-expanded="true" aria-controls="collapseCart">
+                  <i class="fas fa-shopping-cart bss-yellow-text"></i>
+                  <span class="bss-white-text"> Cart contents - Total price: &euro; {{ total }}</span>
+                </button>
+            </h5>
+        </div>
+        <div id="collapseCart" class="collapse show" aria-labelledby="headingCart" data-parent="#checkout">
+            <div class="card-body">
+                <div class="row">
+                    {% for item in cart_items %}
+                    <div class="col-12 my-1">
+                        <div class="display card card-default border-red">
+                            <div class="card-body less-padding">
+                                <div class="row">
+                                    <div class="d-none d-sm-none d-md-block col-2">
+                                        <div class="product">
+                                            <center>
+                                                <img src="{{ MEDIA_URL }}{{ item.product.image1 }}">
+                                            </center>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <sup>{{item.product.description}}</sup><br>
+                                        <sup>Series: {{item.product.category}}</sup><br> &euro; {{ item.product.price }}
+                                    </div>
+                                    <div class="col-12 col-sm-6 ml-sm-auto col-md-4 ml-md-auto">
+                                        <form method="post" action="{% url 'adjust_checkout' item.id %}">
+                                            {% csrf_token %}
+                                            <div class="form-group no-margin">
+                                                <label for="exampleInputAmount" class="sr-only">New Qty</label>
+                                                <div class="input-group input-group-sm">
+                                                    <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
+                                                    <input name="quantity" type="number" min="0" max="999" class="form-control" value="{{item.quantity}}">
+                                                    <div class="input-group-append">
+                                                        <button type="submit" class="btn btn-sm bss-red bss-white-text"><i class="far fa-edit bss-yellow-text"></i> Adjust</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="card-header bss-red" id="headingPerson">
+            <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsePerson" aria-expanded="false" aria-controls="collapsePerson">
+                  <i class="fas fa-user bss-yellow-text"></i>
+                  <span class="bss-white-text"> Personal Details</span>
+                </button>
+            </h5>
+        </div>
+        <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
+            <div id="collapsePerson" class="collapse" aria-labelledby="headingPerson" data-parent="#checkout">
+                <div class="card-body">
+                    <div id="credit-card-errors" style="display:none">
+                        <div class="alert-message block-message error" id="stripe-error-message"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">{{ order_form.full_name | as_crispy_field }}</div>
+                        <div class="col-12">{{ order_form.address1 | as_crispy_field }}</div>
+                        <div class="col-12">{{ order_form.address2 | as_crispy_field }}</div>
+                        <div class="col-12 col-sm-4">{{ order_form.postcode | as_crispy_field }}</div>
+                        <div class="col-12 col-sm-8">{{ order_form.town_or_city | as_crispy_field }}</div>
+                        <div class="col-12 col-sm-4">{{ order_form.state_or_province | as_crispy_field }}</div>
+                        <div class="col-12 col-sm-8">{{ order_form.country | as_crispy_field }}</div>
+                        <div class="col-12 col-sm-4">{{ order_form.phone_number | as_crispy_field }}</div>
+                        <div class="col-12 col-sm-8">{{ order_form.email_address | as_crispy_field }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-header bss-red" id="headingCreditCard">
+                <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCreditCard" aria-expanded="false" aria-controls="collapseCreditCard">
+                  <i class="far fa-credit-card bss-yellow-text"></i>
+                  <span class="bss-white-text"> Payment Details</span>
+                </button>
+                </h5>
+            </div>
+            <div id="collapseCreditCard" class="collapse" aria-labelledby="headingCreditCard" data-parent="#checkout">
+                <div class="card-body">
+                    <div id="credit-card-errors" style="display:none">
+                        <div class="alert-message block-message error" id="stripe-error-message"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-8">
+                            <div class="row">
+                                <div class="col-8">{{ payment_form.credit_card_number | as_crispy_field }}</div>
+                                <div class="col-4">{{ payment_form.cvv | as_crispy_field }}</div>
+                                <div class="col-6">{{ payment_form.expiry_month | as_crispy_field }}</div>
+                                <div class="col-6">{{ payment_form.expiry_year | as_crispy_field }}</div>
+                                <div class="col-12">{{ payment_form.stripe_id | as_crispy_field }}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="row">
+                                <div class="col-12">
+                                    <img class="float-right" src="{% static 'images/bss-brick-cc.png' %}" width="150">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% csrf_token %}
+                    <div class="form-group col-md-12">
+                        <input class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

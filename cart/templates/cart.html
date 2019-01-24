@@ -1,61 +1,142 @@
-{% extends 'base.html' %} {% load static from staticfiles %} {% load crispy_forms_tags %} {% block content %} {% for item in cart_items %}
-
+{% extends 'base.html' %} {% load static from staticfiles %} {% load crispy_forms_tags %} {% block content %} {% if total > 0 %}
 <div class="row">
-    <div class="col-12 mx-auto my-1 display card card-default">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-12 col-sm-3">
-                    <div class="product" style="background-image: url('{{ MEDIA_URL }}{{ item.product.image1 }}')"></div>
+    <div class="col-auto mx-auto">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+            <i class="fas fa-shoe-prints bss-yellow-text"></i> Continue Shopping</a>
+    </div>
+</div>
+{% endif %}
+{% if total == 0 %}
+<div class="row">
+    <div class="col-10 col-md-6 mx-auto">
+        <div class="display card card-default border-red">
+            <div class="card-body">
+                <h5>
+                    Your cart is empty.
+                </h5>
+                
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center">
+                <a class="btn btn-sm bss-white-text bss-red" href="{% url 'products' %}">Go to Products</a>
                 </div>
-                <div class="col-12 col-sm-9">
-                    <div class="row">
-                        <div class="col-12 col-sm-8">
-                            <h5>{{ item.product.name }}</h5>
-                            <p class="product-description">{{ item.product.description }}</p>
-
-                        </div>
-                        <div class="col-12 col-sm-4">
-                            <form method="post" action="{% url 'adjust_cart' item.id %}">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                    <label for="exampleInputAmount" class="sr-only">New Qty</label>
-                                    <div class="input-group input-group-sm">
-                                        <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
-                                        <div class="input-group-prepend"><span class="input-group-text">{{item.quantity}}</span></div>
-                                        <input name="quantity" type="number" min="0" max="999" class="form-control">
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Adjust</button>
-                                        </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="row">
+    <div class="col-12 my-1">
+        <div class="display card card-default border-red">
+            <div class="card-header bss-red bss-yellow-text">
+                Cart contents - change quantity to zero to remove items
+            </div>
+            <div class="card-body">
+                {% for item in cart_items %}
+                <div class="my-1">
+                    <div class="display card card-default border-red">
+                        <div class="card-body less-padding">
+                            <div class="row">
+                                <div class="d-none d-sm-none d-md-block col-2">
+                                    <div class="product">
+                                        <center>
+                                            <img src="{{ MEDIA_URL }}{{ item.product.image1 }}">
+                                        </center>
                                     </div>
                                 </div>
-
-                            </form><br>
-                            <h5>&euro; {{ item.product.price }}</h5>
+                                <div class="col-12 col-md-5">
+                                    <sup>{{item.product.description}}</sup><br>
+                                    <sup>Series: {{item.product.category}}</sup><br> &euro; {{ item.product.price }}
+                                </div>
+                                <div class="col-12 col-sm-6 ml-sm-auto col-md-3 ml-md-auto">
+                                    <form method="post" action="{% url 'adjust_checkout' item.id %}">
+                                        {% csrf_token %}
+                                        <div class="form-group no-margin">
+                                            <label for="exampleInputAmount" class="sr-only">New Qty</label>
+                                            <div class="input-group input-group-sm">
+                                                <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
+                                                <input name="quantity" type="number" min="0" max="999" class="form-control" value="{{item.quantity}}">
+                                                <div class="input-group-append">
+                                                    <button type="submit" class="btn btn-sm bss-red bss-white-text"><i class="far fa-edit bss-yellow-text"></i> Adjust</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+    {% for item in cart_items %}
+    <!--<div class="col-12 col-md-6 mx-auto my-2">-->
+    <!--    <div class="display card card-default border-red">-->
+    <!--        <div class="card-header">-->
+    <!--            {{item.product.name}}-->
+    <!--        </div>-->
+    <!--        <div class="card-body">-->
+    <!--            <div class="row">-->
+    <!--                <div class="col-12 col-md-4">-->
+    <!--                    <div class="product">-->
+    <!--                        <center>-->
+    <!--                            <img src="{{ MEDIA_URL }}{{ item.product.image1 }}">-->
+    <!--                        </center>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--                <div class="col-12 col-sm-8">-->
+    <!--                    <div class="row">-->
+    <!--                        <div class="col-12"><sup>{{item.product.description}}</sup></div>-->
+    <!--                        <div class="col-12"><sup>Category: {{item.product.category}}</sup></div>-->
+    <!--                    </div>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--        <div class="card-footer">-->
+    <!--            <div class="row">-->
+    <!--                <div class="col-4 col-sm-6">-->
+    <!--                    <h6>&euro; {{ item.product.price }}</h6>-->
+    <!--                </div>-->
+    <!--                <div class="col-8 col-sm-6">-->
+    <!--                    <form method="post" action="{% url 'adjust_cart' item.id %}">-->
+    <!--                        {% csrf_token %}-->
+    <!--                        <div class="form-group">-->
+    <!--                            <label for="exampleInputAmount" class="sr-only">New Qty</label>-->
+    <!--                            <div class="input-group input-group-sm">-->
+    <!--                                <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>-->
+    <!--                                <input name="quantity" type="number" min="0" max="999" class="form-control" value="{{item.quantity}}">-->
+    <!--                                <div class="input-group-append">-->
+    <!--                                    <button type="submit" class="btn btn-default bss-red bss-white-text">-->
+    <!--                                        <i class="far fa-edit bss-yellow-text"></i> Adjust</button>-->
+    <!--                                </div>-->
+    <!--                            </div>-->
+    <!--                        </div>-->
+    <!--                    </form>-->
+    <!--                </div>-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+    
+    {% endfor %}
 </div>
-{% endfor %}
-
+{% if total > 0 %}
 <div class="row">
-    <div class="col-12 no-padding">
-        <div class="float-right">
-            <div class="input-group input-group-sm">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Total: </span>
-                </div>
-                <div class="input-group-prepend">
-                    <span class="input-group-text">&euro; {{ total }} </span>
-                </div>
-                <div class="input-group-append">
-                    <a href="#" class="btn btn-success" role="button">Checkout</a>
-                </div>
+    <div class="col-auto mx-auto">
+        <div class="input-group input-group-sm border-red hard-borderradius">
+            <div class="input-group-prepend">
+                <span class="input-group-text">Total: </span>
             </div>
+            <div class="input-group-prepend">
+                <span class="input-group-text">&euro; {{ total }} </span>
+            </div>
+            <div class="input-group-append">
+                <a href="{% url 'checkout' %}" class="btn btn-default bss-red bss-white-text" role="button">
+                    <i class="far fa-credit-card bss-yellow-text"></i> Proceed to Checkout</a>
         </div>
     </div>
 </div>
-
+{% endif %}
 {% endblock %}

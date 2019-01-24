@@ -12,6 +12,8 @@
     <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js"></script>
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    {% block head_stripe_js %}{% endblock %}
     <title>Brick Sticker Shop</title>
 </head>
 
@@ -30,15 +32,15 @@
                             <span class="sr-only">(current)</span> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="#"><i class="bss-yellow-text fas fa-edit"></i> Contact</a>
+                        <a class="nav-link bss-white-text" href="{% url 'contact' %}"><i class="bss-yellow-text fas fa-edit"></i> Contact</a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'logout' %}"><i class="bss-yellow-text fas fa-user-circle"></i> Sign Out</a>
+                        <a class="nav-link bss-white-text" href="{% url 'logout' %}"><i class="bss-yellow-text fas fa-user"></i> Sign Out</a>
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="bss-yellow-text fas fa-user-circle"></i> Sign In</a>
+                        <a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="bss-yellow-text fas fa-user"></i> Sign In</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -70,25 +72,36 @@
     </div>
     {% endif %}
     
-    
     {% block content %} {% endblock %}
     </main>
     
     <footer role="footer" class="footer">
         <div class="container">
             <div class="row footer-lineheight">
-                <!--<div class="col-12 col-sm-4">-->
-                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'about' %}"><i class="bss-yellow-text fas fa-question-circle"></i> About the Stickers</a></div>
-                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'privacy' %}"><i class="bss-yellow-text fas fa-info-circle"></i> Privacy Statement</a></div>
-                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'terms_and_conditions' %}"><i class="bss-yellow-text far fa-handshake"></i> Terms and Conditions</a></div>
-                    <div class="col-6 col-sm-3 mx-auto"><a class="bss-white-text" href="{% url 'returns' %}"><i class="bss-yellow-text fas fa-undo-alt"></i> Returns</a></div>
-                   <!--<div class="card card-default">-->
-                   <!--    <div class="card-body">-->
-                   <!--        Footer-->
-                   <!--    </div>-->
-                   <!--</div>-->
-                    
-                <!--</div>-->
+                <div class="col-6 col-sm-3 mx-auto">
+                    <center>
+                        <a class="bss-white-text" href="{% url 'about' %}">
+                        <i class="bss-yellow-text fas fa-question-circle"></i> About the Stickers</a>
+                    </center>
+                </div>
+                <div class="col-6 col-sm-3 mx-auto">
+                    <center>
+                        <a class="bss-white-text" href="{% url 'privacy' %}">
+                        <i class="bss-yellow-text fas fa-info-circle"></i> Privacy Statement</a>
+                    </center>
+                </div>
+                <div class="col-6 col-sm-3 mx-auto">
+                    <center>
+                        <a class="bss-white-text" href="{% url 'terms_and_conditions' %}">
+                        <i class="bss-yellow-text far fa-handshake"></i> Terms and Conditions</a>
+                    </center>
+                </div>
+                <div class="col-6 col-sm-3 mx-auto">
+                    <center>
+                        <a class="bss-white-text" href="{% url 'returns' %}">
+                        <i class="bss-yellow-text fas fa-undo-alt"></i> Returns</a>
+                    </center>
+                </div>
             </div>
         </div>
     </footer>

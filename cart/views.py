@@ -20,7 +20,7 @@ def add_to_cart(request, id):
     
     
     request.session['cart'] = cart
-    return redirect(reverse('index'))
+    return redirect(reverse('view_cart'))
     
     
 def adjust_cart(request, id):
@@ -39,3 +39,21 @@ def adjust_cart(request, id):
         
     request.session['cart'] = cart
     return redirect(reverse('view_cart'))
+    
+
+def adjust_cart_checkout(request, id):
+    """Allow clients to adjust the cart content during checkout"""
+    if request.POST.get('quantity') == '':
+        request.session['cart'] = request.session.get('cart', {})
+        return redirect(reverse('checkout'))
+    else:
+        quantity = int(request.POST.get('quantity'))
+        cart = request.session.get('cart', {})
+    
+    if quantity > 0:
+        cart[id] = quantity
+    else:
+        cart.pop(id)
+        
+    request.session['cart'] = cart
+    return redirect(reverse('checkout'))

@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'infopages',
-
+    'checkout',
+    'contact',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -140,6 +141,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STRIPE_PK = os.getenv('STRIPE_PK')
+STRIPE_SK = os.getenv('STRIPE_SK')
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 

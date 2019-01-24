@@ -13,25 +13,24 @@
 
 <div class="row">
 {% for product in products %}
-    <div class="col-12 col-md-6 my-1">
+    <div class="col-12 col-md-6 my-2 mx-auto">
         <div class="display card card-default border-red">
             <div class="card-header">
-                {{product.name}}
+                <b>{{ product.setnumber }}</b> - {{ product.name }}
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 col-md-4">
                         <div class="product">
                             <center>
-                                <a href="#"><img src="{{ MEDIA_URL }}{{ product.image1 }}"><br>Detail</a>
-                                <span class="d-none d-sm-block zoom-in fade show"><img src="{{ MEDIA_URL }}{{ product.image1 }}"></span>
+                                <a href="{% url 'productdetail' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image1 }}"><br>Detail</a>
                             </center>
                         </div>
-                </div>
+                    </div>
                     <div class="col-12 col-md-8">
                         <div class="row">
-                            <div class="col-12"><sup>{{product.description}}</sup></div>
-                            <div class="col-12"><sup>Category: {{product.category}}</sup></div>
+                            <div class="col-12"><sup>{{ product.description }}</sup></div>
+                            <div class="col-12"><sup>Series: {{ product.category }}</sup></div>
                         </div>
                 </div>
                 </div>
@@ -45,7 +44,7 @@
                             <div class="input-group input-group-sm">
                                 <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
                                 <span class="input-group-append">
-                                    <button class="btn btn-sm bss-white-text bss-red" type="submit">Add</button>
+                                    <button class="btn btn-sm bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i>  Add</button>
                                 </span>
                             </div>
                         </form>

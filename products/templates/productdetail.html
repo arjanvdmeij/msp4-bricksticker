@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static from staticfiles %}
+<div class="row">
+    <div class="col-12 no-padding">
+        <button class="btn btn-sm bss-white-text bss-red" onclick="goBack()">
+            <i class="fas fa-chevron-left bss-yellow-text"></i>
+             Back to Products</button>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+
+<div class="row">
+    <div class="display card card-default border-red full-width">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12">
+                    <b>{{product.setnumber}}</b> - {{product.name}}
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <center>
+                        <img class="productSlides" src="{{ MEDIA_URL }}{{ product.image1 }}" style="">
+                        <img class="productSlides" src="{{ MEDIA_URL }}{{ product.image2 }}" style="display:none">
+                    </center>
+                    <div class="row">
+                        <div class="col-6 mx-auto">
+                            <center>
+                                <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image1 }}" onclick="showProductSlide(1)">
+                            </center>
+                        </div>
+                        <div class="col-6 mx-auto">
+                            <center>
+                                <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image2 }}" onclick="showProductSlide(2)">
+                            </center>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4><b>Series:</b> {{product.category}}</h4>
+                    <h6>{{product.description}}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="col-8"><h6>&euro; {{ product.price }}</h6></div>
+                    <div class="col-4">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                            {% csrf_token %}
+                            <div class="input-group input-group-sm">
+                                <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
+                                <span class="input-group-append">
+                                    <button class="btn btn-sm bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i>  Add</button>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

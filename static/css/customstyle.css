@@ -112,21 +112,37 @@ body {
     cursor: pointer;
 }
 
+.navbar-brand img {
+    max-width: 65vw;
+    max-height: 50px;
+}
+
 /*.product .zoom-in img {*/
+
 /*    max-height: 100% !important;*/
+
 /*}*/
 
 /*.product .zoom-in {*/
+
 /*    visibility: hidden;*/
+
 /*    z-index: 1;*/
+
 /*    position: absolute;*/
+
 /*}*/
 
 /*.product a:hover+.zoom-in {*/
+
 /*    visibility: visible;*/
+
 /*    width: 100%;*/
+
 /*    height: auto;*/
+
 /*    animation: 1s ease-in;*/
+
 /*}*/
 
 .hard-borderradius {
@@ -140,5 +156,3 @@ body {
     font-size: 0.6rem;
     color: #f7f7f7;
 }
-
-

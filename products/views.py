@@ -1,16 +1,54 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product
+from django.shortcuts import render, get_object_or_404, reverse, redirect
+from .models import Product, ProductComment
+from .forms import ProductCommentForm
+from datetime import date
 
 def all_products(request):
     products = Product.objects.all()
-    categories = Product.objects.values('category').order_by('category').distinct()
-    return render(request, 'products.html', {'products':products,
+    categories = Product.objects.values(
+        'category').order_by(
+        'category').distinct()
+    return render(request, 
+        'products.html', 
+        {'products':products,
+        'categories':categories,
+    })
+  
+    
+def latest_products(request):
+    products = Product.objects.filter().order_by('-date_added')[:5]
+    categories = Product.objects.values(
+        'category').order_by(
+        'category').distinct()
+    return render(request, 
+        'index.html', 
+        {'products':products,
         'categories':categories,
     })
 
+
 def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    return render(request, "productdetail.html", {'product':product})
+    if request.method == 'POST':
+        form = ProductCommentForm(request.POST)
+        
+        if form.is_valid:
+            product = get_object_or_404(Product, pk=pk)
+            ProductComment.objects.create(
+                comment_on=product,
+                author=form['author'].value(),
+                content=form['content'].value(),
+                date = date.today(),
+                )
+            comments = ProductComment.objects.filter(comment_on=pk)
+            comment_form = ProductCommentForm()
+            return redirect('productdetail', product.id)
+    else:
+        product = get_object_or_404(Product, pk=pk)
+        comments = ProductComment.objects.filter(comment_on=pk)
+        comment_form = ProductCommentForm()
+        return render(request, "productdetail.html", {
+            'comment_form':comment_form,
+            'product':product,
+            'comments':comments,
+        })
     
-
-

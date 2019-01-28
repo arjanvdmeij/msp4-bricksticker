@@ -21,7 +21,7 @@ from django.contrib import admin
 from accounts import urls as urls_accounts
 from infopages import urls as urls_infopages
 from products import urls as urls_products
-from products.views import all_products
+from products.views import latest_products
 from cart import urls as urls_cart
 from search import urls as urls_search
 from checkout import urls as urls_checkout
@@ -31,7 +31,7 @@ from contact import urls as urls_contact
 
 
 urlpatterns = [
-    url(r'^$', all_products, name='index'),    
+    url(r'^$', latest_products, name='index'),    
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(urls_accounts)),
     url(r'^info/', include(urls_infopages)),

@@ -1,12 +1,93 @@
 {% autoescape off %}
-Contact Name:
-{{ contact_name }}
+<!DOCTYPE html>
+<html lang="en">
 
-Email:
-{{ contact_email }}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Contact Submission Mail</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .row {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+        .col {
+            -ms-flex: 0 0 auto;
+            flex: 0 0 auto;
+            max-width: none;
+            position: relative;
+            width: 80%;
+            min-height: 1px;
+            padding: 0;
+        }
+        table {
+            border-collapse: collapse;
+            background-color:#f7f7f7;
+        }
+        .table {
+            margin-bottom: .5rem;
+            display: table-row-group;
+            vertical-align: middle;
+            border-color: inherit;
+        }
+        .table td, .table th {
+            padding: .5rem;
+            vertical-align: top;
+        }
+        tr {
+            display: table-row;
+            border: 1px solid #c9190a;
+            vertical-align: inherit;
+        }
+        td, th {
+            display: table-cell;
+            vertical-align: inherit;
+            border: 0;
+        }
+        th {
+            text-align: left;
+            background-color: #c9190a;
+            color: #faec06;
+        }
+        hr {
+            border-top: 1px solid #c9190a;
+        }
+    </style>
+</head>
 
-Content:
-{{ form_content|safe|striptags }}
-
+<body>
+    <div class="row">
+        <div class="col">
+            <table class="table">
+                <tr>
+                    <th>Name:</th>
+                    <th>Mail Address:</th>
+                </tr>
+                <tr>
+                    <td>{{ contact_name }}</td>
+                    <td>{{ contact_email }}</td>
+                </tr>
+            </table>
+            <hr>
+            <table class="table">
+                <tr>
+                    <th>Content:</th>
+                </tr>
+                <tr>
+                    <td>{{ form_content }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
 
 {% endautoescape %}

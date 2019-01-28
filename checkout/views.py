@@ -6,7 +6,7 @@ from .models import Order, OrderItem
 from django.conf import settings
 from django.utils import timezone
 from products.models import Product
-from django.core.mail import send_mail, BadHeaderError
+from django.core.mail import BadHeaderError
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
@@ -69,7 +69,7 @@ def checkout(request):
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
                 
-                messages.error(request, "You have successfully paid. Your order will be processed promptly.")
+                messages.error(request, "Your order has been placed. A confirmation email should arrive shortly.")
                 request.session['cart'] = {}
                 
                 """ make this go to summary bla bla """
@@ -78,7 +78,6 @@ def checkout(request):
             else:
                 messages.error(request, "Unable to take payment at this time, please try again later")
         else:
-            print(payment_form.errors)
             messages.error(request, "We were unable to take a payment with the card you put in")
     else:
         payment_form = PaymentForm()

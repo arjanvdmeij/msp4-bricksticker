@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Confirmation mail</title>
     <style>
         body {
             margin: 0;
@@ -77,14 +77,6 @@
             background-color: #c9190a;
             color: #faec06;
         }
-        .list {
-            display: -ms-flexbox;
-            display: flex;
-            -ms-flex-direction: column;
-            flex-direction: column;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
     </style>
 </head>
 
@@ -101,7 +93,7 @@
             <p>Thank you for your order at <a style="color:#c9190a" href="https://{{ site }}"><b>Brickstickershop</b></a>.</p>
             <p>Your order has been given the following orderID: <b>{{ order.id }}</b><br>
             Please refer to this orderID in case you have any questions.</p>
-            <p>If needed, please contact us through the following link: <a style="color:#c9190a" href="https://{{ site }}/contact">Contact</a></p>
+            <p>If needed, please contact us through the following link: <a style="color:#c9190a" href="https://{{ site }}/contact/"><b>Contact</b></a></p>
             <p>Below is an overview of the item(s) you've chosen to buy:</p>
         </div>
         <div class="col m-tiny">

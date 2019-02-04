@@ -13,9 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-
 from django.views import static
-from .settings import MEDIA_ROOT
+from .settings import MEDIA_ROOT, MEDIA_URL
 from django.conf.urls import url, include
 from django.contrib import admin
 from accounts import urls as urls_accounts
@@ -26,8 +25,6 @@ from cart import urls as urls_cart
 from search import urls as urls_search
 from checkout import urls as urls_checkout
 from contact import urls as urls_contact
-
-# from accounts.views import index
 
 
 urlpatterns = [
@@ -41,5 +38,4 @@ urlpatterns = [
     url(r'^search/', include(urls_search)),
     url(r'^checkout/', include(urls_checkout)),
     url(r'^contact/', include(urls_contact)),
-    
-]
+] 

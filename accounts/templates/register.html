@@ -2,21 +2,26 @@
 <div class="row">
     <div class="col-10 m-auto">
         <form method="post" action="{% url 'register' %}" class="accountform">
-            <h5>Create a new account</h5>
+            <h5>Newsletter Signup</h5>
+            <p>Creating an account allows us to send you news about stickers and any new additions to the collection.</p>
+            <p>None of the information you submit on this page will be shared with other parties.<br>
+                They are strictly aimed to provide you with information on our site and products.<br>
+                You can log on later, should you desire, to withdraw again. We'd be sorry if you did though! 
+                <i class="far fa-smile-wink"></i></p>
+                <div class="void"></div>
             <p>Already have an account? <a href="{% url 'login' %}">Sign In Here</a></p>
             {% csrf_token %}
             <hr class="bss-red">
             <div class="row">
-                <!--<h5>&nbsp;<span class="red-text"><b>Fields with * are required</b></span>&nbsp;</h5>-->
-                <div class="col-12 col-sm-6">{{ user_form.username |as_crispy_field}}</div>
-                <div class="col-12 col-sm-6">{{ user_form.email |as_crispy_field}}</div>
-                <div class="col-12 col-sm-6">{{ user_form.password1 |as_crispy_field}}</div>
-                <div class="col-12 col-sm-6">{{ user_form.password2 |as_crispy_field}}</div>
-                <div class="col-12 col-sm-6">{{ user_form.first_name |as_crispy_field}}</div>
-                <div class="col-12 col-sm-6">{{ user_form.last_name |as_crispy_field}}</div>
+                <div class="col-12 col-sm-6">{{ user_form.username | as_crispy_field}}</div>
+                <div class="col-12 col-sm-6">{{ user_form.email | as_crispy_field}}</div>
+                <div class="col-12 col-sm-6">{{ user_form.password1 | as_crispy_field}}</div>
+                <div class="col-12 col-sm-6">{{ user_form.password2 | as_crispy_field}}</div>
+                <div class="col-12 col-sm-6">{{ user_form.first_name | as_crispy_field}}</div>
+                <div class="col-12 col-sm-6">{{ user_form.last_name | as_crispy_field}}</div>
                 <div class="col-auto m-auto">
                     <button type="submit" class="btn btn-default bss-red bss-white-text float-right">
-                        <i class="fas fa-user-plus bss-yellow-text"></i> Create account</button>
+                        <i class="fas fa-user-plus bss-yellow-text"></i> Register</button>
                 </div>
             </div>
         </form>

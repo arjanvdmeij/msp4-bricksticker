@@ -2,6 +2,13 @@
 
 {% block content %}
 <div class="row">
+    <div class="col-auto m-auto">
+        <div class="col-auto m-auto">
+            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
+            </a>
+        </div>
+    </div>
     <div class="col-11 m-auto">
         <h4>Terms and Conditions (version January 2018) <a href="{% static 'files/T_C_Brickstickershop.pdf' %}" target="_blank"><i class="bss-red-text far fa-file-pdf"></i></a></h4>
         <p><b>Index:</b><br>
@@ -279,4 +286,12 @@
         Brickstickershop will always try to operate within this fair play policy. Should you nevertheless encounter anything on the 
         website that you feel violates the LEGO® fair use policy please let us know through our contact form.</p>
     </div>
+    <div class="col-auto m-auto">
+        <div class="col-auto m-auto">
+            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

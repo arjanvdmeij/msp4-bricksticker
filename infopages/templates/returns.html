@@ -2,6 +2,13 @@
 
 {% block content %}
 <div class="row">
+    <div class="col-auto m-auto">
+        <div class="col-auto m-auto">
+            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
+            </a>
+        </div>
+    </div>
     <div class="col-11 m-auto">
         <h4>To Return an Order:</h4>
         <p>You have the right to cancel your order up to 14 days after receipt without giving any reason. 
@@ -19,5 +26,12 @@
         1234AA Towncity<br>
         Country<br></p>
     </div>
-    
+    <div class="col-auto m-auto">
+        <div class="col-auto m-auto">
+            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
+            </a>
+        </div>
+    </div>
+</div>
 {% endblock %}

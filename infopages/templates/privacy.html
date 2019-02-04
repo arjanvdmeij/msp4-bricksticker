@@ -2,6 +2,13 @@
 
 {% block content %}
 <div class="row">
+    <div class="col-auto m-auto">
+        <div class="col-auto m-auto">
+            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
+            </a>
+        </div>
+    </div>
     <div class="col-11 m-auto">
         <h4>Bricksticker Privacy Policy:</h4>
         <h5>Version 0.2 / Effective date 23 May 2018 (GDPR)</h5>
@@ -45,5 +52,13 @@
         1234AA Towncity Country<br>
         Phone: 555-1234-1234<br>
         Email: info@example.com</p>
+    </div>
+    <div class="col-auto m-auto">
+        <div class="col-auto m-auto">
+            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
+            </a>
+        </div>
+    </div>
 </div>
 {% endblock %}

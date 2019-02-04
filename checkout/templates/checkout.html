@@ -10,6 +10,8 @@
 
 {% endblock %} {% block content %}
 
+{% if total > 0 %}
+
 <div class="row">
     <div class="col-auto mx-auto">
         <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
@@ -19,7 +21,7 @@
 <div class="row">&nbsp;</div>
 
 <div id="checkout">
-    <div class="card">
+    <div class="card border-red">
         <div class="card-header bss-red" id="headingCart">
             <h5 class="mb-0">
                 <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCart" aria-expanded="true" aria-controls="collapseCart">
@@ -36,31 +38,45 @@
                         <div class="display card card-default border-red">
                             <div class="card-body less-padding">
                                 <div class="row">
-                                    <div class="d-none d-sm-none d-md-block col-2">
+                                    <div class="d-none d-sm-none d-md-block col-3">
                                         <div class="product">
                                             <center>
                                                 <img src="{{ MEDIA_URL }}{{ item.product.image1 }}">
                                             </center>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-4">
+                                    <div class="col-12 col-md-5">
                                         <sup>{{item.product.description}}</sup><br>
                                         <sup>Series: {{item.product.category}}</sup><br> &euro; {{ item.product.price }}
                                     </div>
                                     <div class="col-12 col-sm-6 ml-sm-auto col-md-4 ml-md-auto">
-                                        <form method="post" action="{% url 'adjust_checkout' item.id %}">
-                                            {% csrf_token %}
-                                            <div class="form-group no-margin">
-                                                <label for="exampleInputAmount" class="sr-only">New Qty</label>
-                                                <div class="input-group input-group-sm">
-                                                    <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
-                                                    <input name="quantity" type="number" min="0" max="999" class="form-control" value="{{item.quantity}}">
-                                                    <div class="input-group-append">
-                                                        <button type="submit" class="btn btn-sm bss-red bss-white-text"><i class="far fa-edit bss-yellow-text"></i> Adjust</button>
+                                        <div class="row">
+                                            <div class="col-12 my-2">
+                                                <form method="post" action="{% url 'adjust_checkout' item.id %}" class="float-right">
+                                                    {% csrf_token %}
+                                                    <div class="form-group no-margin">
+                                                        <label for="inputAmount" class="sr-only">New Qty</label>
+                                                        <div class="input-group input-group-sm">
+                                                            <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
+                                                            <input name="quantity" type="number" min="0" max="999" class="form-control qty-field" value="{{item.quantity}}">
+                                                            <div class="input-group-append">
+                                                                <button type="submit" class="btn btn-sm bss-red bss-white-text"><i class="far fa-edit bss-yellow-text"></i> Adjust</button>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                </form>
                                             </div>
-                                        </form>
+                                            <div class="col-12 my-2">
+                                                <form method="post" action="{% url 'adjust_checkout' item.id %}" class="float-right">
+                                                    {% csrf_token %}
+                                                    <button type="submit" name="quantity" value="0" class="btn btn-sm bss-red bss-white-text"><i class="fas fa-trash-alt bss-yellow-text"></i> Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        
+                                    <!--</div>-->
+                                    <!--<div class="col-12 col-sm-6 ml-sm-auto col-md-4 ml-md-auto">-->
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +95,7 @@
                 </button>
             </h5>
         </div>
-        <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}">
+        <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}" class="form-border">
             <div id="collapsePerson" class="collapse" aria-labelledby="headingPerson" data-parent="#checkout">
                 <div class="card-body">
                     <div id="credit-card-errors" style="display:none">
@@ -134,7 +150,9 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="form-group col-auto m-auto">
-                            <input class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+                            <button type="submit" class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit">
+                                <i class="fas fa-donate bss-yellow-text"></i> Submit Payment
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -142,5 +160,27 @@
         </form>
     </div>
 </div>
+
+{% else %}
+
+<div class="row">
+    <div class="col-10 col-md-6 mx-auto">
+        <div class="display card card-default border-red">
+            <div class="card-body">
+                <h5>
+                    Your cart is empty.
+                </h5>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center">
+                <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
+                    <i class="fas fa-shoe-prints bss-yellow-text"></i> Continue Shopping</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
 
 {% endblock %}

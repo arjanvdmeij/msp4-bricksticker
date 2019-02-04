@@ -1,48 +1,59 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %} {% load static from staticfiles %}
 
-{% block search %}
-<form class="form-inline my-2 my-lg-0 mr-auto" action="{% url 'search' %}" method="get">
-    <div class="input-group">
-        <input class="form-control hard-borderradius" type="search" name="q" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
-        <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>
+{% block content %} 
+<div class="row align-items-center">
+    <div class="col-6 col-sm-auto mr-auto">
+        <div class="dropdown">
+            <button class="btn btn-default bss-red bss-white-text dropdown-toggle" href="#" role="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-filter bss-yellow-text"></i> Categories
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <form class="form-inline" action="{% url 'search' %}" method="get">
+                <button class="dropdown-item" name="q" type="submit" value="">All Categories</button>
+                </form>
+                <div class="dropdown-divider border-red"></div>
+                {% for item in categories %}
+                <form class="form-inline" action="{% url 'filter_products' %}" method="get">
+                <button class="dropdown-item" name="q" type="submit" value="{{ item.category }}">{{ item.category }}</button>
+                </form>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-</form>
-{% endblock %}
-
-{% block content %} {% load static from staticfiles %}
-
+    <div class="col-6 col-sm-auto ml-auto">
+        <form class="form-inline my-2 my-lg-0 mr-auto" action="{% url 'search' %}" method="get">
+            <div class="input-group">
+                <input class="form-control hard-borderradius" type="search" name="q" placeholder="Search" aria-label="Search" aria-describedby="basic-search">
+                <span class="input-group-append">
+                <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
 <div class="row">
 {% for product in products %}
-    <div class="col-12 col-md-6 my-2 mx-auto">
+    <div class="col-12 my-1">
         <div class="display card card-default border-red">
-            <div class="card-header">
-                <b>{{ product.setnumber }}</b> - {{ product.name }}
-            </div>
-            <div class="card-body">
+            <div class="card-body less-padding">
                 <div class="row">
-                    <div class="col-12 col-md-4">
+                    <div class="d-none d-sm-none d-md-block col-3">
                         <div class="product">
                             <center>
-                                <a href="{% url 'productdetail' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image1 }}"><br>Detail</a>
+                                <a class="bss-red-text" href="{% url 'productdetail' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image1 }}"><br>Detail</a>
                             </center>
                         </div>
                     </div>
-                    <div class="col-12 col-md-8">
-                        <div class="row">
-                            <div class="col-12"><sup>{{ product.description }}</sup></div>
-                            <div class="col-12"><sup>Series: {{ product.category }}</sup></div>
-                        </div>
-                </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-8"><h6>&euro; {{ product.price }}</h6></div>
-                    <div class="col-4">
-                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                    <div class="col-12 col-md-5">
+                        <a class="bss-red-text" href="{% url 'productdetail' product.id %}"><b>{{ product.setnumber }}</b> - {{ product.name }}</a><br>
+                        <sup>{{product.description}}</sup><br>
+                        <sup>Series: {{product.category}}</sup><br> &euro; {{ product.price }}
+                    </div>
+                    <div class="col-12 col-sm-6 ml-sm-auto col-md-3 ml-md-auto">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}" class=" float-right">
                             {% csrf_token %}
                             <div class="input-group input-group-sm">
-                                <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
+                                <input name='quantity' type="number" min="1" max="999" class="form-control qty-field" placeholder="Qty" value="1">
                                 <span class="input-group-append">
                                     <button class="btn btn-sm bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i>  Add</button>
                                 </span>

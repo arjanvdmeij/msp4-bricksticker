@@ -11,11 +11,12 @@ class Order(models.Model):
     country = models.CharField(max_length=40, blank=False)
     phone_number = models.CharField(max_length=20, blank=False)
     email_address = models.EmailField(max_length=40, blank=False, default='')
+    processed = models.BooleanField(default=False)
     date = models.DateField()
     
     def __str__(self):
-        return "OrderID: {0} / Date: {1} / Buyer: {2}".format(
-            self.id, self.date, self.full_name)
+        return "OrderID: {0} / Date: {1} / Processed: {2}".format(
+            self.id, self.date, self.processed)
         
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, null=False)

@@ -52,10 +52,10 @@
                 <div class="row">
                     <div class="col-7"><h6>&euro; {{ product.price }}</h6></div>
                     <div class="col-5">
-                        <form method="post" action="{% url 'add_to_cart' product.id %}">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}" class="float-right">
                             {% csrf_token %}
                             <div class="input-group input-group-sm">
-                                <input name='quantity' type="number" min="1" max="999" class="form-control" placeholder="Qty" value="1">
+                                <input name='quantity' type="number" min="1" max="999" class="form-control qty-field" placeholder="Qty" value="1">
                                 <span class="input-group-append">
                                     <button class="btn btn-sm bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i> Add</button>
                                 </span>
@@ -75,7 +75,7 @@
             <div class="card border-red">
                 <div class="card-header bss-red bss-yellow-text" id="heading">
                     <button class="btn btn-link collapsed bss-white-text" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="true" aria-controls="collapse">
-                     <i class="fas fa-caret-square-down bss-yellow-text"></i> Leave a comment
+                     <i class="fas fa-caret-square-down bss-yellow-text"></i> Leave a comment <i class="far fa-comments bss-yellow-text"></i>
                     </button>
                 </div>
                 <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#CommentAdd">
@@ -107,7 +107,7 @@
             <div class="card-body bss-yellow">
                 <div class="row">
                     {% for comment in comments %}
-                    <div class="col-12 col-sm-6 no-padding">
+                    <div class="col-12">
                         <div class="card border-red m-1">
                             <div class="card-body bss-white">
                                 <p><b>{{ comment.content }}</b></p>

@@ -2,4 +2,9 @@
 *.pyc
 .~c9
 __pycache__/
-static/materialize = reference/css static/materialize = reference/js
+*.jpg
+*.png
+*.JPG
+*.PNG
+static/
+media/

@@ -1,16 +1,15 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
 from django.core.mail import BadHeaderError
 from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template.loader import render_to_string
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
-
 from .forms import ContactForm
 
 def contact(request):
     form = ContactForm
-    
     if request.method == 'POST':
         form = ContactForm(request.POST)
 
@@ -27,6 +26,19 @@ def contact(request):
                 email = EmailMessage(mail_subject, message, to=[email_to])
                 email.content_subtype = 'html'
                 email.send()
+                
+                site = get_current_site(request)
+                cc_message = render_to_string(
+                    'cc_contact_mail.html',{
+                        'form_content': form.cleaned_data['content'],
+                        'site':site.domain,
+                    })
+                cc_mail_subject = 'Your question has been received'
+                cc_email_to = form.cleaned_data['contact_email']
+                cc_email = EmailMessage(cc_mail_subject, cc_message, to=[cc_email_to])
+                cc_email.content_subtype = 'html'
+                cc_email.send()
+                
                 messages.error(request, "Thank you for your mail! We'll get back to you as soon as possible!")
                 return redirect('products')
             except BadHeaderError:

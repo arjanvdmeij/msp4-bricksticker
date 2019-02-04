@@ -3,36 +3,36 @@
 <form role="form" action="" method="post">
     {% csrf_token %}
     <div class="row">
-        <div class="col-10 m-auto">
+        <div class="col-12 col-sm-10 m-auto">
             <div class="display card card-default border-red">
                 <div class="card-header bss-red bss-yellow-text">
                     <h4>Contact</h4>
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-10 m-auto col-sm-6">
+                        <div class="col-12 m-auto col-sm-6 form-border">
                             {{ form.contact_name | as_crispy_field }}
                         </div>
-                        <div class="col-10 m-auto col-sm-6">
+                        <div class="col-12 m-auto col-sm-6 form-border">
                             {{ form.contact_email | as_crispy_field }}
                         </div>
-                        <div class="col-12 m-auto">
+                        <div class="col-12 m-auto form-border">
                             {{ form.content | as_crispy_field }}
                         </div>
                         <div class="col-auto m-auto">
-                            <button type="submit">Submit</button>
+                            <button class="btn btn-default bss-red bss-white-text" type="submit">
+                                <i class="fas fa-share-square bss-yellow-text"></i> Send</button>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <center><p>A copy of the form will be sent to you as well</p></center>
+                    </div>
+                </div>
             </div>
-            
         </div>
-        
     </div>
-
-
-    <!--{{ form | crispy }}-->
-    
 </form>
 
 {% endblock %}

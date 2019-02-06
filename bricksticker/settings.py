@@ -24,7 +24,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if os.getenv('C9_HOSTNAME'):
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = [os.getenv('C9_HOSTNAME'),
     'bss-msp-4.herokuapp.com']

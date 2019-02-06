@@ -4,6 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
 class UserLoginForm(forms.Form):
+    """ 
+    Simple form to handle User Login 
+    """
     username_or_email = forms.CharField(
         label='Username or Email Address')
     password = forms.CharField(
@@ -11,6 +14,9 @@ class UserLoginForm(forms.Form):
 
 
 class UserRegistrationForm(UserCreationForm):
+    """ 
+    Simple form to handle User Registration 
+    """
     username = forms.CharField(
         label='Username')
     password1 = forms.CharField(
@@ -37,6 +43,9 @@ class UserRegistrationForm(UserCreationForm):
 
 
     def clean_email(self):
+        """ 
+        Check existence of mail address 
+        """
         email = self.cleaned_data.get('email')
         username = self.cleaned_data.get('username')
         if User.objects.filter(
@@ -47,6 +56,9 @@ class UserRegistrationForm(UserCreationForm):
         return email
 
     def clean_password2(self):
+        """ 
+        Password validation  
+        """
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
 

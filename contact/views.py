@@ -9,10 +9,13 @@ from django.contrib import messages
 from .forms import ContactForm
 
 def contact(request):
+    """
+    Process the contact form and send mails to admins,
+    as well as the submitter of the form.
+    """
     form = ContactForm
     if request.method == 'POST':
         form = ContactForm(request.POST)
-
         if form.is_valid():
             try:
                 message = render_to_string(
@@ -24,12 +27,12 @@ def contact(request):
                     })
                 mail_subject = 'Contactform: ' + form.cleaned_data['subject']
                 email_to = 'ci.avdm@gmail.com'
-                email = EmailMessage(mail_subject, message, to=[email_to])
+                email = EmailMessage(
+                    mail_subject, message, to=[email_to])
                 email.content_subtype = 'html'
                 email.send()
                 
                 site = get_current_site(request)
-                print(site)
                 cc_message = render_to_string(
                     'cc_contact_mail.html',{
                         'form_content': form.cleaned_data['content'],
@@ -38,15 +41,18 @@ def contact(request):
                     })
                 cc_mail_subject = 'Your question has been received'
                 cc_email_to = form.cleaned_data['contact_email']
-                cc_email = EmailMessage(cc_mail_subject, cc_message, to=[cc_email_to])
+                cc_email = EmailMessage(
+                    cc_mail_subject, cc_message, to=[cc_email_to])
                 cc_email.content_subtype = 'html'
                 cc_email.send()
                 
-                messages.error(request, "Thank you for your mail! We'll get back to you as soon as possible!")
+                messages.error(request, 
+                    'Thank you for your mail!'
+                    + 'We\'ll get back to you as soon as possible!')
                 return redirect('products')
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
                     
     return render(request, 'contact.html', {
         'form':form,
-    })
+        })

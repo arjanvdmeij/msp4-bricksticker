@@ -3,20 +3,46 @@ from .models import Order
 from datetime import datetime, timedelta
 
 class PaymentForm(forms.Form):
-    
-    _this_year = int(datetime.now().strftime("%Y"))
-    _end_year = int((datetime.now() + timedelta(weeks=1040)).strftime("%Y"))
+    """
+    Form to obtain payment information for credit card.
+    Expiration motnh and year progress yearly based on 'now'
+    """
+    _this_year = int(
+        datetime.now().strftime("%Y")
+        )
+    _end_year = int(
+        (datetime.now() + timedelta(weeks=1040)
+        ).strftime("%Y"))
     
     MONTH_CHOICES = [(i,i) for i in range(1,13)]
     YEAR_CHOICES = [(i,i) for i in range(_this_year, _end_year)]
     
-    credit_card_number = forms.CharField(label='Credit Card Number',required=False)
-    cvv = forms.CharField(label='CVV Code', required=False)
-    expiry_month = forms.ChoiceField(label='Expiration Month', choices=MONTH_CHOICES, required=False)
-    expiry_year = forms.ChoiceField(label='Expiration Year', choices=YEAR_CHOICES, required=False)
-    stripe_id = forms.CharField(widget=forms.HiddenInput)
+    credit_card_number = forms.CharField(
+        label='Credit Card Number',
+        required=False,
+        )
+    cvv = forms.CharField(
+        label='CVV Code', 
+        required=False,
+        )
+    expiry_month = forms.ChoiceField(
+        label='Expiration Month', 
+        choices=MONTH_CHOICES, 
+        required=False,
+        )
+    expiry_year = forms.ChoiceField(
+        label='Expiration Year', 
+        choices=YEAR_CHOICES, 
+        required=False,
+        )
+    stripe_id = forms.CharField(
+        widget=forms.HiddenInput,
+        )
     
 class OrderForm(forms.ModelForm):
+    """
+    Standard form with modified label names
+    """
     class Meta:
         model = Order
         

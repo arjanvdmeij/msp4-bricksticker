@@ -12,10 +12,14 @@ class Product(models.Model):
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return "{0} - {1} - {2}".format(self.setnumber, self.name, self.category)
+        return "{0} - {1} - {2}".format(self.setnumber, 
+                                        self.name, 
+                                        self.category)
 
 class ProductComment(models.Model):
-    comment_on = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="Product_Comment")
+    comment_on = models.ForeignKey(
+        Product, on_delete=models.CASCADE, 
+        related_name="Product_Comment")
     author = models.CharField(max_length=75)
     content = models.CharField(max_length=250)
     date = models.DateTimeField(auto_now_add=True)

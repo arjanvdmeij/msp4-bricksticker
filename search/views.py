@@ -4,6 +4,10 @@ from products.models import Product
 
 # Create your views here.
 def search(request):
+    """
+    View returning the filtered results after
+    submitting a search string
+    """
     products = Product.objects.filter(
         Q(description__icontains=request.GET['q']) | 
         Q(category__icontains=request.GET['q'])
@@ -16,6 +20,10 @@ def search(request):
     })
 
 def filter_products(request):
+    """
+    View returning a filtered list of products after selecting
+    a category from the dropdown menu
+    """
     products = Product.objects.filter(
         Q(category__startswith=request.GET['q'])
         )

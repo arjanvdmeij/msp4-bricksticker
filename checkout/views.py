@@ -16,6 +16,10 @@ import stripe
 stripe.api_key = settings.STRIPE_SK
 
 def checkout(request):
+    """
+    Validation and processing of the form(s) filled out
+    within the checkout submission.
+    """
     if request.method=='POST':
         order_form = OrderForm(request.POST)
         payment_form = PaymentForm(request.POST)
@@ -46,9 +50,11 @@ def checkout(request):
                     currency = "EUR",
                     description = order_form.cleaned_data['email_address'],
                     card = payment_form.cleaned_data['stripe_id'],
-                )
+                    )
             except stripe.error.CardError:
-                messages.error(request, "Your payment failed, your card was declined.")
+                messages.error(request, 
+                    'Your payment failed, your card was declined.'
+                    )
                 
             if customer.paid:
                 try:
@@ -69,18 +75,25 @@ def checkout(request):
                 except BadHeaderError:
                     return HttpResponse('Invalid header found.')
                 
-                messages.error(request, "Your order has been placed. A confirmation email should arrive shortly.")
+                messages.error(request, 
+                    'Your order has been placed.'
+                    + ' A confirmation email should arrive shortly.')
                 request.session['cart'] = {}
-                
-                """ make this go to summary bla bla """
                 
                 return redirect(reverse('products'))
             else:
-                messages.error(request, "Unable to take payment at this time, please try again later")
+                messages.error(request, 
+                    'Unable to take payment at this time, '
+                    + 'please try again later')
         else:
-            messages.error(request, "We were unable to take a payment with the card you put in")
+            messages.error(request, 
+                'We were unable to take a payment with the card you put in')
     else:
         payment_form = PaymentForm()
         order_form = OrderForm()
         
-    return render(request, 'checkout.html', {'order_form': order_form, 'payment_form':payment_form, 'stripe_pk':settings.STRIPE_PK})
+    return render(request, 'checkout.html', {
+        'order_form': order_form, 
+        'payment_form':payment_form, 
+        'stripe_pk':settings.STRIPE_PK}
+        )

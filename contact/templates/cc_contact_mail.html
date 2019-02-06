@@ -95,13 +95,26 @@
             <p>Below you will find your submitted form. We will get in contact with you as soon as possible!</p>
         </div>
         <div class="col m-tiny">
+            <center>
             <table class="table">
                 <tr>
+                    <td>
+                        Subject:
+                    </td>
+                    <td>
+                        {{ form_subject }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Content:
+                    </td>
                     <td>
                         {{ form_content }}
                     </td>
                 </tr>
             </table>
+            </center>
         </div>
     </div>
     <div class="row">

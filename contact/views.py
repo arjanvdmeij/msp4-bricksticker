@@ -19,9 +19,10 @@ def contact(request):
                     'contact_mail.html',{
                         'contact_name':form.cleaned_data['contact_name'],
                         'contact_email':form.cleaned_data['contact_email'],
+                        'form_subject': form.cleaned_data['subject'],
                         'form_content': form.cleaned_data['content'],
                     })
-                mail_subject = 'Contactform Submission'
+                mail_subject = 'Contactform: ' + form.cleaned_data['subject']
                 email_to = 'ci.avdm@gmail.com'
                 email = EmailMessage(mail_subject, message, to=[email_to])
                 email.content_subtype = 'html'
@@ -32,6 +33,7 @@ def contact(request):
                 cc_message = render_to_string(
                     'cc_contact_mail.html',{
                         'form_content': form.cleaned_data['content'],
+                        'form_subject': form.cleaned_data['subject'],
                         'site':site.domain,
                     })
                 cc_mail_subject = 'Your question has been received'

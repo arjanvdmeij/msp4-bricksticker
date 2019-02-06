@@ -9,6 +9,10 @@ class ContactForm(forms.Form):
         label='Email Address', 
         required=True, 
         )
+    subject = forms.CharField(
+        label='Subject',
+        required='True',
+        )
     content = forms.CharField(
         required=True,
         widget=forms.Textarea,

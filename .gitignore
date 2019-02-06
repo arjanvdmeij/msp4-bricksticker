@@ -8,3 +8,4 @@ __pycache__/
 *.PNG
 static/
 media/
+staticfiles/

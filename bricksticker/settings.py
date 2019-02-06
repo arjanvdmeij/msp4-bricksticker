@@ -90,7 +90,16 @@ WSGI_APPLICATION = 'bricksticker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
+if os.getenv('C9_HOSTNAME'):
+    print('Running on Cloud9 <DEV>.\nDefaulting to SQLite database.')
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+elif 'DATABASE_URL' in os.environ:
+    print('Found DATABASE_URL in env. Using PostGres.')
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
@@ -102,6 +111,7 @@ else:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
+
 
 
 # Password validation
@@ -132,7 +142,7 @@ AUTHENTICATION_BACKENDS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Amsterdam'
 
 USE_I18N = True
 

@@ -116,9 +116,8 @@ def get_mail_csv(request):
     response['Content-Disposition'] = 'attachment; filename="newsletter.csv"'
     writer = csv.writer(response)
     all_users = User.objects.all()
+    writer.writerow(['Email address', 'First Name', 'Last Name'])
     for user in all_users:
-        writer.writerow([user.email])
-    # writer.writerow(['First row', 'Foo', 'Bar', 'Baz'])
-    # writer.writerow(['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"])
+        writer.writerow([user.email, user.first_name, user.last_name])
 
     return response

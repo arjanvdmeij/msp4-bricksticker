@@ -28,6 +28,7 @@ def contact(request):
                 email.send()
                 
                 site = get_current_site(request)
+                print(site)
                 cc_message = render_to_string(
                     'cc_contact_mail.html',{
                         'form_content': form.cleaned_data['content'],

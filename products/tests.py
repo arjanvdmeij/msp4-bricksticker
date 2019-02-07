@@ -3,17 +3,22 @@ from .models import Product
 
 class ProductTests(TestCase):
     def test_str(self):
-        print('Checking correct formatting of database item')
-        test_name = Product(
-            setnumber = '3681',
-            name = 'Amusement Park',
-            category = 'Fabuland',
+        product = Product(
+            setnumber = '42',
+            name = 'Zephod',
+            category = 'Beeblebrox',
             )
-        self.assertEqual(str(test_name), '3681 - Amusement Park - Fabuland')
+        self.assertEqual(str(product), '42 - Zephod - Beeblebrox')
     
-    def test_click_to_detail_product(self):
-        print('Checking correct detail page is displayed')
-        product = Product(id = 7)
-        page = self.client.get('/products/{0}'.format(product.id))
+    def test_get_products_page(self):
+        page = self.client.get('/products/products/')
+        print(page)
         self.assertEqual(page.status_code, 200)
-        self.assertTemplateUsed(page, 'products/productdetail.html')
+        self.assertTemplateUsed(page, 'products.html')
+    
+    def test_get_home_page(self):
+        page = self.client.get('/')
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, 'index.html')
+        
+    

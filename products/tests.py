@@ -16,7 +16,7 @@ class ProductTests(TestCase):
         self.assertTemplateUsed(page, 'index.html')
     
     def test_get_products_page(self):
-        page = self.client.get('/products/products/')
+        page = self.client.get('/products/')
         print(page)
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, 'products.html')

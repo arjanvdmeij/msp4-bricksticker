@@ -23,7 +23,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bss-red">
             <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" ></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span><i class="fas fa-bars"></i></span>
+                <span><i class="fas fa-bars bss-yellow-text"></i></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto mr-0">
@@ -32,6 +32,8 @@
                             <span class="sr-only">(current)</span> Home</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link bss-white-text" href="{% url 'products' %}"><i class="bss-yellow-text fas fa-box-open"></i> Products</a>
+                    </li><li class="nav-item">
                         <a class="nav-link bss-white-text" href="{% url 'contact' %}"><i class="bss-yellow-text fas fa-edit"></i> Contact</a>
                     </li>
                     {% if user.is_authenticated %}

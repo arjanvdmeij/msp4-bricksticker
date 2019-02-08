@@ -80,7 +80,7 @@ def toggle_processed(request,id):
         order.processed = not order.processed
         order.save()
         print(order.processed)
-    return redirect(profile)
+    return redirect(staff)
 
 def forgetme(request):
     """ 

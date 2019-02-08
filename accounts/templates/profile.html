@@ -1,43 +1,50 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
 <div class="row">
+    <div class="col">
+        <h5 class="bss-red-text">{{ user.first_name }}'s Account</h5>
+        <hr class="bss-red">
+    </div>
+</div>
+<div class="row">
     <div class="col-12 m-auto">
-        <h4>We have this information on you in our database:</h4>
-        <hr class="bss-red">
-        <table class="table">
-            <tr>
-                <th>Username:</th>
-                <td>{{ user.username }}</td>
-            </tr>
-            <tr>
-                <th>Email address:</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>First name:</th>
-                <td>{{ user.first_name }}</td>
-            </tr>
-            <tr>
-                <th>Last name:</th>
-                <td>{{ user.last_name }}</td>
-            </tr>
-            {% if user.is_staff %}
-            <tr>
-                <th>Staff Member:</th>
-                <td>YES</td>
-            </tr>
-            {% if user.is_superuser %}
-            <tr>
-                <th>Site Admin:</th>
-                <td>YES</td>
-            </tr>
-            {% else %}
-            <tr>
-                <th>Site Admin:</th>
-                <td>NO</td>
-            </tr>
-            {% endif %} {% endif %}
-        </table>
-        <hr class="bss-red">
+        <div class="display card card-default border-red">
+            <div class="card-header">
+                Your account details:
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-10 col-sm-4 m-auto">Username:<br><b class="bss-red-text">{{ user.username }}</b></div>
+                    <div class="col-10 col-sm-4 m-auto">Email:<br><b class="bss-red-text">{{ user.email }}</b></div>
+                    <div class="w-100 m-1"></div>
+                    <div class="col-10 col-sm-4 m-auto">First Name:<br><b class="bss-red-text">{{user.first_name }}</b></div>
+                    <div class="col-10 col-sm-4 m-auto">Last Name:<br><b class="bss-red-text">{{ user.last_name }}</b></div>
+                    
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    {% if user.is_staff %}
+                    <div class="col-10 col-sm-4 m-auto">Staff: <b class="bss-red-text">YES</b></div>
+                    {% if user.is_superuser %}
+                    <div class="col-10 col-sm-4 m-auto">Site Admin: <b class="bss-red-text">YES</b></div>
+                    {% else %}
+                    <div class="col-10 col-sm-4 m-auto">Site Admin: <b class="bss-red-text">NO</b></div>
+                    {% endif %}{% endif %}
+                    {% if not user.is_staff %}
+                    &nbsp;
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row my-2">
+    <div class="col-auto m-auto">
+        <center>
+        Here you can opt to delete your account.<br>
+        This will remove you from our newsletter.<br>
+        This will not influence on any ongoing orders.
+        </center>
     </div>
 </div>
 <div class="row">
@@ -45,8 +52,11 @@
         <form method="post" action="{% url 'forgetme' %}">
             {% csrf_token %}
             {% if user.is_staff %}
+            <center>
+            <span class="bss-red-text my-2">Staff members can not delete their account</span><br>
             <button class="btn btn-default bss-red bss-white-text" type="submit" disabled>
                 <i class="far fa-times-circle bss-yellow-text"></i> Delete me</button>
+            </center>
             {% else %}
             <button class="btn btn-default bss-red bss-white-text" type="submit">
                 <i class="far fa-times-circle bss-yellow-text"></i> Delete me</button>

@@ -125,12 +125,18 @@ body {
 
 .form-border input,
 .form-border textarea,
-.form-border select {
+.form-border select,
+.form-control {
     border-color: #c9190a;
 }
 
-.form-border .form-control:focus,
-.qty-field:focus {
+.input-red input {
+    border: 1px solid #c9190a;
+}
+
+.form-control:focus,
+.qty-field:focus,
+.input-red input:focus {
     color: #495057;
     background-color: #fff;
     border-color: #c9190a;

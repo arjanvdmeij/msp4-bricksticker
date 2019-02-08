@@ -58,6 +58,7 @@ def profile(request):
     Profile view with 'delete me'
     """
     return render(request, 'profile.html')
+
     
 @login_required
 def staff(request):
@@ -73,6 +74,7 @@ def staff(request):
         'total_users':total_users,
     })
 
+
 def toggle_processed(request,id):
     if request.method == 'POST':
         order = get_object_or_404(Order, pk=id)
@@ -81,6 +83,7 @@ def toggle_processed(request,id):
         order.save()
         print(order.processed)
     return redirect(staff)
+
 
 def forgetme(request):
     """ 
@@ -131,6 +134,7 @@ def register(request):
     return render(request, 'register.html', {
         'user_form': user_form,
     })
+
 
 def get_mail_csv(request):
     """ 

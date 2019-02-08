@@ -49,10 +49,17 @@
                 <b>For all the products, click 
                 <a class="bss-red-text" href="{% url 'products' %}">HERE</a></b>
             </div>
+            {% if user.is_authenticated %}
+            <div class="col-auto mx-auto my-3">
+                To unsubscribe for the newsletter, click
+                <a class="bss-red-text" href="{% url 'profile' %}">HERE</a>
+            </div>
+            {% else %}
             <div class="col-auto mx-auto my-3">
                 To sign up for the newsletter, click
                 <a class="bss-red-text" href="{% url 'register' %}">HERE</a>
             </div>
+            {% endif %}
         </div>
     </div>
     <div class="col-12 my-1">
@@ -60,37 +67,6 @@
         <h5 class="bss-red-text">Latest additions</h5>
     </div>
     {% for product in products %}
-    <!--<div class="col-12 col-lg-6 my-1">-->
-    <!--    <div class="display card card-default border-red">-->
-    <!--        <div class="card-body less-padding">-->
-    <!--            <div class="row">-->
-    <!--                <div class="d-none d-sm-none d-md-block col-2 col-lg-3">-->
-    <!--                    <div class="product">-->
-    <!--                        <center>-->
-    <!--                            <a class="bss-red-text" href="{% url 'productdetail' product.id %}"><img src="{{ MEDIA_URL }}{{ product.image1 }}"><br>Detail</a>-->
-    <!--                        </center>-->
-    <!--                    </div>-->
-    <!--                </div>-->
-    <!--                <div class="col-12 col-md-5">-->
-    <!--                    <a class="bss-red-text" href="{% url 'productdetail' product.id %}"><b>{{ product.setnumber }}</b> - {{ product.name }}</a><br>-->
-    <!--                    <sup>{{product.description}}</sup><br>-->
-    <!--                    <sup>Series: {{product.category}}</sup><br> &euro; {{ product.price }}-->
-    <!--                </div>-->
-    <!--                <div class="col-12 col-sm-6 ml-sm-auto col-md-3 ml-md-auto col-lg-2 col-lg-auto">-->
-    <!--                    <form method="post" action="{% url 'add_to_cart' product.id %}" class="float-right">-->
-    <!--                        {% csrf_token %}-->
-    <!--                        <div class="input-group input-group-sm">-->
-    <!--                            <input name='quantity' type="number" min="1" max="999" class="form-control qty-field" placeholder="Qty" value="1">-->
-    <!--                            <span class="input-group-append">-->
-    <!--                                <button class="btn btn-sm bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i>  Add</button>-->
-    <!--                            </span>-->
-    <!--                        </div>-->
-    <!--                    </form>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-    <!--</div>-->
     <div class="col-12 my-1">
         <div class="display card card-default border-red">
             <div class="card-body less-padding">

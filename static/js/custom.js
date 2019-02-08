@@ -8,7 +8,3 @@ function showProductSlide(n) {
   }
   x[slideIndex-1].style.display = "block";
 }
-
-function goBack() {
-  window.history.back();
-}

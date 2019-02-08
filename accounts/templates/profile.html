@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %} {% if not user.is_staff %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
 <div class="row">
     <div class="col-12 m-auto">
         <h4>We have this information on you in our database:</h4>
@@ -20,7 +20,7 @@
                 <th>Last name:</th>
                 <td>{{ user.last_name }}</td>
             </tr>
-            {% if user.is_superuser or user.is_staff %}
+            {% if user.is_staff %}
             <tr>
                 <th>Staff Member:</th>
                 <td>YES</td>
@@ -44,92 +44,14 @@
     <div class="col-auto m-auto">
         <form method="post" action="{% url 'forgetme' %}">
             {% csrf_token %}
+            {% if user.is_staff %}
+            <button class="btn btn-default bss-red bss-white-text" type="submit" disabled>
+                <i class="far fa-times-circle bss-yellow-text"></i> Delete me</button>
+            {% else %}
             <button class="btn btn-default bss-red bss-white-text" type="submit">
                 <i class="far fa-times-circle bss-yellow-text"></i> Delete me</button>
+            {% endif %}
         </form>
     </div>
 </div>
-{% else %}
-<div class="row">
-    <div class="col-12 col-sm-4 mx-auto my-2">
-        <div class="card border-red">
-            <div class="card-header">
-                Download Newsletter CSV
-            </div>
-            <div class="card-body m-auto">
-                <a href="{% url 'dl_csv' %}" class="btn bss-red bss-white-text">Download</a>
-            </div>
-            <div class="card-footer">
-                <b>Total recipients:</b> {{ total_users }}
-            </div>
-        </div>
-    </div>
-    {% for order in orders %}
-    <div class="col-12 col-sm-8 ml-auto my-2">
-        <div class="card border-red">
-            <div class="card-header">
-                {{ order.date }} - {{ order.full_name}}
-            </div>
-            <div class="card-body">
-                {% for item in order_items %} {% if item.order.id == order.id %}
-                <div class="card border-red my-1">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12 col-md-8">
-                                <b>{{ item.product.setnumber }}</b>
-                                - {{ item.product.name }}<br> 
-                                Qty: {{ item.quantity }} - Price: € {{ item.total_item_price }}
-                            </div>
-                            <div class="col-md-4 d-none d-sm-none d-md-block product">
-                                <img class="" src="{{ MEDIA_URL }}{{ item.product.image1 }}" alt="Sticker - {{ item.product.setnumber }}">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                {% endif %} {% endfor %}
-            </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-8">
-                        <b>Shipping address:</b><br>
-                        {{ order.full_name }}<br>
-                        {{ order.address1 }}<br>
-                        {% if order.address2 %} {{ order.address2 }}<br>{% endif %} 
-                        {% if order.postcode %} {{ order.postcode }}&nbsp; {% endif %}
-                        {{ order.town_or_city }}<br>
-                        {% if order.state_or_province %} {{ order.state_or_province }}&nbsp; {% endif %} 
-                        {{ order.country }}
-                    </div>
-                    <div class="col-4">
-                        <form method="post" action="{% url 'toggle' order.id %}" class="float-right">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-default bss-red bss-white-text">
-                                <i class="fas fa-clipboard-check bss-yellow-text"></i> Order sent?
-                            </button>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    {% if not orders %}
-    <div class="col-12 col-sm-4 mr-auto my-2">
-        <div class="card border-red">
-            <div class="card-header">
-                All done!
-            </div>
-            <div class="card-body">
-                There are currently no unsent orders
-            </div>
-            <div class="card-footer">
-                &nbsp;
-            </div>
-        </div>
-    </div>
-    {% endif %}
-</div>
-
-{% endif %} {% endblock %}
+{% endblock %}

@@ -55,14 +55,19 @@ def login(request):
 @login_required
 def profile(request):
     """
-    A view that displays the profile page of a logged in user
-    or alternatively shows a number of items at the behest of
-    site adminsitrators and staff, specifically orders
+    Profile view with 'delete me'
+    """
+    return render(request, 'profile.html')
+    
+@login_required
+def staff(request):
+    """
+    Order processing page for staff members
     """
     orders = Order.objects.filter(processed=False)
     order_items = OrderItem.objects.all()
     total_users = User.objects.all().count()
-    return render(request, 'profile.html', {
+    return render(request, 'staff.html', {
         'orders':orders,
         'order_items':order_items,
         'total_users':total_users,
@@ -77,11 +82,10 @@ def toggle_processed(request,id):
         print(order.processed)
     return redirect(profile)
 
-
 def forgetme(request):
     """ 
-    Log out the user and remove all account information
-    from the user table, effectively 'forgetting' the user
+    Log out and remove the user's account
+    Button disabled for staff
     """
     if request.method == 'POST':
         remove_user = request.user.id
@@ -128,17 +132,19 @@ def register(request):
         'user_form': user_form,
     })
 
-
 def get_mail_csv(request):
     """ 
-    A view to allow admins/staff to download a csv file
-    containing all the names and mail addresses of registered users
+    Allow admins/staff to download a csv file
+    for newsletter purposes
     """
-    response = HttpResponse(content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="newsletter.csv"'
-    writer = csv.writer(response)
-    all_users = User.objects.all()
-    writer.writerow(['Email address', 'First Name', 'Last Name'])
-    for user in all_users:
-        writer.writerow([user.email, user.first_name, user.last_name])
-    return response
+    if request.user.is_staff:
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="newsletter.csv"'
+        writer = csv.writer(response)
+        all_users = User.objects.all()
+        writer.writerow(['Email address', 'First Name', 'Last Name'])
+        for user in all_users:
+            writer.writerow([user.email, user.first_name, user.last_name])
+        return response
+    else:
+        return render(request, 'index.html')

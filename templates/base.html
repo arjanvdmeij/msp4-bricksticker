@@ -42,7 +42,10 @@
                         </a>
                         
                         <div class="dropdown-menu" aria-labelledby="accountLinks">
-                            <a class="dropdown-item" href="{% url 'profile' %}">{% if user.is_staff %}Admin{% else %}Profile{% endif %}</a>
+                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+                            {% if user.is_staff %}
+                            <a class="dropdown-item" href="{% url 'staff' %}">Admin</a>
+                            {% endif %}
                             <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
                         </div>
                     </div>
@@ -55,6 +58,7 @@
             </div>
         </nav>
         <nav class="navbar navbar-expand-lg navbar-light bss-red">
+            {% block csvdownload %} {% endblock %}
             <a class="nav-link bss-white-text ml-auto mr-0" href="{% url 'view_cart' %}">
                 <i class="bss-yellow-text fas fa-shopping-cart fa-lg"></i>
                 {% if product_count > 0 %}

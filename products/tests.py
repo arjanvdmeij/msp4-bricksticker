@@ -1,7 +1,8 @@
 from django.test import TestCase
-from .models import Product
+from .models import Product, ProductComment
 
 class ProductTests(TestCase):
+    print('Running Products Tests')
     def test_str(self):
         product = Product(
             setnumber = '42',
@@ -17,6 +18,5 @@ class ProductTests(TestCase):
     
     def test_get_products_page(self):
         page = self.client.get('/products/')
-        print(page)
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, 'products.html')

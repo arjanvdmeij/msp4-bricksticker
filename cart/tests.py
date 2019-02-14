@@ -25,7 +25,9 @@ class CartTests(TestCase):
         cart = {}
         quantity = 3
         cart[id] = quantity
-        response = self.client.post('/cart/adjust_cart {0}'.format(product.id), {'cart_items':cart_items,'quantity':quantity})
+        response = self.client.post('/cart/adjust_cart {0}'.format(product.id), {
+                                    'cart_items':cart_items,'quantity':quantity
+                                    })
         self.assertEqual(cart, {7: 3})
         
 

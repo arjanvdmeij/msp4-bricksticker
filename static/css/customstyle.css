@@ -123,6 +123,10 @@ body {
     height: 2rem;
 }
 
+.form-control .qty-field {
+    border-color: transparent !important;
+}
+
 .form-border input,
 .form-border textarea,
 .form-border select,

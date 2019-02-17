@@ -115,7 +115,7 @@ body {
     max-height: 50px;
 }
 
-.qty-field {
+.qty-field1 {
     max-width: 60px;
 }
 
@@ -132,8 +132,9 @@ body {
     border-color: #c9190a;
 }
 
-.qty-field {
+.qty-field2 {
     border-color: transparent !important;
+    max-width: 60px;
 }
 
 .input-red input {

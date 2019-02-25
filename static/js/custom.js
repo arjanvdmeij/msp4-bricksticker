@@ -1,3 +1,5 @@
+/* global $ */
+
 function showProductSlide(n) {
   var i, slideIndex = n;
   var x = document.getElementsByClassName("productSlides");
@@ -6,5 +8,7 @@ function showProductSlide(n) {
   for (i = 0; i < x.length; i++) {
     x[i].style.display = "none";
   }
+  $(x[i]).fadeOut(1000);
+  $(x[slideIndex-1]).fadeIn(1000);
   x[slideIndex-1].style.display = "block";
 }

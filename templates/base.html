@@ -1,4 +1,4 @@
-{% load static from staticfiles %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,119 +6,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/customstyle.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{% static 'css/materialize.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/lightbox.css' %}" type="text/css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
-    <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js"></script>
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
-    {% block head_stripe_js %}{% endblock %}
     <title>Brick Sticker Shop</title>
 </head>
 
 <body>
     <header>
-    <div class="fixed-top">
-        <nav class="navbar navbar-expand-lg navbar-light bss-red">
-            <a class="navbar-brand" href="#"><img src="{% static 'images/logo.png' %}" ></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span><i class="fas fa-bars bss-yellow-text"></i></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mr-0">
-                    <li class="nav-item active">
-                        <a class="nav-link bss-white-text" href="{% url 'index' %}"><i class="bss-yellow-text fas fa-home"></i>
-                            <span class="sr-only">(current)</span> Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'products' %}"><i class="bss-yellow-text fas fa-box-open"></i> Products</a>
-                    </li><li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'contact' %}"><i class="bss-yellow-text fas fa-edit"></i> Contact</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <div class="nav-link dropdown">
-                        <a class="dropdown-toggle bss-white-text" href="#" role="button" id="accountLinks" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="bss-yellow-text fas fa-user"></i> {% if not user.is_staff %}{{ user.first_name }}{% else %}
-                            <span class="bss-yellow-text">{{ user.first_name }}</span>{% endif %}
-                        </a>
-                        
-                        <div class="dropdown-menu" aria-labelledby="accountLinks">
-                            <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
-                            {% if user.is_staff %}
-                            <a class="dropdown-item" href="{% url 'staff' %}">Admin</a>
+        <div class="navbar-fixed">
+            <nav class="nav-extended bss-red">
+                <div class="nav-wrapper">
+                    <a href="#" class="brand-logo left size-logo"><img src="{% static 'images/logo.png' %}" alt="Brickstickershop logo"></a>
+                    <div class="nav-wrapper">
+                        <ul class="right">
+                            {% if user.is_authenticated %}
+                            {% if not user.is_staff %}
+                            <li>
+                                <a class="dropdown-trigger" href="#!" data-target="usermenu1">
+                                    <i class="bss-yellow-text fas fa-user"></i> Menu
+                                    <i class=" bss-yellow-text material-icons right">arrow_drop_down</i>
+                                </a>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a class="dropdown-trigger bss-yellow-text" href="#!" data-target="usermenu1">
+                                    <i class="bss-yellow-text fas fa-user"></i> Staff
+                                    <i class=" bss-yellow-text material-icons right">arrow_drop_down</i>
+                                </a>
+                            </li>
                             {% endif %}
-                            <a class="dropdown-item" href="{% url 'logout' %}">Sign Out</a>
-                        </div>
+                            {% else %}
+                            <li class="tab"><a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="bss-yellow-text fas fa-user"></i> SIGN IN</a></li>
+                            {% endif %}
+                        </ul>
                     </div>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="bss-yellow-text fas fa-user"></i> Sign In</a>
-                    </li>
+                </div>
+                <div class="left nav-content">
+                    <ul class="tabs tabs-transparent">
+                        <li class="tab"><a class="bss-white-text" href="{% url 'index' %}"><i class="bss-yellow-text fas fa-home"></i> Home</a></li>
+                        <li class="tab"><a class="bss-white-text" href="{% url 'products' %}"><i class="bss-yellow-text fas fa-box-open"></i> Products</a></li>
+                        <li class="tab"><a class="bss-white-text" href="{% url 'contact' %}"><i class="bss-yellow-text fas fa-edit"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="right nav-content">
+                    <ul class="tabs tabs-transparent">
+                        <li class="tab">
+                            <a class="nav-link bss-white-text" href="{% url 'view_cart' %}">
+                                <i class="bss-yellow-text fas fa-shopping-cart fa-2x"></i>
+                                {% if product_count > 0 %}
+                                <span class="count-cart">{{ product_count }}</span>
+                                {% endif %}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <ul id="usermenu1" class="dropdown-content a-like-button">
+                    <li><a class="btn-small bss-white bss-red-text user-menu-button" href="{% url 'profile' %}">Profile</a>
+                    {% if user.is_staff %}
+                    <a class="btn-small bss-white bss-red-text user-menu-button" href="{% url 'staff' %}">Staff</a>
                     {% endif %}
+                    <a class="btn-small bss-white bss-red-text user-menu-button" href="{% url 'logout' %}">Sign Out</a></li>
                 </ul>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-lg navbar-light bss-red">
-            {% block csvdownload %} {% endblock %}
-            <a class="nav-link bss-white-text ml-auto mr-0" href="{% url 'view_cart' %}">
-                <i class="bss-yellow-text fas fa-shopping-cart fa-lg"></i>
-                {% if product_count > 0 %}
-                <sup><label class="cover-cart badge badge-pill badge-dark">{{ product_count }}</label></sup>
-                {% endif %}
-            </a>
-        </nav>
-    </div>
-    </header>
-
-    <main role="main" class="container-fluid">
-    {% if messages %}
-    <div class="alert alert-success alert-dismissable fade show border-red" role="alert">
-        <div class="messages">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            </nav>
         </div>
-    </div>
-    {% endif %}
-    
-    {% block content %} {% endblock %}
+    </header>
+    <main class="container-main lower-me">
+        {% if messages %}
+        <div id="alert-box" class="alert bss-yellow-light border-red center" role="alert">
+            <div class="messages">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="btn btn-alert right">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        {% endif %}
+        {% block content %} {% endblock %}
     </main>
-    
-    <footer role="footer" class="footer fixed-bottom">
+    <footer class="footer">
         <div class="container">
-            <div class="row footer-lineheight">
-                <div class="col mx-auto">
-                    <center>
-                        <a class="bss-white-text" href="{% url 'about' %}">
-                        <i class="bss-yellow-text fas fa-question-circle"></i> About the Stickers</a>
-                    </center>
+            <div class="row footer-lineheight no-margin">
+                <div class="col s6 l3 center">
+                    <a class="bss-white-text" href="{% url 'about' %}">
+                    <i class="bss-yellow-text fas fa-question-circle"></i> About the Stickers</a>
                 </div>
-                <div class="col mx-auto">
-                    <center>
-                        <a class="bss-white-text" href="{% url 'privacy' %}">
-                        <i class="bss-yellow-text fas fa-info-circle"></i> Privacy Statement</a>
-                    </center>
+                <div class="col s6 l3 center">
+                    <a class="bss-white-text" href="{% url 'privacy' %}">
+                    <i class="bss-yellow-text fas fa-info-circle"></i> Privacy Statement</a>
                 </div>
-                <div class="w-100"></div>
-                <div class="col mx-auto">
-                    <center>
-                        <a class="bss-white-text" href="{% url 'terms_and_conditions' %}">
-                        <i class="bss-yellow-text far fa-handshake"></i> Terms and Conditions</a>
-                    </center>
+                <div class="col s6 l3 center">
+                    <a class="bss-white-text" href="{% url 'terms_and_conditions' %}">
+                    <i class="bss-yellow-text far fa-handshake"></i> Terms and Conditions</a>
                 </div>
-                <div class="col mx-auto">
-                    <center>
-                        <a class="bss-white-text" href="{% url 'returns' %}">
-                        <i class="bss-yellow-text fas fa-undo-alt"></i> Returns</a>
-                    </center>
+                <div class="col s6 l3 center">
+                    <a class="bss-white-text" href="{% url 'returns' %}">
+                    <i class="bss-yellow-text fas fa-undo-alt"></i> Returns</a>
                 </div>
             </div>
         </div>
     </footer>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.6.0/js/all.js"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/lightbox.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <script>
+        /* global $ */
+        /* --- dropdown-trigger refuses to work when in custom.js --- */
+        $(document).ready(function(){
+            $('.dropdown-trigger').dropdown();
+        });
+    </script>
+    {% block head_stripe_js %}{% endblock %}
 </body>
 
 </html>

@@ -3,6 +3,7 @@ from .forms import OrderForm, PaymentForm
 from datetime import datetime, timedelta
 
 class CheckoutFormTests(TestCase):
+    print('Running Checkout tests')
     def test_orderform_isvalid(self):
         form = OrderForm({
             'full_name':'Clint Barton',
@@ -19,9 +20,10 @@ class CheckoutFormTests(TestCase):
 
     
     def test_paymentform_isvalid(self):
-        """make a variable end year for perpetual validity"""
+        """make a variable end year (two years from now),
+        for perpetual validity"""
         _end_year = int(
-            (datetime.now() + timedelta(weeks=520)
+            (datetime.now() + timedelta(weeks=104)
             ).strftime("%Y"))
             
         form = PaymentForm({

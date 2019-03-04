@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 class PaymentForm(forms.Form):
     """
     Form to obtain payment information for credit card.
-    Expiration motnh and year progress yearly based on 'now'
+    Expiration motnh and year based on 'now'
     """
     _this_year = int(
         datetime.now().strftime("%Y")
@@ -14,30 +14,32 @@ class PaymentForm(forms.Form):
         (datetime.now() + timedelta(weeks=1040)
         ).strftime("%Y"))
     
-    MONTH_CHOICES = [(i,i) for i in range(1,13)]
-    YEAR_CHOICES = [(i,i) for i in range(_this_year, _end_year)]
-    
     credit_card_number = forms.CharField(
-        label='Credit Card Number',
+        label='Card Nr.',
         required=False,
         )
     cvv = forms.CharField(
-        label='CVV Code', 
+        label='CVV', 
         required=False,
         )
-    expiry_month = forms.ChoiceField(
-        label='Expiration Month', 
-        choices=MONTH_CHOICES, 
+    expiry_month = forms.DecimalField(
+        label='Month', 
         required=False,
+        initial=1,
+        min_value=1,
+        max_value=12,
         )
-    expiry_year = forms.ChoiceField(
-        label='Expiration Year', 
-        choices=YEAR_CHOICES, 
+    expiry_year = forms.DecimalField(
+        label='Year', 
         required=False,
+        initial=2020,
+        min_value=_this_year,
+        max_value=_end_year,
         )
     stripe_id = forms.CharField(
         widget=forms.HiddenInput,
         )
+
     
 class OrderForm(forms.ModelForm):
     """

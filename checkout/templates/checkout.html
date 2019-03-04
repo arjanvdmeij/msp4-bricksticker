@@ -1,174 +1,158 @@
-{% extends 'base.html' %} {% load static from staticfiles %} {% load crispy_forms_tags %} {% block head_stripe_js %}
-
+{% extends 'base.html' %} 
+{% load static from staticfiles %} 
+{% load materializecss %} 
+{% block head_stripe_js %}
 <script src="https://js.stripe.com/v2/"></script>
+<script src="https://js.stripe.com/v3/"></script>
 <script>
     //<![CDATA[
+    var stripe = Stripe('{{ stripe_pk }}');
     Stripe.setPublishableKey('{{ stripe_pk }}');
     //]]>
 </script>
 <script src="{% static 'js/stripe.js' %}"></script>
-
-{% endblock %} {% block content %}
-
+{% endblock %} 
+{% block content %}
 {% if total > 0 %}
-
-<div class="row">
-    <div class="col-auto mx-auto">
+<div class="row no-margin">
+    <div class="left">
         <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-            <i class="fas fa-shoe-prints bss-yellow-text"></i> Continue Shopping</a>
+            <i class="fas fa-shoe-prints bss-yellow-text"></i> Continue Shopping
+        </a>
     </div>
 </div>
-<div class="row">&nbsp;</div>
-
-<div id="checkout">
-    <div class="card border-red">
-        <div class="card-header bss-red" id="headingCart">
-            <h5 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCart" aria-expanded="true" aria-controls="collapseCart">
-                  <i class="fas fa-shopping-cart bss-yellow-text"></i>
-                  <span class="bss-white-text"> Cart contents - Total price: &euro; {{ total }}</span>
-                </button>
-            </h5>
-        </div>
-        <div id="collapseCart" class="collapse show" aria-labelledby="headingCart" data-parent="#checkout">
-            <div class="card-body">
-                <div class="row">
-                    {% for item in cart_items %}
-                    <div class="col-12 my-1">
-                        <div class="display card card-default border-red">
-                            <div class="card-body less-padding">
-                                <div class="row">
-                                    <div class="d-none d-sm-none d-md-block col-3">
-                                        <div class="product">
-                                            <center>
-                                                <img src="{{ MEDIA_URL }}{{ item.product.image1 }}">
-                                            </center>
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-5">
-                                        <sup>{{item.product.description}}</sup><br>
-                                        <sup>Series: {{item.product.category}}</sup><br> &euro; {{ item.product.price }}
-                                    </div>
-                                    <div class="col-12 col-sm-6 ml-sm-auto col-md-4 ml-md-auto">
-                                        <div class="row">
-                                            <div class="col-12 my-2">
-                                                <form method="post" action="{% url 'adjust_checkout' item.id %}" class="float-right">
-                                                    {% csrf_token %}
-                                                    <div class="form-group no-margin">
-                                                        <label for="inputAmount" class="sr-only">New Qty</label>
-                                                        <div class="input-group input-group-sm border-red hard-borderradius">
-                                                            <div class="input-group-prepend"><span class="input-group-text">Qty</span></div>
-                                                            <input name="quantity" type="number" min="0" max="999" class="form-control qty-field2" value="{{item.quantity}}">
-                                                            <div class="input-group-append">
-                                                                <button type="submit" class="btn btn-sm bss-red bss-white-text"><i class="far fa-edit bss-yellow-text"></i> Adjust</button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="col-12 my-2">
-                                                <form method="post" action="{% url 'adjust_checkout' item.id %}" class="float-right">
-                                                    {% csrf_token %}
-                                                    <button type="submit" name="quantity" value="0" class="btn btn-sm bss-red bss-white-text"><i class="fas fa-trash-alt bss-yellow-text"></i> Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-
-        <div class="card-header bss-red" id="headingPerson">
-            <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapsePerson" aria-expanded="false" aria-controls="collapsePerson">
-                  <i class="fas fa-user bss-yellow-text"></i>
-                  <span class="bss-white-text"> Personal Details</span>
-                </button>
-            </h5>
-        </div>
-        <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}" class="form-border">
-            <div id="collapsePerson" class="collapse" aria-labelledby="headingPerson" data-parent="#checkout">
-                <div class="card-body">
-                    <div id="credit-card-errors" style="display:none">
-                        <div class="alert-message block-message error" id="stripe-error-message"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">{{ order_form.full_name | as_crispy_field }}</div>
-                        <div class="col-12">{{ order_form.address1 | as_crispy_field }}</div>
-                        <div class="col-12">{{ order_form.address2 | as_crispy_field }}</div>
-                        <div class="col-12 col-sm-4">{{ order_form.postcode | as_crispy_field }}</div>
-                        <div class="col-12 col-sm-8">{{ order_form.town_or_city | as_crispy_field }}</div>
-                        <div class="col-12 col-sm-4">{{ order_form.state_or_province | as_crispy_field }}</div>
-                        <div class="col-12 col-sm-8">{{ order_form.country | as_crispy_field }}</div>
-                        <div class="col-12 col-sm-4">{{ order_form.phone_number | as_crispy_field }}</div>
-                        <div class="col-12 col-sm-8">{{ order_form.email_address | as_crispy_field }}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-header bss-red" id="headingCreditCard">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseCreditCard" aria-expanded="false" aria-controls="collapseCreditCard">
-                  <i class="far fa-credit-card bss-yellow-text"></i>
-                  <span class="bss-white-text"> Payment Details</span>
-                </button>
-                </h5>
-            </div>
-            <div id="collapseCreditCard" class="collapse" aria-labelledby="headingCreditCard" data-parent="#checkout">
-                <div class="card-body">
-                    <div id="credit-card-errors" style="display:none">
-                        <div class="alert-message block-message error" id="stripe-error-message"></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 col-sm-8">
-                            <div class="row">
-                                <div class="col-8">{{ payment_form.credit_card_number | as_crispy_field }}</div>
-                                <div class="col-4">{{ payment_form.cvv | as_crispy_field }}</div>
-                                <div class="col-6">{{ payment_form.expiry_month | as_crispy_field }}</div>
-                                <div class="col-6">{{ payment_form.expiry_year | as_crispy_field }}</div>
-                                <div class="col-12">{{ payment_form.stripe_id | as_crispy_field }}</div>
-                            </div>
-                        </div>
-                        <div class="d-none d-sm-block col-sm-4">
-                            <div class="row">
-                                <div class="col-12">
-                                    <img class="float-right" src="{% static 'images/bss-brick-cc.png' %}" width="150">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="form-group col-auto m-auto">
-                            <button type="submit" class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit">
-                                <i class="fas fa-donate bss-yellow-text"></i> Submit Payment
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
-
-{% else %}
-
 <div class="row">
-    <div class="col-10 col-md-6 mx-auto">
-        <div class="display card card-default border-red">
-            <div class="card-body">
+    <div class="card-panel col s12 border-red white">
+        <ul class="collapsible border-red">
+            <li class="active">
+                <div class="collapsible-header bss-red bss-white-text">
+                    <i class="material-icons bss-yellow-text">shopping_cart</i>Cart Contents - Total price: &euro; {{ total }}
+                </div>
+                <div class="collapsible-body bss-yellow-light less-padding">
+                    <div class="row no-margin">
+                        {% for item in cart_items %}
+                        <div class="col s12 m6 l4">
+                            <div class="card border-red hoverable">
+                                <div class="card-image product center">
+                                    <img src="{{ MEDIA_URL }}{{ item.product.image1 }}" alt="{{ item.product.name }}">
+                                </div>
+                                <div class="card-content">
+                                    <h6 class="bss-red-text">{{ item.product.setnumber }} - {{ item.product.name }}</h6>
+                                    <div class="card-panel no-margin less-padding border-red fixed-height bss-blue-light">
+                                        <div class="row no-margin">
+                                            <div class="col s12">
+                                                <p class="product-description">{{item.product.description}}</p><br>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col s6">
+                                                <sup>Category: {{item.product.category}}</sup>
+                                                </div>
+                                                <div class="col s6">
+                                                    <span class="right bss-red-text">&euro; {{ item.product.price }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-action no-padding">
+                                    <div class="row less-margin-bottom">
+                                        <form method="post" action="{% url 'adjust_checkout' item.id %}" class=""> {% csrf_token %}  
+                                            <div class="col s2 offset-s1">
+                                                Qty:&nbsp;
+                                            </div>
+                                            <div class="col s3 no-padding center-align-items qty-cart">
+                                                <input name='quantity' type="number" min="1" max="999" class="left" value="{{ item.quantity }}">
+                                            </div>
+                                            <div class="col s6 right">
+                                                <button class="btn width-fix-cart1 bss-white-text bss-red right" type="submit">
+                                                    <i class="fas fa-edit bss-yellow-text"></i>&nbsp;Adjust
+                                                </button>
+                                            </div>
+                                        </form>    
+                                    </div>
+                                </div>
+                                <div class="row no-margin">
+                                    <form method="post" action="{% url 'adjust_checkout' item.id %}" class="float-right"> {% csrf_token %}
+                                        <div class="col s7 no-padding">
+                                            <button type="button" class="btn bss-red-text bss-white product-price left">
+                                                item total: &euro; {{ item.product_total_price }}
+                                            </button>
+                                        </div>
+                                        <div class="col s5 no-padding">
+                                            <button type="submit" name="quantity" value="0" class="btn width-fix-cart1 bss-red bss-white-text right">
+                                                <i class="fas fa-trash-alt bss-yellow-text"></i>&nbsp;Delete
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="collapsible-header bss-red bss-white-text">
+                    <i class="material-icons bss-yellow-text">person</i>Address and <i class="material-icons bss-yellow-text">payment</i> Payment
+                </div>
+                <div class="collapsible-body bss-yellow-light less-padding">
+                    <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}" class="form-border"> {% csrf_token %} 
+                        <div class="card-panel bss-white border-red">
+                            <div class="row">
+                                {{ order_form.full_name | materializecss:'s12' }}
+                                {{ order_form.address1 | materializecss:'s12' }}
+                                {{ order_form.address2 | materializecss:'s12' }}
+                                {{ order_form.postcode | materializecss:'s12 m4' }}
+                                {{ order_form.town_or_city | materializecss:'s12 m8' }}
+                                {{ order_form.state_or_province | materializecss:'s12 m4' }}
+                                {{ order_form.country | materializecss:'s12 m8' }}
+                                {{ order_form.phone_number | materializecss:'s12 m4' }}
+                                {{ order_form.email_address | materializecss:'s12 m8' }}  
+                            </div>
+                            <div class="row">
+                                <div class="col s12 m9">
+                                    <div class="card-panel border-red white no-margin">
+                                        <div class="row no-margin center bss-red-text">
+                                            <h6 class="no-margin">Enter your Credit Card here</h6>
+                                        </div>
+                                        <div class="row">
+                                            {{ payment_form.credit_card_number | materializecss:'s9' }}
+                                            {{ payment_form.cvv | materializecss:'s3' }}
+                                            {{ payment_form.expiry_month | materializecss:'s6 m4' }}
+                                            {{ payment_form.expiry_year | materializecss:'s6 m4' }}
+                                            <div class="hide">
+                                                {{ payment_form.stripe_id | materializecss }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s12 m3 hide-on-small-only">
+                                    <img class="center" src="{% static 'images/bss-brick-cc.png' %}" width="150" alt="Figure with Credit Card">
+                                </div>
+                            </div>
+                            <div class="row center">
+                                <button type="submit" class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit">
+                                    <i class="fas fa-donate bss-yellow-text"></i> Submit Payment
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col s10 offset-s1 m6 offset-m3">
+        <div class="card border-red">
+            <div class="card-content center-align">
                 <h5>
                     Your cart is empty.
                 </h5>
             </div>
-            <div class="card-footer">
-                <div class="d-flex justify-content-center">
+            <div class="card-action">
+                <div class="center-align">
                 <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
                     <i class="fas fa-shoe-prints bss-yellow-text"></i> Continue Shopping</a>
                 </div>
@@ -176,7 +160,5 @@
         </div>
     </div>
 </div>
-
 {% endif %}
-
 {% endblock %}

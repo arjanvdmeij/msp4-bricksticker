@@ -23,11 +23,11 @@ def all_products(request):
     
 def latest_products(request):
     """
-    View used to show a welcome page with 5 most recently added items.
+    View used to show a welcome page with 6 most recently added items.
     Categroies are added in for future use, though
     currently the category filter is not present
     """
-    products = Product.objects.all().order_by('-date_added')[:5]
+    products = Product.objects.all().order_by('-date_added')[:6]
     categories = Product.objects.values(
         'category').order_by(
         'category').distinct()

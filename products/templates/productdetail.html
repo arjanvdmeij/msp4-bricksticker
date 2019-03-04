@@ -1,97 +1,58 @@
-{% extends 'base.html' %}
-{% load static from staticfiles %}
-{% load crispy_forms_tags %}
-
+{% extends 'base.html' %} 
+{% load static %} 
+{% load materializecss %} 
 {% block content %}
-
-<div class="row">
-    <div class="col-auto mx-auto">
+<div class="row no-margin">
+    <div class="left">
         <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-            <i class="fas fa-shoe-prints bss-yellow-text"></i> Back to Products</a>
+        <i class="fas fa-shoe-prints bss-yellow-text"></i> Back to Products</a>
     </div>
 </div>
-<div class="row">&nbsp;</div>
-
 <div class="row">
-    <div class="col-12">
-        <div class="display card card-default border-red full-width">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-12">
-                        <b>{{product.setnumber}}</b> - {{product.name}}
+    <div class="col s12 no-padding">
+        <div class="card border-red">
+            <div class="card-content no-padding">
+                <div class="row no-margin less-padding bss-red center">
+                    <div class="card-title col s12 bss-yellow-text">
+                        {{product.setnumber}} - {{product.name}}
                     </div>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <center>
-                            <img class="productSlides" src="{{ MEDIA_URL }}{{ product.image1 }}" style="">
-                            <img class="productSlides" src="{{ MEDIA_URL }}{{ product.image2 }}" style="display:none">
-                        </center>
-                        <div class="row">
-                            <div class="col-6 mx-auto">
-                                <center>
-                                    <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image1 }}" onclick="showProductSlide(1)">
-                                </center>
-                            </div>
-                            <div class="col-6 mx-auto">
-                                <center>
-                                    <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image2 }}" onclick="showProductSlide(2)">
-                                </center>
-                            </div>
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="center-align">
+                        <div class="slide-height center">
+                            <a href="{{ MEDIA_URL }}{{ product.image1 }}" data-lightbox="Image-{{product.id}}-img" data-title="{{product.name}}">
+                                <img class="productSlides"src="{{ MEDIA_URL }}{{ product.image1 }}" alt="{{product.name}}" style="">
+                            </a>
+                            <a href="{{ MEDIA_URL }}{{ product.image2 }}" data-lightbox="Image-{{product.id}}-img" data-title="{{product.name}}">
+                                <img class="productSlides"src="{{ MEDIA_URL }}{{ product.image2 }}" alt="{{product.name}}" style="display:none">
+                            </a>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
-                        <h4><b>Series:</b> {{product.category}}</h4>
-                        <h6>{{product.description}}</h6>
+                    <div class="row no-margin">
+                        <div class="col s6 center">
+                            <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image1 }}" onclick="showProductSlide(1)" alt="Thumbnail 1">
+                        </div>
+                        <div class="col s6 center">
+                            <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image2 }}" onclick="showProductSlide(2)" alt="Thumbnail 2">
+                        </div>
                     </div>
                 </div>
+                <div class="col s12 m6">
+                    <h5 class="bss-red-text">Category: {{product.category}}</h5>
+                    <h6>{{product.description}}</h6>
+                </div>
             </div>
-            <div class="card-footer">
-                <div class="row">
-                    <div class="col-7"><h6>&euro; {{ product.price }}</h6></div>
-                    <div class="col-5">
-                        <form method="post" action="{% url 'add_to_cart' product.id %}" class="float-right">
+            <div class="card-action no-padding">
+                <div class="row no-margin">
+                    <div class="col s6 no-padding">
+                        <button class="left btn bss-red-text white product-price">&euro; {{ product.price }}</button>
+                    </div>
+                    <div class="col s6 no-padding">
+                        <form method="post" action="{% url 'add_to_cart' product.id %}" class="">
                             {% csrf_token %}
-                            <div class="input-group input-group-sm">
-                                <input name='quantity' type="number" min="1" max="999" class="form-control qty-field" placeholder="Qty" value="1">
-                                <span class="input-group-append">
-                                    <button class="btn btn-sm bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i> Add</button>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-</div>
-
-<div class="row my-1">
-    <div class="col-12">
-        <div id="CommentAdd">
-            <div class="card border-red">
-                <div class="card-header bss-red bss-yellow-text" id="heading">
-                    <button class="btn btn-link collapsed bss-white-text" type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="true" aria-controls="collapse">
-                     <i class="fas fa-caret-square-down bss-yellow-text"></i> Leave a comment <i class="far fa-comments bss-yellow-text"></i>
-                    </button>
-                </div>
-                <div id="collapse" class="collapse" aria-labelledby="heading" data-parent="#CommentAdd">
-                    <div class="card-body">
-                        <form method="POST" enctype="multipart/form-data">
-                            {% csrf_token %} 
-                            <div class="row">
-                                <div class="col-12 col-sm-3">
-                                    {{ comment_form.author | as_crispy_field }}
-                                </div>
-                                <div class="col-12 col-sm-9">
-                                    {{ comment_form.content | as_crispy_field }}
-                                </div>
-                            </div>
-                            <button type="submit" class="btn btn-default bss-red bss-white-text">
-                                <i class="far fa-check-square bss-yellow-text"></i> Save</button>
+                            <button name="quantity" value="1" class="right btn bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i>  Add</button>
                         </form>
                     </div>
                 </div>
@@ -99,29 +60,50 @@
         </div>
     </div>
 </div>
-
-{% if comments %}
 <div class="row">
-    <div class="col-12">
-        <div class="card no-padding border-red">
-            <div class="card-body bss-yellow">
-                <div class="row">
-                    {% for comment in comments %}
-                    <div class="col-12">
-                        <div class="card border-red m-1">
-                            <div class="card-body bss-white">
-                                <p><b>{{ comment.content }}</b></p>
+    <div class="col s12 no-padding">
+        <ul class="collapsible no-margin border-red">
+            <li>
+                <div class="collapsible-header bss-red bss-white-text border-red">
+                    <span class="collapsible-header-comment"><i class="fas fa-caret-square-down bss-yellow-text"></i>
+                    &nbsp;Leave a comment&nbsp;
+                    <i class="far fa-comments bss-yellow-text"></i></span>
+                </div>
+                <div class="collapsible-body less-padding bss-red border-red">
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="card no-margin">
+                            <div class="card-content">
+                                <div class="row no-margin">
+                                    {{ comment_form.author | materializecss:'s12 m3, icon=person' }}
+                                    {{ comment_form.content | materializecss:'s12 m9, icon=create' }}
+                                </div>
+                            </div>
+                            <div class="card-action center-align">
+                                <button type="submit" class="btn btn-default bss-red bss-white-text">
+                                <i class="far fa-check-square bss-yellow-text"></i> Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </li>
+            {% if comments %}
+            <li>
+                <div class="row no-margin">
+                    <div class="col s12 bss-yellow-light">
+                        {% for comment in comments %}
+                        <div class="card margin-fix-comment border-red">
+                            <div class="card-content">
+                                <p>{{ comment.content }}</p><br>
                                 <sup>{{ comment.author }} - {{ comment.date }}</sup>
                             </div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
-            </div>
-        </div>
+            </li>
+            {% endif %}
+        </ul>
     </div>
-    
 </div>
-{% endif %}
-
 {% endblock %}

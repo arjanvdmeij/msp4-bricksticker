@@ -8,8 +8,16 @@ class ProductTests(TestCase):
             setnumber = '42',
             name = 'Zephod',
             category = 'Beeblebrox',
+            price = 3.25,
             )
-        self.assertEqual(str(product), '42 - Zephod - Beeblebrox')
+        product.save()
+        product = Product.objects.filter(setnumber='42')
+        self.assertEqual(str(product[0]), '42 - Zephod - Beeblebrox')
+        name = product[0].name
+        self.assertIn('Zep',name)
+        category = product[0].category
+        self.assertEqual('Beeblebrox',category)
+
     
     def test_get_home_page(self):
         page = self.client.get('/')

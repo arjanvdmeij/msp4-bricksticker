@@ -1,18 +1,13 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="row">
-    <div class="col-auto m-auto">
-        <div class="col-auto m-auto">
-            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
-            </a>
-        </div>
+    <div class="col s12 center less-padding">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text center" role="button">
+        <i class="fas fa-shoe-prints bss-yellow-text"></i>&nbsp;Go To All Products</a>
     </div>
-    <div class="col-12">&nbsp;</div>
-    <div class="col-11 m-auto">
-        <h4>To Return an Order:</h4>
-        <p>You have the right to cancel your order up to 14 days after receipt without giving any reason. 
+    <div class="col s10 offset-s1">        
+        <h5 class="bss-red-text">To Return an Order:</h5>
+        <p>You have the right to cancel your order up to 14 days after receival without giving any reason. 
         After cancellation, you have another 14 days to return your product. You will then be credited with the 
         full order amount including shipping costs. Only the costs for returning from your home to the webshop 
         are for your own account. For the exact rates, consult your carrier's website. If you use your right of 
@@ -20,19 +15,12 @@
         and packaging will be returned to the entrepreneur. To exercise this right, please contact us at 
         support@example.com. We will then refund the order amount due within 14 days after registration 
         of your return, provided that the product has already been returned in good order.</p>
-        <hr class="hr-small bss-red">
-        <h6>Return Address:</h6>
+        <div class="divider bss-red"></div>
+        <blockquote>Return Address:</blockquote>
         <p>Brickstickershop<br>
         Streetaddress 111<br>
         1234AA Towncity<br>
         Country<br></p>
-    </div>
-    <div class="col-auto m-auto">
-        <div class="col-auto m-auto">
-            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
-            </a>
-        </div>
     </div>
 </div>
 {% endblock %}

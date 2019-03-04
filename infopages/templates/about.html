@@ -1,28 +1,22 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
+{% block content %}
 <div class="row">
-    <div class="col-auto m-auto">
-        <div class="col-auto m-auto">
-            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
-            </a>
-        </div>
+    <div class="col s12 center less-padding">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text center" role="button">
+        <i class="fas fa-shoe-prints bss-yellow-text"></i>&nbsp;Go To All Products</a>
     </div>
-    <div class="col-12">&nbsp;</div>
-    <div class="col-11 m-auto">
-        <h4>Frequently asked questions:</h4>
+    <div class="col s10 offset-s1 less-padding">
+        <h5 class="bss-red-text">Frequently asked questions:</h5>
+        <div class="divider bss-red"></div>
         {% for topic in faq %}
-        <p><b>{{ topic.question }}</b><br>
-        {{ topic.answer }}</p>
-        <hr class="hr-small bss-red">
+        <blockquote>{{ topic.question }}</blockquote>
+        <p>{{ topic.answer }}</p>
+        <div class="divider bss-red"></div>
         {% endfor %}
     </div>
-    <div class="col-auto m-auto">
-        <div class="col-auto m-auto">
-            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
-            </a>
-        </div>
+    <div class="col s12 center less-padding">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text center" role="button">
+        <i class="fas fa-shoe-prints bss-yellow-text"></i>&nbsp;Go To All Products</a>
     </div>
 </div>
-
 {% endblock %}

@@ -1,5 +1,4 @@
 from django.conf.urls import url, include
-# from products.views import all_products
 from .views import about, privacy, terms_and_conditions, returns
 
 urlpatterns = [

@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="row">
-    <div class="col-auto m-auto">
-        <div class="col-auto m-auto">
-            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
-            </a>
-        </div>
+    <div class="col s12 center less-padding">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text center" role="button">
+        <i class="fas fa-shoe-prints bss-yellow-text"></i>&nbsp;Go To All Products</a>
     </div>
-    <div class="col-12">&nbsp;</div>
-    <div class="col-11 m-auto">
-        <h4>Bricksticker Privacy Policy:</h4>
-        <h5>Version 0.2 / Effective date 23 May 2018 (GDPR)</h5>
-        <h6>About our privacy policy</h6>
+    <div class="col s10 offset-s1 less-padding">
+        <h5 class="bss-red-text">Bricksticker Privacy Policy:</h5>
+        <h5><sup>Version 0.2 / Effective date 23 May 2018 (GDPR)</sup></h5>
+        <blockquote>About our privacy policy</blockquote>
         <p>Brickstickershop cares a lot about your privacy. We therefore only process data that we need for (improvement of) our services
         and we handle the collected information about you and your use of our services with utmost care. 
         We will never make your data available to third parties for commercial purposes. This privacy policy applies to the use of 
@@ -23,20 +18,20 @@
         which conditions this data can possibly be shared with third parties. We also explain to you how we store your data and how we 
         protect your data against misuse, and what rights you have with regards to the personal data you provide us. If you have any questions 
         about our privacy policy, please contact our privacy contact person, you will find the contact details at the end of our privacy policy.</p>
-        <hr class="hr-small bss-red">
-        <h6>Shipping and Logistics</h6>
+        <div class="divider bss-red"></div>
+        <blockquote>Shipping and Logistics</blockquote>
         <p>If you place an order with us, it is our job to have the order delivered to you. We use the services of *TBD* for the execution 
         of the deliveries. It is therefore necessary that we share your name, address and residence details with *TBD*. *TBD* uses this 
         information only for the purpose of executing the agreement. In the event *TBD* engages subcontractors, *TBD* will also make 
         your data available to these parties.</p>
-        <hr class="hr-small bss-red">
-        <h6>Invoicing and Accounting</h6>
+        <div class="divider bss-red"></div>
+        <blockquote>Invoicing and Accounting</blockquote>
         <p>We use external services of to keep track of our administration and accounting. We use the services of an Administration 
         and Tax Consultant. We share your name, address and residence details and details regarding your order. This data is used 
         for managing sales invoices. Your personal data is sent and stored protected. Our accountant is obligated to observe secrecy 
         and will treat your information confidentially. They do not use your personal data for purposes other than those described above.</p>
-        <hr class="hr-small bss-red">
-        <h6>Purpose of Data Processing</h6>
+        <div class="divider bss-red"></div>
+        <blockquote>Purpose of Data Processing</blockquote>
         <p>We only use your data for the benefit of our services. This means that the purpose of the processing is always directly related 
         to the assignment you provide. We do not use your data for (targeted) marketing. If you share information with us and we use 
         this information to contact you at a later date - other than at your request - we will ask you explicitly for this. 
@@ -46,20 +41,17 @@
         <p>In some cases, Brickstickershop may be obliged to share your data in connection with official scrutiny or criminal investigations 
         on the basis of a statutory obligation. In such a case we are forced to share your information, but we will use all legal options 
         that the law offers us to oppose this.</p>
-        <hr class="hr-small bss-red">
-        <h6>Contact Details</h6>
+        <div class="divider bss-red"></div>
+        <blockquote>Contact Details</blockquote>
         <p>Brickstickershop<br>
         Streetaddress 111<br>
         1234AA Towncity Country<br>
         Phone: 555-1234-1234<br>
         Email: info@example.com</p>
     </div>
-    <div class="col-auto m-auto">
-        <div class="col-auto m-auto">
-            <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text" role="button">
-                <i class="fas fa-shoe-prints bss-yellow-text"></i> Go To All Products
-            </a>
-        </div>
+    <div class="col s12 center less-padding">
+        <a href="{% url 'products' %}" class="btn btn-sm bss-red bss-white-text center" role="button">
+        <i class="fas fa-shoe-prints bss-yellow-text"></i>&nbsp;Go To All Products</a>
     </div>
 </div>
 {% endblock %}

@@ -15,12 +15,12 @@ class TestInfoPages(TestCase):
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, 'privacy.html')
     
-    def test_get_about_page(self):
+    def test_get_returns_page(self):
         page = self.client.get('/info/returns/')
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, 'returns.html')
     
-    def test_get_about_page(self):
+    def test_get_terms_and_conditions_page(self):
         page = self.client.get('/info/terms/')
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, 'terms_and_conditions.html')
@@ -31,4 +31,6 @@ class TestInfoPages(TestCase):
             answer = 'yes, multiple..'
             )
         faq.save()
-        self.assertEqual(str(faq), 'words?')
+        faq = FAQ.objects.filter(question='words?')
+        answer = faq[0].answer
+        self.assertIn('multiple',answer)

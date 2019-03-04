@@ -8,6 +8,8 @@ def search(request):
     View returning the filtered results after
     submitting a search string
     """
+    search = request.GET['q']
+    print(search)
     products = Product.objects.filter(
         Q(description__icontains=request.GET['q']) | 
         Q(category__icontains=request.GET['q'])
@@ -17,6 +19,7 @@ def search(request):
     return render(request, 'products.html', 
         {'products':products,
         'categories':categories,
+        'search':search,
     })
 
 def filter_products(request):
@@ -24,6 +27,8 @@ def filter_products(request):
     View returning a filtered list of products after selecting
     a category from the dropdown menu
     """
+    picked = request.GET['q']
+    print(picked)
     products = Product.objects.filter(
         Q(category__startswith=request.GET['q'])
         )
@@ -32,4 +37,5 @@ def filter_products(request):
     return render(request, 'products.html', 
         {'products':products,
         'categories':categories,
+        'picked':picked,
     })

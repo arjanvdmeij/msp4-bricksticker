@@ -1,41 +1,33 @@
-{% extends 'base.html' %} {% load static from staticfiles %} {% load crispy_forms_tags %} {% block content %}
-
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %} 
+{% load materializecss %}
 <form role="form" action="" method="post">
     {% csrf_token %}
     <div class="row">
-        <div class="col-12 col-sm-10 m-auto">
-            <div class="display card card-default border-red">
-                <div class="card-header bss-red bss-yellow-text">
-                    <h4>Contact</h4>
+        <div class="col s12 m10 offset-m1">
+            <div class="card border-red">
+                <div class="card-title bss-red bss-yellow-text center-align less-padding no-margin">
+                    Contact
                 </div>
-                <div class="card-body">
+                <div class="card-content">
                     <div class="row">
-                        <div class="col-12 m-auto col-sm-6 form-border">
-                            {{ form.contact_name | as_crispy_field }}
-                        </div>
-                        <div class="col-12 m-auto col-sm-6 form-border">
-                            {{ form.contact_email | as_crispy_field }}
-                        </div>
-                        <div class="col-12 m-auto form-border">
-                            {{ form.subject | as_crispy_field }}
-                        </div>
-                        <div class="col-12 m-auto form-border">
-                            {{ form.content | as_crispy_field }}
-                        </div>
-                        <div class="col-auto m-auto">
-                            <button class="btn btn-default bss-red bss-white-text" type="submit">
-                                <i class="fas fa-share-square bss-yellow-text"></i> Send</button>
+                        <div class="col s10 offset-s1">
+                            {{ form.contact_name | materializecss:'s12 m6' }} 
+                            {{ form.contact_email | materializecss:'s12 m6' }} 
+                            {{ form.subject | materializecss:'s12' }} 
+                            {{ form.content | materializecss:'s12' }}
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-12">
-                        <center><p>A copy of the form will be sent to you as well</p></center>
-                    </div>
+                <div class="card-action center-align less-padding">
+                    <button class="btn btn-default bss-red bss-white-text" type="submit">
+                        <i class="fas fa-share-square bss-yellow-text"></i> Send
+                    </button>
+                    <p>A copy of the form will be sent to you as well</p>
                 </div>
             </div>
         </div>
     </div>
 </form>
-
 {% endblock %}

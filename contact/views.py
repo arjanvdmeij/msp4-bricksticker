@@ -18,6 +18,8 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             try:
+                """ Send form to site admins
+                """
                 message = render_to_string(
                     'contact_mail.html',{
                         'contact_name':form.cleaned_data['contact_name'],
@@ -32,6 +34,8 @@ def contact(request):
                 email.content_subtype = 'html'
                 email.send()
                 
+                """ Send form data to customer as well
+                """
                 site = get_current_site(request)
                 cc_message = render_to_string(
                     'cc_contact_mail.html',{
@@ -48,7 +52,7 @@ def contact(request):
                 
                 messages.error(request, 
                     'Thank you for your mail!'
-                    + 'We\'ll get back to you as soon as possible!')
+                    + ' We\'ll get back to you as soon as possible!')
                 return redirect('products')
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')

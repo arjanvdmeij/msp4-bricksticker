@@ -1,82 +1,62 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} 
-{% block csvdownload %}
-    <a href="{% url 'dl_csv' %}" class="btn btn-sm bss-yellow bss-red-text">Newsletter CSV</a>
-    <b class=bss-white-text>&nbsp;&nbsp;Recipients:&nbsp;</b> <span class="bss-white-text">{{ total_users }}</span>
-{% endblock %}
+{% extends "base.html" %} 
 {% block content %}
+<div class="row center">
+    <sup>&nbsp;&nbsp;Recipients:&nbsp;{{ total_users }}</sup><br>
+    <a href="{% url 'dl_csv' %}" class="btn btn-sm bss-red bss-white-text">Newsletter CSV</a>
+</div>
 <div class="row">
-    {% for order in orders %}
-    <div class="col-12 col-sm-10 m-auto">
-        <div id="pendingOrder-{{order.id}}">
-        <div class="card border-red  my-2">
-            <div class="card-header bss-red" id="head-{{order.id}}">
-                <h5 class="mb-0">
-                    <button class="btn btn-link collapsed bss-white-text" type="button" data-toggle="collapse" data-target="#collapse{{order.id}}" aria-expanded="true" aria-controls="collapse{{order.id}}">
-                    <i class="fas fa-angle-double-down bss-yellow-text"></i>&nbsp;&nbsp;{{ order.date }} - OrderID: {{ order.id }}
-                    </button>
-                </h5>
-            </div>
-            
-            <div id="collapse{{order.id}}" class="collapse" aria-labelledby="head-{{order.id}}" data-parent="#pendingOrder-{{order.id}}">
-                <div class="card-body">
-                    {% for item in order_items %} {% if item.order.id == order.id %}
-                    <div class="card border-red my-1">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 col-md-8">
-                                    <b>{{ item.product.setnumber }}</b>
-                                    - {{ item.product.name }}<br> 
-                                    Qty: {{ item.quantity }} - Price: € {{ item.total_item_price }}
+    <div class="col s12 m10 offset-m1">
+        <ul class="collapsible border-red">
+        {% for order in orders %}
+            <li>
+                <div class="collapsible-header bss-red bss-white-text">
+                    <i class="material-icons bss-yellow-text">arrow_drop_down</i>{{ order.date }} - OrderID: {{ order.id }}
+                </div>
+                <div class="collapsible-body bss-yellow-light less-padding">
+                    <div class="card-panel border-red less-padding">
+                        <div class="row no-margin">
+                        {% for item in order_items %} {% if item.order.id == order.id %}
+                            <div class="col s12 no-padding">
+                                <div class="card border-red card-bottom-margin">
+                                    <div class="card-content">
+                                        <div class="bss-red-text">
+                                            {{ item.product.setnumber }} - {{ item.product.name }}
+                                            <span class="right">&euro; {{ item.product.price }}</span>
+                                        </div>
+                                        <div>
+                                            {{item.product.description}}
+                                            <span class="right">Qty:&nbsp;{{ item.quantity }}</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4 d-none d-sm-none d-md-block product">
-                                    <img class="" src="{{ MEDIA_URL }}{{ item.product.image1 }}" alt="Sticker - {{ item.product.setnumber }}">
+                            </div>
+                        {% endif %}{% endfor %}
+                        </div>
+                        <div class="row no-margin">
+                            <div class="col s8 no-padding">
+                                <div class="card-panel border-red less-padding">
+                                    <h6 class="bss-red-text">Shipping address:</h6>
+                                    {{ order.full_name }}<br>
+                                    <sup>{{ order.address1 }} {% if order.address2 %},&nbsp;{{ order.address2 }}{% endif %}<br>
+                                    {% if order.postcode %} {{ order.postcode }}&nbsp;{% endif %}{{ order.town_or_city }},&nbsp;
+                                    {% if order.state_or_province %} {{ order.state_or_province }}&nbsp; {% endif %} 
+                                    {{ order.country }}</sup>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    {% endif %} {% endfor %}
-                </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-8">
-                            <b>Shipping address:</b><br>
-                            {{ order.full_name }}<br>
-                            {{ order.address1 }}<br>
-                            {% if order.address2 %} {{ order.address2 }}<br>{% endif %} 
-                            {% if order.postcode %} {{ order.postcode }}&nbsp; {% endif %}
-                            {{ order.town_or_city }}<br>
-                            {% if order.state_or_province %} {{ order.state_or_province }}&nbsp; {% endif %} 
-                            {{ order.country }}
-                        </div>
-                        <div class="col-4">
+                        <div class="row no-margin">
                             <form method="post" action="{% url 'toggle' order.id %}" class="float-right">
                                 {% csrf_token %}
-                                <button type="submit" class="btn btn-default bss-red bss-white-text">
+                                <button type="submit" class="btn bss-red bss-white-text right">
                                     <i class="fas fa-clipboard-check bss-yellow-text"></i> Order sent?
                                 </button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </li>
+        {% endfor %}
+        </ul>
     </div>
-    </div>
-    {% endfor %}
-    {% if not orders %}
-    <div class="col-12 col-sm-4 mr-auto my-2">
-        <div class="card border-red">
-            <div class="card-header">
-                All done!
-            </div>
-            <div class="card-body">
-                There are currently no unsent orders
-            </div>
-            <div class="card-footer">
-                &nbsp;
-            </div>
-        </div>
-    </div>
-    {% endif %}
 </div>
 {% endblock %}

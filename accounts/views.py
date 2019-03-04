@@ -17,7 +17,7 @@ def logout(request):
     redirects back to the index page
     """
     auth.logout(request)
-    messages.success(request, 'You have successfully logged out')
+    messages.success(request, 'You have successfully signed out')
     return redirect(reverse('index'))
 
 
@@ -33,7 +33,7 @@ def login(request):
 
             if user:
                 auth.login(request, user)
-                messages.error(request, "You have successfully logged in")
+                messages.error(request, "You have successfully signed in")
 
                 if request.GET and request.GET['next'] !='':
                     next = request.GET['next']
@@ -42,7 +42,7 @@ def login(request):
                     return redirect(reverse('index'))
             else:
                 user_form.add_error(None, 
-                    "Your username or password are incorrect")
+                    "Your username and/or password are incorrect")
     else:
         user_form = UserLoginForm()
 
@@ -67,7 +67,7 @@ def staff(request):
     """
     orders = Order.objects.filter(processed=False)
     order_items = OrderItem.objects.all()
-    total_users = User.objects.all().count()
+    total_users = User.objects.exclude(is_staff=True).all().count()
     return render(request, 'staff.html', {
         'orders':orders,
         'order_items':order_items,
@@ -122,12 +122,12 @@ def register(request):
             if user:
                 auth.login(request, user)
                 messages.success(request, 
-                    "You have successfully registered")
+                    "You have successfully registered. Thank you!")
                 return redirect(reverse('index'))
 
             else:
                 messages.error(request, 
-                    "unable to log you in at this time!")
+                    "We failed to sign you in, please try again later!")
     else:
         user_form = UserRegistrationForm()
     
@@ -145,7 +145,7 @@ def get_mail_csv(request):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="newsletter.csv"'
         writer = csv.writer(response)
-        all_users = User.objects.all()
+        all_users = User.objects.exclude(is_staff=True).all()
         writer.writerow(['Email address', 'First Name', 'Last Name'])
         for user in all_users:
             writer.writerow([user.email, user.first_name, user.last_name])

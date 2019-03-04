@@ -11,7 +11,7 @@ def view_cart(request):
     
 def add_to_cart(request, id):
     """
-    Add a quantity of the specified product to the cart
+    Add a product to the cart
     """
     quantity=int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
@@ -27,7 +27,8 @@ def add_to_cart(request, id):
     
 def adjust_cart(request, id):
     """
-    Adjust the quantity of the specified product to the specified amount
+    Adjust the quantity of a product to the specified amount
+    or delete an item from the cart
     """
     if request.POST.get('quantity') == '':
         request.session['cart'] = request.session.get('cart', {})
@@ -38,7 +39,6 @@ def adjust_cart(request, id):
     
     if quantity > 0:
         cart[id] = quantity
-        print(cart)
     else:
         cart.pop(id)
         
@@ -48,7 +48,8 @@ def adjust_cart(request, id):
 
 def adjust_cart_checkout(request, id):
     """
-    Allow clients to adjust the cart content during checkout
+    Allow clients to adjust the cart contents during checkout
+    or remove items before purchase
     """
     if request.POST.get('quantity') == '':
         request.session['cart'] = request.session.get('cart', {})

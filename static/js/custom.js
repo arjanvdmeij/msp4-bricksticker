@@ -12,3 +12,21 @@ function showProductSlide(n) {
   $(x[slideIndex-1]).fadeIn(1000);
   x[slideIndex-1].style.display = "block";
 }
+
+$(document).ready(function(){
+  $('.slider').slider({
+    indicators: false,
+    duration: 2500,
+    interval: 3500,
+    height: 120
+  });
+  $('.collapsible').collapsible();
+  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
+  $('select').formSelect();
+  $('.btn-alert').on('click', function() {
+    $('#alert-box').fadeTo(1000,0, function() {
+      $('#alert-box').addClass('hide');
+      });
+    });
+});
+

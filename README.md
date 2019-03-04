@@ -12,6 +12,7 @@ For the project, Django was used as a framework, with Heroku for site hosting an
 
 The site is 99% functional, the only thing that will not happen is actual payment processing.
 The site is currently restricted to a test version of Stripe, and orders will never be sent out (sorry!)
+On the plus side, this won't charge your card either. 
 
 ### What does it do?
 

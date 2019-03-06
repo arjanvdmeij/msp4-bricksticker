@@ -12,15 +12,14 @@
     <div class="col s12 no-padding">
         <div class="card border-red">
             <div class="card-content no-padding">
-                <div class="row no-margin less-padding bss-red center">
-                    <div class="card-title col s12 bss-yellow-text">
-                        {{product.setnumber}} - {{product.name}}
+                <div class="row no-margin less-padding bss-red">
+                    <div class="card-title adjust-title col s12 bss-white-text">
+                        <span class="bss-yellow-text">{{product.setnumber}}</span> - {{product.name}}
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col s12 m6">
-                    <div class="center-align">
                         <div class="slide-height center">
                             <a href="{{ MEDIA_URL }}{{ product.image1 }}" data-lightbox="Image-{{product.id}}-img" data-title="{{product.name}}">
                                 <img class="productSlides"src="{{ MEDIA_URL }}{{ product.image1 }}" alt="{{product.name}}" style="">
@@ -29,7 +28,6 @@
                                 <img class="productSlides"src="{{ MEDIA_URL }}{{ product.image2 }}" alt="{{product.name}}" style="display:none">
                             </a>
                         </div>
-                    </div>
                     <div class="row no-margin">
                         <div class="col s6 center">
                             <img class="productThumbnail" src="{{ MEDIA_URL }}{{ product.image1 }}" onclick="showProductSlide(1)" alt="Thumbnail 1">
@@ -39,9 +37,29 @@
                         </div>
                     </div>
                 </div>
-                <div class="col s12 m6">
-                    <h5 class="bss-red-text">Category: {{product.category}}</h5>
-                    <h6>{{product.description}}</h6>
+                <div class="col s12 m6 more-padding">
+                    <div class="row center">
+                        <h5 class="bss-red-text">Category: {{product.category}}</h5>
+                        <h6>{{product.description}}</h6>
+                    </div>
+                    {% if product.id in cart_ids %}
+                    <div class="card-panel border-red bss-yellow-light less-padding no-margin">
+                        <div class="card-panel border-red bss-white less-padding no-margin center">
+                            <div class="row">
+                                <div class="col-s12">
+                                    This item has been added to your cart.<br>
+                                    You can adjust the quantity, or remove the item, by going there now.
+                                </div>
+                            </div>
+                            <div class="row no-margin">
+                                <a class="btn bss-red bss-white-text" href="{% url 'view_cart' %}">
+                                    <i class="bss-yellow-text fas fa-shopping-cart"></i>
+                                    &nbsp;Go to cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="card-action no-padding">
@@ -52,7 +70,16 @@
                     <div class="col s6 no-padding">
                         <form method="post" action="{% url 'add_to_cart' product.id %}" class="">
                             {% csrf_token %}
-                            <button name="quantity" value="1" class="right btn bss-white-text bss-red" type="submit"><i class="fas fa-cart-plus bss-yellow-text"></i>  Add</button>
+                            {% if product.id in cart_ids %}
+                            <button name="quantity" value="1" class="right btn bss-white-text bss-red" type="submit" disabled>
+                                <i class="fas fa-check-double green-text text-darken-1"></i>
+                                &nbsp;Cart
+                            </button> 
+                            {% else %}
+                            <button name="quantity" value="1" class="right btn bss-white-text bss-red" type="submit">
+                                <i class="fas fa-cart-plus bss-yellow-text"></i>&nbsp;Add
+                            </button>
+                            {% endif %}
                         </form>
                     </div>
                 </div>

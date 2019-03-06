@@ -10,7 +10,7 @@ def all_products(request):
     View rendering all products and categories based on
     available categories named in the products
     """
-    products = Product.objects.all()
+    products = Product.objects.all().order_by('category')
     categories = Product.objects.values(
         'category').order_by(
         'category').distinct()

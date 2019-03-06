@@ -52,8 +52,10 @@ class OrderForm(forms.ModelForm):
             'full_name':'Full Name',
             'address1':'Address Line 1',
             'address2':'Address Line 2',
-            'town_or_city':'Town or City',
-            'state_or_province':'State or Province',
+            'town_or_city':'City',
+            'state_or_province':'State',
+            'phone_number':"Phone #",
+            'email_address':'Email'
             }
         
         fields = (

@@ -9,7 +9,6 @@ def search(request):
     submitting a search string
     """
     search = request.GET['q']
-    print(search)
     products = Product.objects.filter(
         Q(description__icontains=request.GET['q']) | 
         Q(category__icontains=request.GET['q'])
@@ -28,7 +27,6 @@ def filter_products(request):
     a category from the dropdown menu
     """
     picked = request.GET['q']
-    print(picked)
     products = Product.objects.filter(
         Q(category__startswith=request.GET['q'])
         )

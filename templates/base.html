@@ -13,13 +13,12 @@
     <link rel="icon" type="image/png" href="{% static 'images/favicon.ico' %}">
     <title>Brick Sticker Shop</title>
 </head>
-
 <body>
     <header>
         <div class="navbar-fixed">
             <nav class="nav-extended bss-red">
                 <div class="nav-wrapper">
-                    <a href="#" class="brand-logo left size-logo"><img src="{% static 'images/logo.png' %}" alt="Brickstickershop logo"></a>
+                    <div class="brand-logo left size-logo"><img src="{% static 'images/logo.png' %}" alt="Brickstickershop logo"></div>
                     <div class="nav-wrapper">
                         <ul class="right">
                             {% if user.is_authenticated %}
@@ -73,7 +72,7 @@
             </nav>
         </div>
     </header>
-    <main class="container-main lower-me">
+    <main class="container lower-me">
         {% if messages %}
         <div id="alert-box" class="alert bss-yellow-light border-red center" role="alert">
             <div class="messages">
@@ -81,7 +80,7 @@
                     {{ message }}
                 {% endfor %}
                 <button type="button" class="btn btn-alert right">
-                    <span aria-hidden="true">&times;</span>
+                    <span>&times;</span>
                 </button>
             </div>
         </div>

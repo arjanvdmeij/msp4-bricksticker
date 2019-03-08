@@ -88,21 +88,21 @@ WSGI_APPLICATION = 'bricksticker.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-if os.getenv('C9_HOSTNAME'):
-    print('Running on Cloud9 <DEV>.\nDefaulting to SQLite database.')
+if os.getenv('ENVTYPE') == 'development':
+    print('Running on Cloud9 <DEV>.\nUsing SQLite database.')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-elif 'DATABASE_URL' in os.environ:
-    print('Found DATABASE_URL in env. Using PostGres.')
+elif os.getenv('ENVTYPE') == 'production':
+    print('Running on Heroku <PROD>.\nUsing PostGres database.')
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
 else:
-    print('PostGres not reached @ Heroku. Defaulting to SQLite database.')
+    print('ENVTYPE variable not found.\nDefaulting to SQLite.')
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -152,7 +152,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-if os.getenv('C9_HOSTNAME'):
+if os.getenv('ENVTYPE') == 'development':
     print('Using local static and media locations')
     STATIC_URL = '/static/'
     STATICFILES_DIRS =  (
@@ -177,7 +177,9 @@ else:
     
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-    STATIC_URL = '/static/'
+    # STATIC_URL = '/static/'
+    STATIC_URL = 'https://%s/%s/' % (
+        AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
     STATICFILES_DIRS =  (
         os.path.join(BASE_DIR, "static"),
         )

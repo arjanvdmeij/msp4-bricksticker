@@ -1,179 +1,146 @@
-# [BrickStickerShop](https://bss-msp-4.herokuapp.com) [![Build Status](https://travis-ci.org/arjanvdmeij/msp4-bricksticker.svg?branch=master)](https://travis-ci.org/arjanvdmeij/msp4-bricksticker)
+[![BrickStickerShop](https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png)](https://bss-msp-4.herokuapp.com)   
+Travis says: [![Build Status](https://travis-ci.org/arjanvdmeij/msp4-bricksticker.svg?branch=master)](https://travis-ci.org/arjanvdmeij/msp4-bricksticker)
 
-## Overview
+This is the fourth project created for the Full Stack Web Developer course by [Code Institute](https://codeinstitute.net).  
+The goal here was to create a full stack application, using Django with multiple apps and (in my case) a PostGres database.  
 
-### What is this?
+For the project, I recreated my brother's site, as a template to eventually update his actual webshop as well.
+Anything a regular user of a webshop should be able to do is present. With the exception of actually receiving any ordered items.
+The site contains a good number of items, however the total number of items is far less than eventually would be in a live version.
 
-This is the fourth project created for the Full Stack Web Developer course by [Code Institute](https://codeinstitute.net).
-The goal here was to pull together everything learned over the course's run.
-In this case, I created a webshop 'mockup', with content based on my brother's actual shop.
-In time, the actual shop can (and will) be re-designed, however it will be based on frameworks provided by his hosting.
-For the project, Django was used as a framework, with Heroku for site hosting and Amazon AWS for file storage of uploaded content.
+For the project, **Django** was used as framework, with **Heroku** for site and database hosting and **Amazon (AWS)** for file storage.
 
-The site is 99% functional, the only thing that will not happen is actual payment processing.
-The site is currently restricted to a test version of Stripe, and orders will never be sent out (sorry!)
-On the plus side, this won't charge your card either. 
+## UX
+ 
+With a site that is aimed at Lego enthusiasts, specifically those looking for replacement stickers for their sets, one of the requirements
+is to immediately show the latest additions to the site, and provide a way for them to subscribe to a newsletter if wanted.
+The site overall needs to have a search option, both by category or by keyword.  
+Aside from the above, cart contents must be changeable, where the quantity needs to be adjustable, or the item can be removed from the cart entirely. 
+If and when an item is unavailable, an option needs to be in place for people to contact the shop owner and request the addition of an item.
+Last but certainly not least, customers need to be able to place their actual order and receive a receipt for their placed order.
 
-### What does it do?
+All the above is available in this site. Along with the above, additional information is available in the form of a FAQ page, as well as pages offering 
+the privacy policy, the terms and conditions and the returns policy.
 
-Like any other shop, the site opens with general information and the latest additions to the inventory of the shop.
-From here, the full list can be opened, which in turn can be filtered on category, or a search can be performed to find a specific product.
-Any product presented can then be zoomed in on, and added into the cart. In a product detail page, comments can be left as well on the product.
-When viewing the cart, the quantity of the item can be adjusted, or the item can be removed entirly from the cart.
-During checkout changes can be made still as well.
-Users can create an account in order to receive a newsletter at this point. 
-They can log on later to have themselves 'forgotten', effectively removing the account and with it, the subscription to the newsletter.
-
-### How does it work
-
-On the opening page, data is retrieved from the database and filtered for most recent items. 
-These are then shown on the page, using Django to render the information onto the page.
-The same goes for the products page, where two sets of data are retrieved to populate the page with.
-The full list of products, as well as a list of unique category names is used in this case.
-Whenever a user selects a category from the dropdown, the page is refreshed with a subset of data where the products all share the same category.
-The search function bases itself on the product name and the description, returning only those results where products have the search statement in either field.
-
-The database used depends on the environment the application is running on.
-Logic looking at the environment 'picks' the correct database to use. For development (on Cloud9), the application uses a SQLite database,
-on the production environment (on Heroku), a PostGres database is used. 
-This logic is also applied to the content uploaded (when adding products), where development stores in Cloud9, and production uses an Amazon AWS Bucket for static files and media.
-
-The code used is mostly based on **Django**, version 1.11.18 and **Python**, version 3.4.3.
-For the HTML, **Bootstrap 4.1.3** was used for styling. 
-- Bootstrap with popper.js included was used for full Bootstrap functionality.
-Some **javascript** was used for the product detail pages, but this was kept to a minimum and instead Bootstrap's basics were used.
-**Font Awesome**, version 5.6.0, was used for icons.
-
-The site can be viewed [HERE](https://bss-msp-4.herokuapp.com)
+#### Wireframe and User Stories
+For user stories and wireframe mockups created as part of this project, see the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of this repository.
 
 ## Features
-
 ### Existing Features
-- Opening page with a banner, some info and basic links, followed by 5 most recent additions to the site's inventory
-- *Optional* account creation for the use of newsletter subscribing
-  - Account creation is specifically not needed to make purchases
+- Opening page with a banner, some info and basic links, followed by the 6 most recent additions to the site's inventory  
+   **a.** *Optional* account creation for the use of newsletter subscribing. Account creation is explicitly *not* needed to make purchases
 - Optionally, users can delete their account themselves to be removed from the newsletter through profile page
-- Links to various information in the footer of the site, detailing information about:
-  - products FAQ
-  - privacy statement
-  - terms and conditions (with optional PDF downlaod)
-  - returns policy
-- Navbar containing links to:
-  - home page
-  - products page
-  - contact form
-  - user sign in / sign out
-    - After sign-in, menu becomes dropdown allowing access to profile
+- Links to various information in the footer of the site, detailing information about:  
+   **a.** products FAQ  
+   **b.** privacy statement  
+   **c.** terms and conditions (with optional PDF downlaod)  
+   **d.** returns policy  
+- Navbar containing links to:  
+   **a.** home page  
+   **b.** products page  
+   **c.** contact form  
+   **d.** user sign in / sign out - *After sign-in, menu becomes dropdown allowing access to profile and sign-out*
 - Products page offers category filter as well as search bar 
-- Contact form transcript is mailed to submitter as well as site mail
-- Cart page linking to checkout
+- Contact form transcript is mailed to submitter as well as site's mail address
+- Cart page linking to checkout page
 - Checkout with (test) payment system for credit card using Stripe
 - Mail sent to user after checkout with list of items, submitted address for delivery and order ID
-- Staff / Admin page added into the site
-  - easier order handling (items and delivery address shown, button to mark order processed)
-  - download button to retrieve a csv file with all users and their mail addresses for newsletter use
-- Standard Django admin pages allowing addition of products, FAQ's and comment management for products
-  - Complete overview of all orders as well, both processed and unprocessed
+- Staff / Admin page added into the site  
+   **a.** easier order handling (items and delivery address shown, button to mark order processed)  
+   **b.** download button to retrieve a csv file with all users and their mail addresses for newsletter use  
+   **c.** ADD PRODUCT  
+   **d.** ADD FAQ  
+- Standard Django admin pages allow addition of products, FAQ's and comment management for products by staff members  
+   **a.** offers complete overview of all orders as well, both processed and unprocessed
 
-### Apps created
-- Accounts
-  - All basic Django user information with adjusted pages to conform to site overall looking
-  - Provides the base for the profile page and the staff page
-  - Changed from standard pages for password reset, login and registration
-
-- Cart
-  - Available across all apps
-  - Also contains the logic for changing the content during checkout
-
-- Checkout
-  - Processing of order into payment and database
-
-- Contact
-  - Small app specifically for the contact form
-
-- Infopages
-  - Contains the 4 links in the footer of the page
-  - Table created for FAQ, for easily adding Q&A through Django Admin
-
-- Products
-  - Provides the opening page to the site
-  - Views for total products page and product detail page
-  - Contains the Product comments
-
-- Search
-  - Search function based on text string returning results containing the string
-  - Filter function to return a view based on category selected from the dropdown
-  - Both options available within the products page
-
-### Features Left to Implement
-- Expand user's accounts to allow in-site order history and easy address filling
-- Extended staff/admin in-site pages allowing:
-  - product additions / modifications
-  - full order history download
-  - newsletter processing in-site
+### Features Left to Implement  
+- Expand user's accounts to allow:  
+   **a.** in-site order history  
+   **b.** easy address filling  
+   **c.** saving the cart  
+   **d.** etcetera
+- Extended staff/admin in-site pages allowing:  
+   **a.** existing product modifications  
+   **b.** full order history download  
+   **c.** newsletter processing in-site
 - Further sophistication of mails sent out
+- Finish upgrade to Stripe v3
 
-## Tech Used
-
-### Technologies and outside sources:
-- **HTML**, **CSS**, **Javascript**, **Python**
-- **[Django](https://www.djangoproject.com)** version 1.11.18
-  - Framework used for the site
-  - Add-on for forms: django-crispy-forms
-- **[Bootstrap](https://getbootstrap.com)** version 4.1.3
-  - Used for the styling of the site
-  - version used includes [popper.js](https://popper.js.org)
-  - used with [jQuery](https://jquery.com) version 3.3.1
-- **[Stripe](https://stripe.com/)** test version used for (m/f)aking payments. 
-  - ***No actual payments can be made***
-- **[Stack Overflow](https://stackoverflow.com/)**
-
-## Wireframe and User Stories
-- In the root of the repository is a document with stories and mockup drawings (though crude, they turned out more or less as envisioned)
+## Technologies Used
+- **HTML**, **CSS**, **Javascript/jQuery**, **Python** were all at the heart of things
+- [**Django**](https://www.djangoproject.com/) - The entire site uses **Django 1.11.20** as its framework  
+   Django pip-installed add-ons used:  
+   *django-materializecss-form* - used for the styling of the forms in Materialize  
+   *stripe* - used in processing of payments  
+   *boto3* - used for the AWS storage  
+   *dj-database-url* - used for Heroku PostGres integration  
+- [**MaterializeCSS**](https://materializecss.com) - The site is styled based on **MaterializeCSS 1.0.0**  
+   *Originally the site was being developed using Bootstrap 4, but this was changed to MAterializeCSS.*  
+   *The pages created up to the switch can be downloaded still however* [***HERE***](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/bss_booststrap.tar.gz)
+   *should anyone want to build on those. An accompanying text file details which changes need to be made to switch to Bootstrap 4*
+- [**Stripe**'s stripe.js](https://stripe.com/) - test version used for (m/f)aking payments.  
+   *No actual payments can be made*
+- [**JQuery**](https://jquery.com) - The project uses **JQuery** to simplify DOM manipulation.  
+   *Additional javascript was used to perform some enhancements as well, like smooth scrolling to the top of the page. Most of the* 
+   *jQuery in use however is through MaterializeCSS, with some settings applied, with exception of added alert-box functionality.*
 
 ## Testing
+Testing the site has been ongoing from the very start, with each and every addition tested manually and/or automated with the aid of
+[**Travis CI**](https://travis-ci.org/).  
+Every aspect of the site was tested manually extensively, even those tests that are automated.  
+
+In the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) 
+in the root of the repository, a chapter is dedicated
+to the tests, including screenshots of manual testing, overview of automated tests and the result as Travis relays.  
+Each app contains a `tests.py` file. In order to run all tests manually instead of using Travis, 
+go to a terminal prompt, enter `python3 manage.py test` to run all tests.  
+In order to run tests for a specific app, enter (e.g.) `python3 manage.py products` where products is the app to run the tests for.
 
 Testing was done every step of development, as well as automated using **[Travis](https://travis-ci.org)**
 
-### Travis tests
-- **Cart** tests to open cart and to change quantity of item
-- **Checkout** tests to check forms
-- **Infopages** tests to open separate pages and add an FAQ subject
-- **Products** tests to verify templates used and verify naming in database
 
-The files for testing (*tests.py*) can be found in the apps named above.
+### Look and Feel on various browsers / devices
+The site has been tested on multiple environments:  
+   **a.** Google Chrome (Desktop) - *both direct and using developer tools to emulate devices (see f. below)*  
+   **b.** Safari (Desktop)  
+   **c.** Google Chrome (Mobile) - *installed on iPhone XR, 7+, iPad Air (1st gen) and iPad (2018)*  
+   **d.** Safari (Mobile) - *installed on iPhone XR, 7+, iPad Air (1st gen) and iPad (2018)*  
+   **e.** Opera (Mobile)
+   **f.** Developer tools - *emulated versions of Pixel 2 (XL), iPhone 6/7/8(Plus) and X and iPad(Pro)*
 
-### Manual Tests
-- Manual testing was entirely done by continuous testing of every step created
-  - initial pages with just placeholders
-  - manual addition of items through Django admin pages
-  - processing data onto page placeholders
-  - expand code and page continuously, updating python code or HTML as needed
-  - make modifications to the mails to be sent out and immediately run tests from shop to verify
-  - verify search valid by searching a word, reviewing resulting product(s)
-    - perform the same search on page from Chrome to count resulting matches
-  - create orders, add items to cart, break off checkout and continue shopping
-  - modify item value to zero to get same effect as deletion
-  - add to quantity in cart, reduce it in checkout and complete order
-  - add comments to a product's detail page and refresh result to verify POST data isn't sent again
-  - open a page to a link requiring login, without being logged in and verify re-directs
-  
-### Devices for testing
-- Testing was done on the following browsers:
-  - Safari
-  - Google Chrome
-  
-- Mobile device testing was done:
-  - Using Chrome's developer tools, emulating all available formats
-  - iPhone 7+
-    - iOS Safari
-    - iOS Opera
-    - iOS Chrome
-  - iPad Air2
-    - iOS Safari
-    - iOS Opera
-    - iOS Chrome
+Scaling on all devices works as intended. The site does not scale well to the tiny screens of iPhone 5 and/or Galxy S5. This was
+a deliberate choice on my part, as those devices are not much used anymore by the target audience. The majority of traffic will also
+be coming from desktop and/or tablet sized browsers. I therefore chose to focus on those instead of (semi-)obsolete mobile phones.
 
-### Media and Information
-- Product images and descriptions courtesy of the real Brickstickershop, owned by my brother
-  - Payment Lego Figure found on Google
+### Bugs encountered
+At present, there is a small 'bug' in the products page, where the search form shows as an ellips-like inputfield.  
+This is something that doesn't accour for any other form within the site. There is however no loss of functionality. 
+It is a small bug that will need tending in time, however for the moment, it is left as is. The desktop version does not have this
+same issue at all.
+
+While 'rebooting' the site in a MaterializeCSS form, I ran into issues with stripe payments, where stripe.js wuold throw an error and not process payments.
+After (a LOT) of trial and error, it turned out that adding in the CSS class `hide` into the form template directly, which is 
+possible when using django-materializecss-form (e.g. `{{ payment_form.cvv | materializecss:'s3 hide'}}`), caused the form to fail.  
+By the time that became clear, I was on route to upgrade from Stripe v2 to Stripe v3. This needs finishing still, but hiding the form field in its own
+separate `div` solved the problem with payments.  
+
+Any other things I've run into were simply my fault, and corrected on-the-go whenever needed. Whenever a page was changed, adjustments were made to parts
+broken elsewhere. This mostly applies to the HTML and CSS where changes for specific screensizes would break things. I do not consider those bugs however.
+
+## Deployment
+
+For a description of the deployment process, see the corresponding chapter in the 
+[**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of the repository.
+This chapter describes the current deployment, as well as the environment variables required in order to run the code locally.
+
+## Credits
+
+### Content, Media and Acknowledgements
+*Three headers rolled into one. There is a reason for that.*  
+
+All content and media was obtained from my brother's webshop [**brickstickershop**](https://www.brickstickershop.com/?Lng=en)  
+This site is also what inspired me to use this subject, both because it is close to the chest with him being my brother, 
+and because like him, I've always had a weak spot for Lego, from a very young age already. His site deserves an overhaul,
+this is my first step towards that goal, eventually applying a new look and feel to his site.
+
+Thanks bro, for handing me the files needed to make this all work!

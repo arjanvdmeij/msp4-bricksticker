@@ -67,7 +67,7 @@ def checkout(request):
                                 'total': total,
                                 'site':site.domain,
                             })
-                        mail_subject = 'Thank you for your order'
+                        mail_subject = 'Thank you for your order with orderID: BSS-%s' % saved_order.id
                         email_to = order_form.cleaned_data['email_address']
                         email = EmailMessage(mail_subject, message, to=[email_to])
                         email.content_subtype = 'html'

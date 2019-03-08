@@ -1,0 +1,426 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-color: #f7f7f7;
+    margin-bottom: 152px;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+}
+
+h6 {
+    font-size: 1.1em;
+}
+
+.lower-me {
+
+    padding-top: 72px;
+
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #c9190a;
+    line-height: 2.5rem;
+}
+
+/* --- colours --- */
+
+.bss-red {
+    background-color: #c9190a !important;
+}
+
+.bss-red-text {
+    color: #c9190a !important;
+}
+
+.bss-yellow {
+    background-color: #faec06 !important;
+}
+
+.bss-yellow-light {
+    background-color: #fcf69c !important;
+}
+
+.bss-yellow-text {
+    color: #faec06 !important;
+}
+
+.bss-white {
+    background-color: #f7f7f7 !important;
+}
+
+.bss-white-text {
+    color: #f7f7f7 !important;
+}
+
+.bss-blue-light {
+    background-color: #d0e8ff !important;
+}
+
+.border-red {
+    border: 1px solid #c9190a;
+}
+
+/* --- Overrides for Materialize --- */
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-border {
+    border: 0;
+}
+
+.no-border-bottom {
+    border-bottom: 0 !important;
+}
+
+.less-padding {
+    padding: .5rem !important;
+}
+
+.more-padding {
+    padding: 0 1.5rem !important;
+}
+
+.padding-left-right-only {
+    padding: 0 .5rem 0 !important;
+}
+
+.less-margin-bottom {
+    margin-bottom: .5rem !important;
+}
+
+nav ul a:hover {
+    background-color: transparent !important;
+}
+
+.btn-small {
+    width: 100%;
+    font-size: 0.8em !important;
+    border-radius: 0;
+}
+
+.btn-small:hover {
+    background-color: #fcf69c !important;
+}
+
+#categories {
+    top: 173px !important;
+}
+
+#usermenu1 {
+    top: 56px !important;
+}
+
+.card {
+    border-radius: 0 !important;
+}
+
+.card-title-smaller-font {
+    font-size: 1.2rem !important;
+}
+
+.card .card-content {
+    padding: .5em;
+    border-radius: 0 !important;
+}
+
+.card .card-action {
+    border-top: 0;
+}
+
+/* --- Added onto Materialize's hoverable class --- */
+
+.hoverable-text {
+    -webkit-transition: -webkit-text-shadow .5s;
+    transition: -webkit-text-shadow .5s;
+    transition: text-shadow .5s;
+    transition: text-shadow .5s, -webkit-text-shadow .5s;
+}
+
+.hoverable-text:hover {
+    -webkit-text-shadow: 1px 4px 7px rgba(0, 0, 0, 0.4);
+    text-shadow: 1px 4px 7px rgba(0, 0, 0, 0.4);
+}
+
+/* --- end hoverable add --- */
+
+i.material-icons.right {
+    margin-left: 5px !important;
+}
+
+input[type=search]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #c9190a !important;
+    -webkit-box-shadow: 0 1px 0 0 #c9190a !important;
+    box-shadow: 0 1px 0 0 #c9190a !important;
+}
+
+input[type=password]:not(.browser-default):focus.validate~label,
+input[type=email]:not(.browser-default):focus.validate~label,
+input[type=text]:not(.browser-default):focus.validate~label {
+    color: #c9190a;
+}
+
+.input-field .prefix.active {
+    color: #c9190a !important;
+}
+
+input[type=search]:not(.browser-default) {
+    border-bottom: 1px solid #c9190a !important;
+}
+
+.qty-cart>input[type=number]:not(.browser-default) {
+    width: 60px !important;
+    height: 2em;
+    text-align: center;
+    border: 1px solid #c9190a;
+    margin-bottom: 0;
+}
+
+.qty-cart>input[type=number]:not(.browser-default):focus {
+    border-bottom: 1px solid #c9190a;
+    box-shadow: 0 1px 0 0 #c9190a;
+}
+
+#search-field>.material-icons {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+blockquote {
+    border-left: 5px solid #c9190a;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.card-bottom-margin {
+    margin: .5rem 0 .5rem 0;
+}
+
+.dropdown-toggle::after {
+    color: #faec06;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #c9190a;
+}
+
+button:focus {
+    outline: 0 !important;
+}
+
+.fixed-action-btn {
+    bottom: 58px !important;
+}
+
+/* --- custom CSS --- */
+
+.product img {
+    display: block;
+    max-height: 110px;
+    width: auto !important;
+    max-width: 100%;
+    margin: auto auto;
+    padding: 10px;
+}
+
+.slide-height {
+    display: block;
+    height: 270px;
+    margin: 10px;
+}
+
+.productSlides {
+    max-width: 100%;
+    max-height: 250px;
+}
+
+.productThumbnail {
+    padding-top: 10px;
+    height: 70px;
+    max-width: 100%;
+    cursor: pointer;
+}
+
+.collapsible-header-comment {
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    align-items: flex-start;
+}
+
+.margin-fix-comment {
+    margin: .75rem 0 .75rem 0;
+}
+
+.size-logo img {
+    padding-left: 2rem;
+    padding-top: 10px;
+    max-width: 65vw;
+    max-height: 50px;
+}
+
+.slides-border-radius {
+    border-radius: .25rem !important;
+}
+
+.count-cart {
+    margin-left: -1em;
+    color: white;
+    background-color: black;
+    padding: 0 4px;
+    border-radius: 1.5em;
+    vertical-align: super;
+}
+
+.container-main {
+    width: 90%;
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* --- Additions for missing alert box --- */
+
+.alert {
+    width: 75%;
+    margin: 0 auto 10px;
+    line-height: 2rem;
+}
+
+.btn-alert {
+    text-decoration: none;
+    color: #f7f7f7;
+    background-color: #c9190a;
+    height: 24px;
+    line-height: 24px;
+    width: 24px;
+    padding: 0 8px;
+    margin: 2px;
+}
+
+.btn-alert:hover,
+.btn-alert:focus {
+    background-color: #c9190a !important;
+}
+
+/* --- end alert-box --- */
+
+.shrink-font-size input {
+    font-size: 0.8rem !important;
+    height: 2rem !important;
+}
+
+.shrink-font-size label {
+    line-height: 1 !important;
+}
+
+.fixed-height {
+    height: 75px !important;
+}
+
+.product-price {
+    font-size: .8em !important;
+    cursor: initial;
+    border-top: 1px solid #c9190a;
+    border-right: 1px solid #c9190a;
+    box-shadow: none !important;
+}
+
+.product-price:hover {
+    webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.product-description {
+    height: 25px;
+    display: block;
+    overflow: hidden;
+}
+
+.a-like-button a[type="button"] {
+    -webkit-appearance: none;
+    line-height: .5;
+    margin: 0 !important;
+}
+
+.width-fix-cart1 {
+    width: 110px !important;
+}
+
+.width-fix-cart2 {
+    width: 160px !important;
+}
+
+.user-menu-button {
+    padding: 5px 0 0 !important;
+    border: 0 !important;
+    margin: 0 !important;
+}
+
+.all-categories {
+    border-bottom: 1px solid red !important;
+}
+
+.max-height-product-card {
+    max-height: 325px;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.btn:disabled,
+.btn[disabled] {
+    pointer-events: none;
+    background-color: #bfbfbf !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #c9190a !important;
+    cursor: default;
+    border-top: 1px solid #c9190a;
+    border-left: 1px solid #c9190a;
+}
+
+.no-border-line {
+    border-top: 0 !important;
+    border-left: 0 !important;
+}
+
+.btn-to-top {
+    padding: 0 8px;
+}
+
+/* --- Override Materialize Container width --- */
+
+@media only screen and (min-width: 993px) {
+    .container {
+        width: 80% !important;
+    }
+}
+
+.adjust-title {
+    font-size: 1rem !important;
+    text-transform: uppercase;
+    margin-bottom: 0 !important;
+}

@@ -36,19 +36,17 @@
                                 <img src="{{ MEDIA_URL }}{{ item.product.image1 }}" alt="{{ item.product.name }}">
                             </div>
                             <div class="card-content">
-                                <h6 class="bss-red-text">{{ item.product.setnumber }} - {{ item.product.name }}</h6>
+                                <h6 class="bss-red-text">{{ item.product.setnumber }} - {{ item.product.name | truncatewords:4 }}</h6>
                                 <div class="card-panel no-margin less-padding border-red fixed-height bss-blue-light">
                                     <div class="row no-margin">
                                         <div class="col s12">
-                                            <p class="product-description">{{item.product.description | truncatechars:40 }}</p><br>
+                                            <p class="product-description">{{item.product.description | truncatechars:40 }}</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col s6">
-                                                <sup>Category: {{item.product.category}}</sup>
-                                            </div>
-                                            <div class="col s6">
-                                                <span class="right bss-red-text">&euro; {{ item.product.price }}</span>
-                                            </div>
+                                        <div class="col s8">
+                                            <sup>Category: {{item.product.category}}</sup>
+                                        </div>
+                                        <div class="col s4">
+                                            <span class="right bss-red-text">&euro; {{ item.product.price }}</span>
                                         </div>
                                     </div>
                                 </div>

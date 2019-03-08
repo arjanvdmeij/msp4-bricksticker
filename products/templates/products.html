@@ -79,8 +79,13 @@
                         <div class="card-panel bss-blue-light no-margin less-padding border-red fixed-height">
                             <div class="row no-margin">
                                 <div class="col s12">
-                                    <p class="product-description">{{product.description | truncatechars:40 }}</p><br>
-                                    <sup>Category: {{product.category}}<span class="right">Released: {{product.release_year}}</span></sup>
+                                    <p class="product-description">{{product.description | truncatechars:40 }}</p>
+                                </div>
+                                <div class="col s7">
+                                    <sup>Category: {{product.category}}</sup>
+                                </div>
+                                <div class="col s5">
+                                    <span class="right"><sup>Released: {{product.release_year}}</sup></span>
                                 </div>
                             </div>
                         </div>

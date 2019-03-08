@@ -1,5 +1,6 @@
 /* global $ */
 
+// Switch betwen available images on productdetail page
 function showProductSlide(n) {
   var i, slideIndex = n;
   var x = document.getElementsByClassName("productSlides");
@@ -15,6 +16,19 @@ function showProductSlide(n) {
   x[slideIndex-1].style.margin = "0 auto";
 }
 
+// smooth scroll to top for all pages
+$('a[href="#top"]').on('click', function(top) {
+    var scrollId = $(this.hash);
+    top.preventDefault();
+    $('html, body').animate({
+      scrollTop: scrollId.offset().top
+    }, 1000, function() {
+      // Callback after animation, setting focus
+      var $focusOn = $(scrollId);
+      $focusOn.focus();
+    });
+  });
+
 $(document).ready(function(){
   $('.slider').slider({
     indicators: false,
@@ -25,6 +39,7 @@ $(document).ready(function(){
   $('.collapsible').collapsible();
   $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
   $('select').formSelect();
+  // custom alert-box closing
   $('.btn-alert').on('click', function() {
     $('#alert-box').fadeTo(1000,0, function() {
       $('#alert-box').addClass('hide');

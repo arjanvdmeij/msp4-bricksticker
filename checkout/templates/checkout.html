@@ -101,7 +101,7 @@
                             <div class="col s12 no-padding">
                                 <div class="card-panel border-red white no-margin">
                                     <div class="row no-margin bss-red-text">
-                                        <h6 class="no-margin">Enter your Address here</h6>
+                                        <h6 class="no-margin">Address Information</h6>
                                     </div>
                                     <div class="row no-margin">
                                         {{ order_form.full_name | materializecss:'s12 shrink-font-size' }}
@@ -118,25 +118,35 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col s12 m12 l9 no-padding">
+                            <div class="col s12 no-padding">
                                 <div class="card-panel border-red white no-margin">
                                     <div class="row no-margin bss-red-text">
-                                        <h6 class="no-margin">Enter your Credit Card here</h6>
+                                        <h6 class="no-margin">Payment Information</h6>
                                     </div>
                                     <div class="row">
-                                        {{ payment_form.credit_card_number | materializecss:'s9 shrink-font-size' }}
-                                        {{ payment_form.cvv | materializecss:'s3 shrink-font-size' }}
-                                        {{ payment_form.expiry_month | materializecss:'s6 m4 shrink-font-size' }}
-                                        {{ payment_form.expiry_year | materializecss:'s6 m4 shrink-font-size' }}
-                                        <div class="hide">
-                                            {{ payment_form.stripe_id | materializecss }}
+                                        <div class="col m4 l3 hide-on-small-only center">
+                                            <img class="center" src="{% static 'images/payment-logo-stripe.png' %}" width="150" alt="Figure with Credit Card">
+                                        </div>
+                                        <div class="col s12 m8 l6 xl4 offset-xl1">
+                                            {{ payment_form.credit_card_number | materializecss:'s9 shrink-font-size' }}
+                                            {{ payment_form.cvv | materializecss:'s3 shrink-font-size' }}
+                                            {{ payment_form.expiry_month | materializecss:'s6 m4 shrink-font-size' }}
+                                            {{ payment_form.expiry_year | materializecss:'s6 m4 shrink-font-size' }}
+                                            <div class="hide">
+                                                {{ payment_form.stripe_id | materializecss }}
+                                            </div>
+                                        </div>
+                                        <div class="col l3 xl3 offset-xl1 hide-on-med-and-down center">
+                                            <img class="center" src="{% static 'images/bss-brick-cc.png' %}" width="150" alt="Figure with Credit Card">
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col s12 l3 no-padding center hide-on-med-and-down">
-                                <img class="center" src="{% static 'images/bss-brick-cc.png' %}" width="150" alt="Figure with Credit Card">
-                            </div>
+                            <!--<div class="col s12 l3 center hide-on-med-and-down">-->
+                            <!--    <div class="ccard-panel border-red white no-margin">-->
+                                    
+                            <!--    </div>-->
+                            <!--</div>-->
                         </div>
                         <div class="row center">
                             <button type="submit" class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit">

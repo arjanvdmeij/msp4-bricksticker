@@ -8,125 +8,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Confirmation mail</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        a {
-            text-decoration: none;
-        }
-        .row {
-            display: -ms-flexbox;
+        .row img {
             display: flex;
-            -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-        .m-auto {
-            margin: auto!important;
-        }
-        .m-tiny {
-            margin-left: 5px;
-            margin-right: 5px;
-        }
-        .col {
-            -ms-flex: 0 0 auto;
-            flex: 0 0 auto;
-            max-width: none;
-            position: relative;
-            width: 80%;
-            min-height: 1px;
-            padding: 0;
-        }
-        .col img {
-            display: block;
             max-width: 100%;
-            max-height: 75px;
-        }
-        table {
-            border-collapse: collapse;
-            background-color:#f7f7f7;
-        }
-        .table {
-            margin-bottom: .5rem;
-            display: table-row-group;
-            vertical-align: middle;
-            border-color: inherit;
-        }
-        tbody {
-            display: table-row-group;
-            vertical-align: middle;
-            border-color: inherit;
-        }
-        .table td, .table th {
-            padding: .5rem;
-            vertical-align: top;
-        }
-        tr {
-            display: table-row;
-            border: 1px solid #c9190a;
-            vertical-align: inherit;
-        }
-        td, th {
-            display: table-cell;
-            vertical-align: inherit;
-            border: 0;
-        }
-        th {
-            text-align: left;
-            background-color: #c9190a;
-            color: #faec06;
+            max-height: 65px;
         }
     </style>
 </head>
 
 <body>
-    <div class="row" style="background-color:#c9190a">
-        <div class="col">
-            <img src="{% static 'images/logo.png' %}">
-        </div>
+    <div class="row center hide-on-small-only" style="background-color:#c9190a;margin:0;">
+        <img src="https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png">
     </div>
     
     <div class="row">
-        <div class="col" style="margin-left:5px;margin-right:5px">
+        <div class="col s12 m9" style="margin-left:5px;margin-right:5px">
             <p>Hello,</p>
             <p>Thank you for filling out the contact form at <a style="color:#c9190a" href="https://{{ site }}"><b>Brickstickershop</b></a>.</p>
             <p>Below you will find your submitted form. We will get in contact with you as soon as possible!</p>
         </div>
     </div>
     <div class="row">
-        <div class="col m-tiny">
-            <center>
+        <div class="col s12 m9" style="margin-left:5px;margin-right:5px">
             <table class="table">
-                <tr>
+                <tr style="border-color:#c9190a">
                     <td>
-                        Subject:
+                        <b>Subject:</b>
                     </td>
                     <td>
                         {{ form_subject }}
                     </td>
                 </tr>
-                <tr>
+                <tr style="border-color:#c9190a">
                     <td>
-                        Content:
+                        <b>Content:</b>
                     </td>
                     <td>
                         {{ form_content }}
                     </td>
                 </tr>
             </table>
-            </center>
         </div>
     </div>
     <div class="row">
-        <div class="col" style="margin-left:5px;margin-right:5px">
-            
-        </div>
     </div>
     <div class="row">
-        <div class="col" style="margin-left:5px;margin-right:5px">
-            <h4>Thank you for shopping with us!</h4>
+        <div class="col s12 m9" style="margin-left:5px;margin-right:5px">
+            <h6>Thank you for shopping with us!</h6>
             <p>Kindest regards,</p>
             <p>The team at <a style="color:#c9190a" href="https://{{ site }}"><b>Brickstickershop</b></a>.</p>
         </div>

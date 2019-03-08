@@ -13,18 +13,14 @@
         .col img {
             display: block;
             max-width: 100%;
-            max-height: 55px;
+            max-height: 65px;
         }
     </style>
 </head>
 
 <body>
-    <div class="row" style="background-color:#c9190a;padding:0;margin:0;">
-        <div class="col s12" style="padding:0;">
-            <center>
-                <img src="https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png">
-            </center>
-        </div>
+    <div class="row hide-on-small-only" style="background-color:#c9190a;padding:0;margin:0;">
+        <img src="https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png">
     </div>
     
     <div class="row">
@@ -50,7 +46,8 @@
                     <tr>
                         <td>
                             <b>{{ item.product.setnumber}}</b> - {{ item.product.name}}<br>
-                            <b>Price:</b> € {{ item.product.price }}&emsp;<b>Qty:</b> {{ item.quantity }}
+                            <b>Price:</b> € {{ item.product.price }}<span class="hide-on-small-only">&emsp;<b>Qty:</b> {{ item.quantity }}</span>
+                            <span class="show-on-small hide-on-med-and-up"><b>Qty:</b> {{ item.quantity }}</span>
                         </td>
                         <td></td>
                         <td></td>

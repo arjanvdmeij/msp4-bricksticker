@@ -14,7 +14,7 @@
     <title>Brick Sticker Shop</title>
 </head>
 <body>
-    <header>
+    <header id="top" >
         <div class="navbar-fixed">
             <nav class="nav-extended bss-red">
                 <div class="nav-wrapper">
@@ -86,6 +86,11 @@
         </div>
         {% endif %}
         {% block content %} {% endblock %}
+        <div class="fixed-action-btn hide-on-small-only">
+            <a href="#top" class="btn bss-red bss-yellow-text btn-to-top">
+            <i class="large material-icons">vertical_align_top</i>
+            </a>
+        </div>
     </main>
     <footer class="footer">
         <div class="container">

@@ -36,13 +36,16 @@ $(document).ready(function(){
     interval: 3500,
     height: 120
   });
+  $('select').formSelect();
   $('.collapsible').collapsible();
   $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
   $('select').formSelect();
   // custom alert-box closing
   $('.btn-alert').on('click', function() {
-    $('#alert-box').fadeTo(1000,0, function() {
-      $('#alert-box').addClass('hide');
+    $('#alert-box').fadeTo(250,0, function() {
+      $('#alert-box').animate({height:0},500, function() {
+        $('#alert-box').addClass('hide');
+        });      
       });
     });
 });

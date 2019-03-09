@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,400i,700,700i');
 
 html {
     position: relative;
@@ -158,6 +158,7 @@ i.material-icons.right {
 }
 
 input[type=search]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=password]:not(.browser-default):focus:not([readonly]),
 input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]),
@@ -167,6 +168,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
     box-shadow: 0 1px 0 0 #c9190a !important;
 }
 
+input[type=number]:not(.browser-default):focus.validate~label,
 input[type=password]:not(.browser-default):focus.validate~label,
 input[type=email]:not(.browser-default):focus.validate~label,
 input[type=text]:not(.browser-default):focus.validate~label,
@@ -300,7 +302,6 @@ button:focus {
 /* --- Additions for missing alert box --- */
 
 .alert {
-    width: 75%;
     margin: 0 auto 10px;
     line-height: 2rem;
 }
@@ -424,4 +425,8 @@ button:focus {
     font-size: 1rem !important;
     text-transform: uppercase;
     margin-bottom: 0 !important;
+}
+
+.file-upload-button .btn {
+    background-color: #c9190a !important;
 }

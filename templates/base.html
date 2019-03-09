@@ -76,12 +76,16 @@
         {% if messages %}
         <div id="alert-box" class="alert bss-yellow-light border-red center" role="alert">
             <div class="messages">
-                {% for message in messages %}
-                    {{ message }}
-                {% endfor %}
                 <button type="button" class="btn btn-alert right">
                     <span>&times;</span>
                 </button>
+                {% for message in messages %}
+                    {% if 'safe' in message.tags %}
+                        {{ message|safe }}
+                    {% else %}
+                        {{ message }}
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
         {% endif %}

@@ -35,7 +35,7 @@
     <div class="col s8 offset-s2 center">
         Here you can opt to delete your account.<br>
         This will remove you from our newsletter.<br>
-        This will not influence on any ongoing orders.
+        This will not influence any ongoing orders.
     </div>
 </div>
 <div class="row">
@@ -43,11 +43,9 @@
         <form method="post" action="{% url 'forgetme' %}">
             {% csrf_token %}
             {% if user.is_staff %}
-            <center>
             <span class="bss-red-text"><sup>Staff members can not delete their account</sup></span><br>
             <button class="btn bss-red bss-white-text no-border-line" type="submit" disabled>
                 <i class="far fa-times-circle bss-red-text"></i> Delete me</button>
-            </center>
             {% else %}
             <button class="btn bss-red bss-white-text" type="submit">
                 <i class="far fa-times-circle bss-yellow-text"></i> Delete me</button>

@@ -1,0 +1,34 @@
+{% extends 'staff.html' %} 
+{% load static %} 
+{% load materializecss %} 
+{% block staffcontent %}
+<form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data"> {% csrf_token %}
+    <div class="card-panel border-red white">
+        <div class="row no-margin">
+            {{ product_form.setnumber | materializecss:'s12 m3' }} 
+            {{ product_form.name | materializecss:'s12 m9' }} 
+            {{ product_form.release_year | materializecss:'s12 m4' }} 
+            {{ product_form.category | materializecss:'s12 m4' }} 
+            {{ product_form.price | materializecss:'s12 m4' }} 
+            {{ product_form.description | materializecss:'s12' }}
+            <div class="col s12 m6 file-upload-button">
+                <span class="bss-red-text">Upload the Set Image</span><br>
+                {{ product_form.image1 | materializecss:'s12 no-padding' }}
+            </div>
+            <div class="col s12 m6 file-upload-button">
+                <span class="bss-red-text">Upload the Sticker Image</span><br> 
+                {{ product_form.image2 | materializecss:'s12 no-padding' }}
+            </div>
+        </div>
+        <div class="card-action">
+            <div class="row no-margin">
+                <div class="col s12">
+                    <button type="submit" class="btn btn-default bss-red bss-white-text">
+                        <i class="fas fa-save bss-yellow-text"></i>&nbsp;Add Product
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

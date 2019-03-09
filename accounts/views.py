@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.shortcuts import HttpResponseRedirect, get_object_or_404
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
-from checkout.models import Order, OrderItem
 from django.core.urlresolvers import reverse
 from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
@@ -59,32 +58,8 @@ def profile(request):
     """
     return render(request, 'profile.html')
 
-    
+
 @login_required
-def staff(request):
-    """
-    Order processing page for staff members
-    """
-    orders = Order.objects.filter(processed=False)
-    order_items = OrderItem.objects.all()
-    total_users = User.objects.exclude(is_staff=True).all().count()
-    return render(request, 'staff.html', {
-        'orders':orders,
-        'order_items':order_items,
-        'total_users':total_users,
-    })
-
-
-def toggle_processed(request,id):
-    if request.method == 'POST':
-        order = get_object_or_404(Order, pk=id)
-        print(order)
-        order.processed = not order.processed
-        order.save()
-        print(order.processed)
-    return redirect(staff)
-
-
 def forgetme(request):
     """ 
     Log out and remove the user's account
@@ -135,7 +110,7 @@ def register(request):
         'user_form': user_form,
     })
 
-
+@login_required
 def get_mail_csv(request):
     """ 
     Allow admins/staff to download a csv file

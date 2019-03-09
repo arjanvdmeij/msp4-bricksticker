@@ -1,11 +1,31 @@
 {% extends "base.html" %} 
 {% block content %}
 <div class="row center">
-    <sup>&nbsp;&nbsp;Recipients:&nbsp;{{ total_users }}</sup><br>
-    <a href="{% url 'dl_csv' %}" class="btn btn-sm bss-red bss-white-text">Newsletter CSV</a>
+    <div class="col s6 m3 center">
+        <a href="{% url 'add_product' %}" class="btn bss-red bss-white-text" style="width:100%;">
+            <i class="fas fa-plus-circle bss-yellow-text"></i>&nbsp;Add Product</a><br>
+        <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">&nbsp;</span>
+    </div>
+    <div class="col s6 m3 center">
+        <a href="{% url 'add_faq' %}" class="btn bss-red bss-white-text" style="width:100%;">
+            <i class="fas fa-question-circle bss-yellow-text"></i>&nbsp;Add FAQ</a><br>
+        <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">&nbsp;</span>
+    </div>
+    <div class="col s6 m3 center">
+        <a href="{% url 'orders' %}" class="btn bss-red bss-white-text" style="width:100%;">
+            <i class="fas fa-list-ol bss-yellow-text"></i>&nbsp;Orders</a><br>
+        <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">&nbsp;</span><br>
+    </div>
+    <div class="col s6 m3 center">
+        <a href="{% url 'dl_csv' %}" class="btn bss-red bss-white-text" style="width:100%;">
+            <i class="fas fa-file-download bss-yellow-text"></i>&nbsp;Get CSV</a><br>
+        <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">Newsletter Recipients:&nbsp;{{ total_users }}</span>
+    </div>
+    
 </div>
+{% block staffcontent %}
 <div class="row">
-    <div class="col s12 m10 offset-m1">
+    <div class="col s12">
         <ul class="collapsible border-red">
         {% for order in orders %}
             <li>
@@ -59,4 +79,5 @@
         </ul>
     </div>
 </div>
+{% endblock %}
 {% endblock %}

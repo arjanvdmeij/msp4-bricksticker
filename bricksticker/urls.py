@@ -18,6 +18,7 @@ from .settings import MEDIA_ROOT, MEDIA_URL
 from django.conf.urls import url, include
 from django.contrib import admin
 from accounts import urls as urls_accounts
+from accounts import urls_staff
 from infopages import urls as urls_infopages
 from products import urls as urls_products
 from products.views import latest_products
@@ -31,6 +32,7 @@ urlpatterns = [
     url(r'^$', latest_products, name='index'),    
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include(urls_accounts)),
+    url(r'^staff/', include(urls_staff)),
     url(r'^info/', include(urls_infopages)),
     url(r'^products/', include(urls_products)),
     url(r'^cart/', include(urls_cart)),

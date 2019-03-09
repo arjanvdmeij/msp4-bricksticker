@@ -7,12 +7,10 @@ class PaymentForm(forms.Form):
     Form to obtain payment information for credit card.
     Expiration motnh and year based on 'now'
     """
-    _this_year = int(
-        datetime.now().strftime("%Y")
-        )
-    _end_year = int(
-        (datetime.now() + timedelta(weeks=1040)
-        ).strftime("%Y"))
+    current_year = int(
+        datetime.now().strftime("%Y"))
+    end_year = int((
+        datetime.now() + timedelta(weeks=1040)).strftime("%Y"))
     
     credit_card_number = forms.CharField(
         label='Card Nr.',
@@ -32,9 +30,9 @@ class PaymentForm(forms.Form):
     expiry_year = forms.DecimalField(
         label='Year', 
         required=False,
-        initial=2020,
-        min_value=_this_year,
-        max_value=_end_year,
+        initial=current_year,
+        min_value=current_year,
+        max_value=end_year,
         )
     stripe_id = forms.CharField(
         widget=forms.HiddenInput,

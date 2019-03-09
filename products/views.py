@@ -1,7 +1,10 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.db.models import Q
 from .models import Product, ProductComment
-from .forms import ProductCommentForm
+from .forms import ProductCommentForm, ProductForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib import messages
 from datetime import date
 
 
@@ -84,3 +87,41 @@ def product_detail(request, pk):
             'cart_ids':cart_ids,
         })
     
+@login_required
+def add_product(request):
+    """
+    A view for staff to add new 
+    products to the database
+    """
+    if request.user.is_staff:
+        if request.method == 'POST':
+            try:
+                product_form = ProductForm(request.POST, request.FILES)
+                if product_form.is_valid():
+                    name = product_form.cleaned_data['name']
+                    setnumber = product_form.cleaned_data['setnumber']
+                    
+                    product_form.save()
+                    
+                messages.success(request, 
+                    'The following product has been added:<br>' 
+                    + str(setnumber) + ' - ' + name,
+                    extra_tags='safe',
+                    )
+                return redirect(reverse('add_product'))
+            except:
+                messages.error(request,
+                    'Someting went wrong. Please try again')
+                return redirect(reverse('add_product'))
+        else:
+            product_form = ProductForm()
+            total_users = User.objects.exclude(
+                is_staff=True).all().count()
+            return render(request, 'add_product.html', {
+                'product_form': product_form,
+                'total_users': total_users,
+                })
+    else:
+        messages.error(request,
+            'You are not allowed to use that page.')
+        return redirect(reverse('index'))

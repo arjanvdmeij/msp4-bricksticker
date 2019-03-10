@@ -11,3 +11,4 @@ media/
 staticfiles/
 old_migrations/
 *c9_invoke*
+.old_migrations/

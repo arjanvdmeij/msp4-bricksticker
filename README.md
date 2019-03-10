@@ -1,7 +1,10 @@
 [![BrickStickerShop](https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png)](https://bss-msp-4.herokuapp.com)   
-Travis says: [![Build Status](https://travis-ci.org/arjanvdmeij/msp4-bricksticker.svg?branch=master)](https://travis-ci.org/arjanvdmeij/msp4-bricksticker)
+Travis says:  
+[![Build Status](https://travis-ci.org/arjanvdmeij/msp4-bricksticker.svg?branch=master)](https://travis-ci.org/arjanvdmeij/msp4-bricksticker)  
+The logo up here is clickable for the live site, but alternatively you can click 
+[**here**](https://bss-msp-4.herokuapp.com)
 
-This is the fourth project created for the Full Stack Web Developer course by [Code Institute](https://codeinstitute.net).  
+This is the fourth project created for the Full Stack Web Developer course by [**Code Institute**](https://codeinstitute.net).  
 The goal here was to create a full stack application, using Django with multiple apps and (in my case) a PostGres database.  
 
 For the project, I recreated my brother's site, as a template to eventually update his actual webshop as well.
@@ -46,10 +49,10 @@ For user stories and wireframe mockups created as part of this project, see the 
 - Checkout with (test) payment system for credit card using Stripe
 - Mail sent to user after checkout with list of items, submitted address for delivery and order ID
 - Staff / Admin page added into the site  
-   **a.** easier order handling (items and delivery address shown, button to mark order processed)  
-   **b.** download button to retrieve a csv file with all users and their mail addresses for newsletter use  
-   **c.** ADD PRODUCT  
-   **d.** ADD FAQ  
+   **a.** page to add products to the catalog without the need to use Django Admin  
+   **b.** page to add FAQ items without the need to use Django Admin  
+   **c.** quick order handling (items and delivery address shown, button to mark order processed)  
+   **d.** download button to retrieve a csv file with all users and their email addresses for newsletter use  
 - Standard Django admin pages allow addition of products, FAQ's and comment management for products by staff members  
    **a.** offers complete overview of all orders as well, both processed and unprocessed
 
@@ -58,13 +61,14 @@ For user stories and wireframe mockups created as part of this project, see the 
    **a.** in-site order history  
    **b.** easy address filling  
    **c.** saving the cart  
-   **d.** etcetera
+   **d.** forum option (in time)
 - Extended staff/admin in-site pages allowing:  
-   **a.** existing product modifications  
+   **a.** existing product modifications, as well as product comment management  
    **b.** full order history download  
    **c.** newsletter processing in-site
 - Further sophistication of mails sent out
 - Finish upgrade to Stripe v3
+- Add more payment options
 
 ## Technologies Used
 - **HTML**, **CSS**, **Javascript/jQuery**, **Python** were all at the heart of things
@@ -93,7 +97,7 @@ In the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob
 in the root of the repository, a chapter is dedicated
 to the tests, including screenshots of manual testing, overview of automated tests and the result as Travis relays.  
 Each app contains a `tests.py` file. In order to run all tests manually instead of using Travis, 
-go to a terminal prompt, enter `python3 manage.py test` to run all tests.  
+go to a terminal prompt, and enter `python3 manage.py test` to run all tests.  
 In order to run tests for a specific app, enter (e.g.) `python3 manage.py products` where products is the app to run the tests for.
 
 Testing was done every step of development, as well as automated using **[Travis](https://travis-ci.org)**
@@ -109,12 +113,12 @@ The site has been tested on multiple environments:
    **f.** Developer tools - *emulated versions of Pixel 2 (XL), iPhone 6/7/8(Plus) and X and iPad(Pro)*
 
 Scaling on all devices works as intended. The site does not scale well to the tiny screens of iPhone 5 and/or Galxy S5. This was
-a deliberate choice on my part, as those devices are not much used anymore by the target audience. The majority of traffic will also
+a deliberate choice on my part, as those devices are not much used anymore by the target audience. The majority of traffic will
 be coming from desktop and/or tablet sized browsers. I therefore chose to focus on those instead of (semi-)obsolete mobile phones.
 
 ### Bugs encountered
-At present, there is a small 'bug' in the products page, where the search form shows as an ellips-like inputfield.  
-This is something that doesn't accour for any other form within the site. There is however no loss of functionality. 
+At present, there is a small 'bug' in the products page, where the search form shows as an ellips-like inputfield on iPhone.  
+This is something that doesn't occur for any other form within the site. There is however no loss of functionality. 
 It is a small bug that will need tending in time, however for the moment, it is left as is. The desktop version does not have this
 same issue at all.
 
@@ -131,7 +135,8 @@ broken elsewhere. This mostly applies to the HTML and CSS where changes for spec
 
 For a description of the deployment process, see the corresponding chapter in the 
 [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of the repository.
-This chapter describes the current deployment, as well as the environment variables required in order to run the code locally.
+This chapter describes the current deployment, as well as the environment variables required in order to run the code locally, 
+including creation of a `Staff` group within Django Admin for easy adding of staff members.
 
 ## Credits
 
@@ -143,4 +148,5 @@ This site is also what inspired me to use this subject, both because it is close
 and because like him, I've always had a weak spot for Lego, from a very young age already. His site deserves an overhaul,
 this is my first step towards that goal, eventually applying a new look and feel to his site.
 
-Thanks bro, for handing me the files needed to make this all work!
+Thanks bro, for handing me everything needed to make this all work!
+I owe you all the images, logos and descriptions (heck, even the prices!)

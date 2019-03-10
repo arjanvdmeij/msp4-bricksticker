@@ -9,5 +9,5 @@ __pycache__/
 static/
 media/
 staticfiles/
-README.1.md
-NEW.md
+old_migrations/
+*c9_invoke*

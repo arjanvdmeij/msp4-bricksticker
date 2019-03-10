@@ -283,12 +283,17 @@ button:focus {
 }
 
 .count-cart {
+    display: inline-block;
+    min-width: 1.5rem;
     margin-left: -1em;
-    color: white;
-    background-color: black;
-    padding: 0 4px;
-    border-radius: 1.5em;
+    color: #f7f7f7;
+    background-color: #000000;
+    border-radius: 50%;
     vertical-align: super;
+    line-height: 22px;
+    height: 22px;
+    text-align: center;
+    font-size: 1rem;
 }
 
 .container-main {

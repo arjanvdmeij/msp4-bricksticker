@@ -131,14 +131,12 @@ def order_handling(request):
 
 @login_required
 def toggle_processed(request,id):
-    """ Changes Order 'processed' state
-    to True, removing it from site view
-    (not from database)
+    """ 
+    Changes Order 'processed' state to True, removing
+    it from site view (not from database)
     """
     if request.method == 'POST':
         order = get_object_or_404(Order, pk=id)
-        print(order)
         order.processed = not order.processed
         order.save()
-        print(order.processed)
     return redirect(order_handling)

@@ -13,20 +13,14 @@ def all_products(request):
     View rendering all products and categories based on
     available categories named in the products
     """
-    products = Product.objects.all().order_by('category')
+    products = Product.objects.all().order_by('setnumber')
     categories = Product.objects.values(
         'category').order_by(
         'category').distinct()
-    cart = request.session.get('cart', {})
-    cart_ids = list()
-    for key in cart.keys():
-        cart_ids.append(int(key))
-    
     return render(request, 
         'products.html', 
         {'products':products,
         'categories':categories,
-        'cart_ids':cart_ids,
     })
 
     
@@ -40,15 +34,10 @@ def latest_products(request):
     categories = Product.objects.values(
         'category').order_by(
         'category').distinct()
-    cart = request.session.get('cart', {})
-    cart_ids = list()
-    for key in cart.keys():
-        cart_ids.append(int(key))
     return render(request, 
         'index.html', 
         {'products':products,
         'categories':categories,
-        'cart_ids':cart_ids,
     })
 
 
@@ -76,15 +65,10 @@ def product_detail(request, pk):
         product = get_object_or_404(Product, pk=pk)
         comments = ProductComment.objects.filter(comment_on=pk).order_by('-date')
         comment_form = ProductCommentForm()
-        cart = request.session.get('cart', {})
-        cart_ids = list()
-        for key in cart.keys():
-            cart_ids.append(int(key))
         return render(request, "productdetail.html", {
             'comment_form':comment_form,
             'product':product,
             'comments':comments,
-            'cart_ids':cart_ids,
         })
     
 @login_required

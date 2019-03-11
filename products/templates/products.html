@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="row">
-            {% for product in products %}
+            {% for product in products|dictsort:'setnumber' %}
             <div class="col s12 m6 xl4">
                 <div class="card border-red hoverable white">
                     <div class="card-image product center">

@@ -97,7 +97,7 @@ if os.getenv('ENVTYPE') == 'development':
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-elif os.getenv('ENVTYPE') == 'production':
+elif os.getenv('ENVTYPE') == 'production' and os.getenv('DATABASE_URL'):
     print('Running on Heroku <PROD>.\nUsing PostGres database.')
     DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'))

@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib import messages
 from .forms import ContactForm
+import os
 
 def contact(request):
     """
@@ -28,7 +29,7 @@ def contact(request):
                         'form_content': form.cleaned_data['content'],
                     })
                 mail_subject = 'Contactform: ' + form.cleaned_data['subject']
-                email_to = 'ci.avdm@gmail.com'
+                email_to = os.getenv('EMAIL_HOST_USER')
                 email = EmailMessage(
                     mail_subject, message, to=[email_to])
                 email.content_subtype = 'html'
@@ -57,6 +58,4 @@ def contact(request):
             except BadHeaderError:
                 return HttpResponse('Invalid header found.')
                     
-    return render(request, 'contact.html', {
-        'form':form,
-        })
+    return render(request, 'contact.html', {'form':form,})

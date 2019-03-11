@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, reverse
+from django.http import HttpResponse, HttpResponseRedirect
 
 # Create your views here.
 
@@ -11,7 +12,9 @@ def view_cart(request):
     
 def add_to_cart(request, id):
     """
-    Add a product to the cart
+    Add a product to the cart.
+    While site doesn't offer quantity at the moment,
+    option is here for re-use elsewhere
     """
     quantity=int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
@@ -22,7 +25,7 @@ def add_to_cart(request, id):
         cart[id] = cart.get(id, quantity)
     
     request.session['cart'] = cart
-    return redirect(reverse('products'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
     
     
 def adjust_cart(request, id):
@@ -43,25 +46,4 @@ def adjust_cart(request, id):
         cart.pop(id)
         
     request.session['cart'] = cart
-    return redirect(reverse('view_cart'))
-    
-
-def adjust_cart_checkout(request, id):
-    """
-    Allow clients to adjust the cart contents during checkout
-    or remove items before purchase
-    """
-    if request.POST.get('quantity') == '':
-        request.session['cart'] = request.session.get('cart', {})
-        return redirect(reverse('checkout'))
-    else:
-        quantity = int(request.POST.get('quantity'))
-        cart = request.session.get('cart', {})
-    
-    if quantity > 0:
-        cart[id] = quantity
-    else:
-        cart.pop(id)
-        
-    request.session['cart'] = cart
-    return redirect(reverse('checkout'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

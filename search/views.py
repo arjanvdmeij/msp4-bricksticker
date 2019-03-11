@@ -15,11 +15,13 @@ def search(request):
         )
     categories = Product.objects.values(
         'category').order_by('category').distinct()
+    
     return render(request, 'products.html', 
         {'products':products,
         'categories':categories,
         'search':search,
     })
+
 
 def filter_products(request):
     """
@@ -32,6 +34,7 @@ def filter_products(request):
         )
     categories = Product.objects.values(
         'category').order_by('category').distinct()
+    
     return render(request, 'products.html', 
         {'products':products,
         'categories':categories,

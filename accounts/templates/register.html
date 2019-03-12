@@ -30,12 +30,18 @@
                                 <div class="col s12 center">
                                     <sup>You can log in with username or email address</sup>
                                 </div>
-                                {{ user_form.username | materializecss:'s12 m6' }}
-                                {{ user_form.email | materializecss:'s12 m6' }}
-                                {{ user_form.password1 | materializecss:'s12 m6' }}
-                                {{ user_form.password2 | materializecss:'s12 m6' }}
-                                {{ user_form.first_name | materializecss:'s12 m6' }}
-                                {{ user_form.last_name | materializecss:'s12 m6' }}
+                                <div class="row no-margin">
+                                    {{ user_form.username | materializecss:'s12 m6' }}
+                                    {{ user_form.email | materializecss:'s12 m6' }}
+                                </div>
+                                <div class="row no-margin">
+                                    {{ user_form.password1 | materializecss:'s12 m6' }}
+                                    {{ user_form.password2 | materializecss:'s12 m6' }}
+                                </div>
+                                <div class="row no-margin">
+                                    {{ user_form.first_name | materializecss:'s12 m6' }}
+                                    {{ user_form.last_name | materializecss:'s12 m6' }}
+                                </div>
                                 <div class="col s12 center">
                                     <button type="submit" class="btn btn-default bss-red bss-white-text float-right">
                                     <i class="fas fa-user-plus bss-yellow-text"></i> Register</button>

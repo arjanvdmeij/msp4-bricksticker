@@ -33,7 +33,7 @@ def login(request):
     
                 if user and user.is_active:
                     auth.login(request, user)
-                    messages.error(request, "You have successfully signed in")
+                    messages.success(request, "You have successfully signed in")
     
                     if request.GET and request.GET['next'] !='':
                         next = request.GET['next']

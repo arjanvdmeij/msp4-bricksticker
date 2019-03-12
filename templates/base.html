@@ -70,20 +70,35 @@
     </header>
     <main class="container lower-me">
         {% if messages %}
+        {% for message in messages %}
+        {% if 'success' in message.tags %}
         <div id="alert-box" class="alert bss-yellow-light border-red center" role="alert">
             <div class="messages">
                 <button type="button" class="btn btn-alert right">
                     <span>&times;</span>
                 </button>
-                {% for message in messages %}
-                    {% if 'safe' in message.tags %}
-                        {{ message|safe }}
-                    {% else %}
-                        {{ message }}
-                    {% endif %}
-                {% endfor %}
+                {% if 'safe' in message.tags %}
+                    {{ message|safe }}
+                {% else %}
+                    {{ message }}
+                {% endif %}
             </div>
         </div>
+        {% else %}
+        <div id="alert-box" class="alert bss-red-light border-red center" role="alert">
+            <div class="messages">
+                <button type="button" class="btn btn-alert right">
+                    <span>&times;</span>
+                </button>
+                {% if 'safe' in message.tags %}
+                    {{ message|safe }}
+                {% else %}
+                    {{ message }}
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
         {% endif %}
         {% block content %} {% endblock %}
         <div class="fixed-action-btn hide-on-small-only">

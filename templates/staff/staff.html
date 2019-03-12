@@ -1,23 +1,23 @@
 {% extends "base.html" %} 
 {% block content %}
 <div class="row center">
-    <div class="col s6 m3 center">
-        <a href="{% url 'add_product' %}" class="btn bss-red bss-white-text" style="width:100%;">
+    <div class="col s6 m3 center no-padding">
+        <a href="{% url 'add_product' %}" class="btn bss-red bss-white-text" style="width:99%;">
             <i class="fas fa-plus-circle bss-yellow-text"></i>&nbsp;Add Product</a><br>
         <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">&nbsp;</span>
     </div>
-    <div class="col s6 m3 center">
-        <a href="{% url 'add_faq' %}" class="btn bss-red bss-white-text" style="width:100%;">
+    <div class="col s6 m3 center no-padding">
+        <a href="{% url 'add_faq' %}" class="btn bss-red bss-white-text" style="width:99%;">
             <i class="fas fa-question-circle bss-yellow-text"></i>&nbsp;Add FAQ</a><br>
         <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">&nbsp;</span>
     </div>
-    <div class="col s6 m3 center">
-        <a href="{% url 'orders' %}" class="btn bss-red bss-white-text" style="width:100%;">
+    <div class="col s6 m3 center no-padding">
+        <a href="{% url 'orders' %}" class="btn bss-red bss-white-text" style="width:99%;">
             <i class="fas fa-list-ol bss-yellow-text"></i>&nbsp;Orders</a><br>
         <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">&nbsp;</span><br>
     </div>
-    <div class="col s6 m3 center">
-        <a href="{% url 'dl_csv' %}" class="btn bss-red bss-white-text" style="width:100%;">
+    <div class="col s6 m3 center no-padding">
+        <a href="{% url 'dl_csv' %}" class="btn bss-red bss-white-text" style="width:99%;">
             <i class="fas fa-file-download bss-yellow-text"></i>&nbsp;Get CSV</a><br>
         <span class="bss-red-text" style="padding:3px;font-size:0.7rem;">Newsletter Recipients:&nbsp;{{ total_users }}</span>
     </div>

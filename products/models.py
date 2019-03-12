@@ -21,7 +21,7 @@ class ProductComment(models.Model):
         Product, on_delete=models.CASCADE, 
         related_name="Product_Comment")
     author = models.CharField(max_length=75)
-    content = models.CharField(max_length=250)
+    content = models.TextField(max_length=1000)
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

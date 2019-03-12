@@ -36,9 +36,11 @@ $(document).ready(function(){
     interval: 3500,
     height: 120
   });
+  $('.modal').modal({
+    inDuration: 500,
+  });
   $('select').formSelect();
   $('.collapsible').collapsible();
-  $('.datepicker').datepicker({'format': 'yyyy-mm-dd'});
   $('select').formSelect();
   // custom alert-box closing
   $('.btn-alert').on('click', function() {
@@ -48,4 +50,6 @@ $(document).ready(function(){
         });      
       });
     });
+  $('.dropdown-trigger').dropdown();
+  $('textarea#id_content').characterCounter();
 });

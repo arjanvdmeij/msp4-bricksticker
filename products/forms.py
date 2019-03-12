@@ -10,6 +10,10 @@ class ProductCommentForm(forms.ModelForm):
             'content',
         )
         
+        widgets = {
+            'content':forms.Textarea(attrs={'data-length':1000})
+        }
+        
 class ProductForm(forms.ModelForm):
     """
     Standard form with modified label names

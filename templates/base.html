@@ -22,21 +22,17 @@
                     <div class="nav-wrapper">
                         <ul class="right">
                             {% if user.is_authenticated %}
-                            {% if not user.is_staff %}
-                            <li>
-                                <a class="dropdown-trigger" href="#!" data-target="usermenu1">
-                                    <i class="bss-yellow-text fas fa-user"></i> Menu
-                                    <i class=" bss-yellow-text material-icons right">arrow_drop_down</i>
-                                </a>
-                            </li>
-                            {% else %}
                             <li>
                                 <a class="dropdown-trigger bss-yellow-text" href="#!" data-target="usermenu1">
-                                    <i class="bss-yellow-text fas fa-user"></i> Staff
+                                    {% if not user.is_staff %}
+                                    <i class="bss-yellow-text fas fa-user-check"></i>&emsp;{{ user.first_name | truncatechars:9 }}
                                     <i class=" bss-yellow-text material-icons right">arrow_drop_down</i>
+                                    {% else %}
+                                    <i class="bss-blue-light-text fas fa-user-shield"></i><span class="bss-blue-light-text">&emsp;{{ user.first_name | truncatechars:9 }}</span>
+                                    <i class=" bss-blue-light-text material-icons right">arrow_drop_down</i>
+                                    {% endif %}
                                 </a>
                             </li>
-                            {% endif %}
                             {% else %}
                             <li class="tab"><a class="nav-link bss-white-text" href="{% url 'login' %}"><i class="bss-yellow-text fas fa-user"></i> SIGN IN</a></li>
                             {% endif %}

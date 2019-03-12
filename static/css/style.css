@@ -59,7 +59,11 @@ h6 {
 }
 
 .bss-blue-light {
-    background-color: #B6EAFC!important;
+    background-color: #b6eafc !important;
+}
+
+.bss-blue-light-text {
+    color: #b6eafc !important;
 }
 
 .border-red {
@@ -227,7 +231,7 @@ button:focus {
 }
 
 .fixed-action-btn {
-    bottom: 58px !important;
+    bottom: 78px !important;
 }
 
 .page-footer {
@@ -458,6 +462,6 @@ button:focus {
 
 @media only screen and (min-width: 601px) and (max-width: 992px) {
     .fixed-action-btn {
-        bottom: 92px !important;
+        bottom: 132px !important;
     }
 }

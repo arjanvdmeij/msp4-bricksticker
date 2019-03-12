@@ -30,7 +30,7 @@ def login(request):
             user = auth.authenticate(request.POST['username_or_email'],
                                      password=request.POST['password'])
 
-            if user:
+            if user and user.is_active:
                 auth.login(request, user)
                 messages.error(request, "You have successfully signed in")
 
@@ -39,6 +39,10 @@ def login(request):
                     return HttpResponseRedirect(next)
                 else:
                     return redirect(reverse('index'))
+            elif user and not user.is_active:
+                user_form.add_error(None,
+                    "Your account is inactive."
+                    + " Please contact the site owner for assistance")
             else:
                 user_form.add_error(None, 
                     "Your username and/or password are incorrect")

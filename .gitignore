@@ -12,3 +12,4 @@ staticfiles/
 old_migrations/
 *c9_invoke*
 .old_migrations/
+P_settings.1.py

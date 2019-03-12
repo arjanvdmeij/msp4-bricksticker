@@ -141,6 +141,7 @@ blockquote {
 .card .card-content {
     padding: .5em;
     border-radius: 0 !important;
+    word-wrap:break-word;
 }
 
 .card .card-action {

@@ -46,7 +46,7 @@
                             <h6 class="bss-red-text">{{ item.product.setnumber }} - {{ item.product.name | truncatewords:4 }}</h6>
                             <div class="card-panel no-margin less-padding border-red fixed-height bss-blue-light">
                                 <div class="row no-margin">
-                                    <div class="col s12">
+                                    <div class="col s12 no-padding">
                                         <p class="product-description">{{ item.product.description | truncatechars:40 }}</p>
                                     </div>
                                     <div class="row">
@@ -80,7 +80,7 @@
                         <div class="row no-margin">
                             <form method="post" action="{% url 'adjust_cart' item.id %}" class="float-right"> {% csrf_token %}
                                 <div class="col s7 no-padding">
-                                    <button type="button" class="btn bss-red-text bss-white product-price left">item total: &euro; {{ item.product_total_price }}</button>
+                                    <button type="button" class="btn bss-red-text white product-price left">item total: &euro; {{ item.product_total_price }}</button>
                                 </div>
                                 <div class="col s5 no-padding">
                                     <button type="submit" name="quantity" value="0" class="btn width-fix-cart1 bss-red bss-white-text right">
@@ -98,10 +98,10 @@
 </div>
 <div class="row">
     <div class="col s6 no-padding">
-        <button class="right btn bss-red-text bss-white product-price width-fix-cart2 border-red">Total &euro; {{ total }}</button>
+        <button class="right btn bss-red-text white product-price width-fix-cart2 border-red">Total &euro; {{ total }}</button>
     </div>
     <div class="col s6 no-padding">
-        <a href="{% url 'checkout' %}" class="left btn bss-red width-fix-cart2 bss-white-text" role="button">
+        <a href="{% url 'checkout' %}" class="left btn bss-red width-fix-cart2 bss-white-text no-shadow" role="button">
         <i class="far fa-credit-card bss-yellow-text"></i> to Checkout</a>
     </div>
 </div>

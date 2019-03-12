@@ -96,7 +96,7 @@
             </a>
         </div>
     </main>
-    <footer class="footer">
+    <footer class="page-footer">
         <div class="container">
             <div class="row footer-lineheight no-margin">
                 <div class="col s6 l3 center">
@@ -123,13 +123,6 @@
     <script src="{% static 'js/materialize.min.js' %}"></script>
     <script src="{% static 'js/lightbox.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
-    <script>
-        /* global $ */
-        /* --- dropdown-trigger refuses to work when in custom.js --- */
-        $(document).ready(function(){
-            $('.dropdown-trigger').dropdown();
-        });
-    </script>
     {% block head_stripe_js %}{% endblock %}
 </body>
 

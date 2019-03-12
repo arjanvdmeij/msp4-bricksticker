@@ -30,7 +30,7 @@
             <div class="collapsible-body bss-yellow-light less-padding">
                 <div class="row no-margin">
                     {% for item in cart_items|dictsort:'product.setnumber' %}
-                    <div class="col s12 m6 l4">
+                    <div class="col s12 m6 xl4">
                         <div class="card border-red hoverable">
                             <div class="card-image product center">
                                 <img src="{{ MEDIA_URL }}{{ item.product.image1 }}" alt="{{ item.product.name }}">
@@ -39,13 +39,13 @@
                                 <h6 class="bss-red-text">{{ item.product.setnumber }} - {{ item.product.name | truncatewords:4 }}</h6>
                                 <div class="card-panel no-margin less-padding border-red fixed-height bss-blue-light">
                                     <div class="row no-margin">
-                                        <div class="col s12">
+                                        <div class="col s12 no-padding">
                                             <p class="product-description">{{item.product.description | truncatechars:40 }}</p>
                                         </div>
-                                        <div class="col s8">
+                                        <div class="col s8 no-padding">
                                             <sup>Category: {{item.product.category}}</sup>
                                         </div>
-                                        <div class="col s4">
+                                        <div class="col s4 no-padding">
                                             <span class="right bss-red-text">&euro; {{ item.product.price }}</span>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                             <div class="row no-margin">
                                 <form method="post" action="{% url 'adjust_cart' item.id %}" class="float-right"> {% csrf_token %}
                                     <div class="col s7 no-padding">
-                                        <button type="button" class="btn bss-red-text bss-white product-price left">
+                                        <button type="button" class="btn bss-red-text white product-price left">
                                             item total: &euro; {{ item.product_total_price }}
                                         </button>
                                     </div>
@@ -94,57 +94,57 @@
             </div>
             <div class="collapsible-body bss-yellow-light less-padding">
                 <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}"> {% csrf_token %} 
-                    <div class="card-panel bss-white border-red no-margin less-padding">
-                        <div class="row less-margin-bottom">
-                            <div class="col s12 no-padding">
-                                <div class="card-panel border-red white no-margin">
-                                    <div class="row no-margin bss-red-text">
-                                        <h6 class="no-margin">Address Information</h6>
-                                    </div>
-                                    <div class="row no-margin">
-                                        {{ order_form.full_name | materializecss:'s12 shrink-font-size' }}
-                                        {{ order_form.address1 | materializecss:'s12 m6 shrink-font-size' }}
-                                        {{ order_form.address2 | materializecss:'s12 m6 shrink-font-size' }}
-                                        {{ order_form.postcode | materializecss:'s12 m4 l2 shrink-font-size' }}
-                                        {{ order_form.town_or_city | materializecss:'s12 m8 l4 shrink-font-size' }}
-                                        {{ order_form.state_or_province | materializecss:'s12 m4 l2 shrink-font-size' }}
-                                        {{ order_form.country | materializecss:'s12 m8 l4 shrink-font-size' }}
-                                        {{ order_form.phone_number | materializecss:'s12 m4 l2 shrink-font-size' }}
-                                        {{ order_form.email_address | materializecss:'s12 m8 l4 shrink-font-size' }}
-                                    </div>
+                    <div class="row less-margin-bottom">
+                        <div class="col s12 no-padding">
+                            <div class="card-panel border-red white no-margin">
+                                <div class="row no-margin bss-red-text">
+                                    <h6 class="no-margin">Address Information</h6>
+                                </div>
+                                <div class="row no-margin">
+                                    {{ order_form.full_name | materializecss:'s12 shrink-font-size' }}
+                                    {{ order_form.address1 | materializecss:'s12 m6 shrink-font-size' }}
+                                    {{ order_form.address2 | materializecss:'s12 m6 shrink-font-size' }}
+                                    {{ order_form.postcode | materializecss:'s12 m4 l2 shrink-font-size' }}
+                                    {{ order_form.town_or_city | materializecss:'s12 m8 l4 shrink-font-size' }}
+                                    {{ order_form.state_or_province | materializecss:'s12 m4 l2 shrink-font-size' }}
+                                    {{ order_form.country | materializecss:'s12 m8 l4 shrink-font-size' }}
+                                    {{ order_form.phone_number | materializecss:'s12 m4 l2 shrink-font-size' }}
+                                    {{ order_form.email_address | materializecss:'s12 m8 l4 shrink-font-size' }}
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col s12 no-padding">
-                                <div class="card-panel border-red white no-margin">
-                                    <div class="row no-margin bss-red-text">
-                                        <h6 class="no-margin">Payment Information</h6>
+                    </div>
+                    <div class="row no-margin">
+                        <div class="col s12 no-padding">
+                            <div class="card-panel border-red white no-margin">
+                                <div class="row no-margin bss-red-text">
+                                    <h6 class="no-margin">Payment Information</h6>
+                                </div>
+                                <div class="row">
+                                    <div class="col m4 l3 hide-on-small-only center">
+                                        <img class="center" src="{% static 'images/payment-logo-stripe.png' %}" width="150" alt="Stripe Logo (left)">
                                     </div>
-                                    <div class="row">
-                                        <div class="col m4 l3 hide-on-small-only center">
-                                            <img class="center" src="{% static 'images/payment-logo-stripe.png' %}" width="150" alt="Stripe Logo (left)">
+                                    <div class="col s12 m8 l6 xl4 offset-xl1">
+                                        {{ payment_form.credit_card_number | materializecss:'s9 shrink-font-size' }}
+                                        {{ payment_form.cvv | materializecss:'s3 shrink-font-size' }}
+                                        {{ payment_form.expiry_month | materializecss:'s6 m4 shrink-font-size' }}
+                                        {{ payment_form.expiry_year | materializecss:'s6 m4 shrink-font-size' }}
+                                        <div class="hide">
+                                            {{ payment_form.stripe_id | materializecss }}
                                         </div>
-                                        <div class="col s12 m8 l6 xl4 offset-xl1">
-                                            {{ payment_form.credit_card_number | materializecss:'s9 shrink-font-size' }}
-                                            {{ payment_form.cvv | materializecss:'s3 shrink-font-size' }}
-                                            {{ payment_form.expiry_month | materializecss:'s6 m4 shrink-font-size' }}
-                                            {{ payment_form.expiry_year | materializecss:'s6 m4 shrink-font-size' }}
-                                            <div class="hide">
-                                                {{ payment_form.stripe_id | materializecss }}
-                                            </div>
-                                        </div>
-                                        <div class="col l3 xl3 offset-xl1 hide-on-med-and-down center">
-                                            <img class="center" src="{% static 'images/bss-brick-cc.png' %}" width="150" alt="Figure with Credit Card (right)">
-                                        </div>
+                                    </div>
+                                    <div class="col l3 xl3 offset-xl1 hide-on-med-and-down center">
+                                        <img class="center" src="{% static 'images/bss-brick-cc.png' %}" width="150" alt="Figure with Credit Card (right)">
+                                    </div>
+                                </div>
+                                <div class="row no-margin">
+                                    <div class="col s12 center">
+                                        <button type="submit" class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit">
+                                            <i class="fas fa-donate bss-yellow-text"></i> Submit Order
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row center">
-                            <button type="submit" class="btn btn-default bss-red bss-white-text" id="submit_payment_btn" name="commit">
-                                <i class="fas fa-donate bss-yellow-text"></i> Submit Order
-                            </button>
                         </div>
                     </div>
                 </form>

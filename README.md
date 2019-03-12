@@ -1,4 +1,4 @@
-[![BrickStickerShop](https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png)](https://bss-msp-4.herokuapp.com)   
+[![BrickStickerShop](https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.1.png)](https://bss-msp-4.herokuapp.com)   
 Travis says:  
 [![Build Status](https://travis-ci.org/arjanvdmeij/msp4-bricksticker.svg?branch=master)](https://travis-ci.org/arjanvdmeij/msp4-bricksticker)  
 The logo up here is clickable for the live site, but alternatively you can click 
@@ -23,12 +23,33 @@ If and when an item is unavailable, an option needs to be in place for people to
 Last but certainly not least, customers need to be able to place their actual order and receive a receipt for their placed order.
 
 All the above is available in this site. Along with the above, additional information is available in the form of a FAQ page, as well as pages offering 
-the privacy policy, the terms and conditions and the returns policy.
+the privacy policy, the terms and conditions and the returns policy.  
+  
+- Unregistered user can browse the site, perform searches, filtering, and make purchases.  
+- Registered users can do the same, but also receive the newsletter and have a profile page where they can remove their own account to opt out of the newsletter.  
+- Staff members cannot remove their accounts through the profile. They do have access to a staff page where they can add products, handle order, add FAQ items and 
+downlaod a csv file for newsletter purposes. In the admin panel they can also modify and delete items. They can not perform user management there.
+- The superuser can do what staff members can, plus perform user management in the admin panel, as well as group management.
 
 #### Wireframe and User Stories
 For user stories and wireframe mockups created as part of this project, see the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of this repository.
 
 ## Features
+### Existing apps
+The application holds a number of apps, carrying out various different tasks.
+- **accounts**:  
+   This app takes care of all tasks related to registering, signing in and out, and generation of the csv file for staff members
+- **cart**:  
+   This app ensures the cart is viewable, editable, and that its content can be used across the site 
+- **checkout**:
+   handles payments and order processing. Delivers staff the list of order items yet to be sent out
+- **contact**:
+   Fairly generic contact form, processing sending the form to site admins as well as submitter
+- **infopages**:
+   re-usable set of pages with generic information, including a model for easy adding of FAQ items
+- **products**:
+   home of the opening page, all products and product detail page. Holds models for products and comments on them, as well as staff form to add products.
+
 ### Existing Features
 - Opening page with a banner, some info and basic links, followed by the 6 most recent additions to the site's inventory  
    **a.** *Optional* account creation for the use of newsletter subscribing. Account creation is explicitly *not* needed to make purchases
@@ -73,17 +94,27 @@ For user stories and wireframe mockups created as part of this project, see the 
 ## Technologies Used
 - **HTML**, **CSS**, **Javascript/jQuery**, **Python** were all at the heart of things
 - [**Django**](https://www.djangoproject.com/) - The entire site uses **Django 1.11.20** as its framework  
-   Django pip-installed add-ons used:  
+   Django add-ons used:  
    *django-materializecss-form* - used for the styling of the forms in Materialize  
    *stripe* - used in processing of payments  
-   *boto3* - used for the AWS storage  
+   *boto3* and *django-storages* - used for the AWS storage  
    *dj-database-url* - used for Heroku PostGres integration  
 - [**MaterializeCSS**](https://materializecss.com) - The site is styled based on **MaterializeCSS 1.0.0**  
    *Originally the site was being developed using Bootstrap 4, but this was changed to MAterializeCSS.*  
    *The pages created up to the switch can be downloaded still however* [***HERE***](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/bss_booststrap.tar.gz)
    *should anyone want to build on those. An accompanying text file details which changes need to be made to switch to Bootstrap 4*
 - [**Stripe**'s stripe.js](https://stripe.com/) - test version used for (m/f)aking payments.  
-   *No actual payments can be made*
+   *No actual payments can be made*  
+   ***Cards to use in testing:***
+   | Card Number      | Card Type       | Payment?        |
+   |------------------|:---------------:|:---------------:|
+   | 4242424242424242 | Visa            | Yes             |
+   | 5555555555554444 | Mastercard      | Yes             |
+   | 378282246310005  | AMEX            | Yes             |
+   | 4000000000000127 | Visa            | No, cvc error   |
+   | 4000000000009995 | Visa            | No, funds error |  
+   In all card cases, a valid expiration should be provided.
+   
 - [**JQuery**](https://jquery.com) - The project uses **JQuery** to simplify DOM manipulation.  
    *Additional javascript was used to perform some enhancements as well, like smooth scrolling to the top of the page. Most of the* 
    *jQuery in use however is through MaterializeCSS, with some settings applied, with exception of added alert-box functionality.*
@@ -128,8 +159,12 @@ possible when using django-materializecss-form (e.g. `{{ payment_form.cvv | mate
 By the time that became clear, I was on route to upgrade from Stripe v2 to Stripe v3. This needs finishing still, but hiding the form field in its own
 separate `div` solved the problem with payments.  
 
+Another interesting bug was trying to apply migrations to the databse after I had split off a settings file specifically for the production environment on Heroku.
+In booting on Heroku a check was built in to perform any migrations needed, which it did. Based on the general Dev/Travis configuration. And once done, boot the application
+using the production settings. Needless to say settings are now integrated again in a single file and settings are applied based on an environment variable.  
+
 Any other things I've run into were simply my fault, and corrected on-the-go whenever needed. Whenever a page was changed, adjustments were made to parts
-broken elsewhere. This mostly applies to the HTML and CSS where changes for specific screensizes would break things. I do not consider those bugs however.
+broken elsewhere. This mostly applies to the HTML and CSS where changes for specific screensizes would break things. I do not consider those bugs however.  
 
 ## Deployment
 

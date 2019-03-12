@@ -24,30 +24,35 @@ def login(request):
     """
     A view that manages the login form
     """
-    if request.method == 'POST':
-        user_form = UserLoginForm(request.POST)
-        if user_form.is_valid():
-            user = auth.authenticate(request.POST['username_or_email'],
-                                     password=request.POST['password'])
-
-            if user and user.is_active:
-                auth.login(request, user)
-                messages.error(request, "You have successfully signed in")
-
-                if request.GET and request.GET['next'] !='':
-                    next = request.GET['next']
-                    return HttpResponseRedirect(next)
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            user_form = UserLoginForm(request.POST)
+            if user_form.is_valid():
+                user = auth.authenticate(request.POST['username_or_email'],
+                                         password=request.POST['password'])
+    
+                if user and user.is_active:
+                    auth.login(request, user)
+                    messages.error(request, "You have successfully signed in")
+    
+                    if request.GET and request.GET['next'] !='':
+                        next = request.GET['next']
+                        return HttpResponseRedirect(next)
+                    else:
+                        return redirect(reverse('index'))
+                elif user and not user.is_active:
+                    user_form.add_error(None,
+                        "Your account is inactive."
+                        + " Please contact the site owner for assistance")
                 else:
-                    return redirect(reverse('index'))
-            elif user and not user.is_active:
-                user_form.add_error(None,
-                    "Your account is inactive."
-                    + " Please contact the site owner for assistance")
-            else:
-                user_form.add_error(None, 
-                    "Your username and/or password are incorrect")
+                    user_form.add_error(None, 
+                        "Your username and/or password are incorrect")
+        else:
+            user_form = UserLoginForm()
     else:
-        user_form = UserLoginForm()
+        messages.error(request,
+            "You are already logged in")
+        return redirect(reverse('index'))
 
     return render(request, 'login.html', {
         'user_form': user_form, 
@@ -89,26 +94,31 @@ def register(request):
     """
     A view for the registration form
     """
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            
-            user = auth.authenticate(
-                request.POST.get('email'),
-                password=request.POST.get('password1'))
-
-            if user:
-                auth.login(request, user)
-                messages.success(request, 
-                    "You have successfully registered. Thank you!")
-                return redirect(reverse('index'))
-
-            else:
-                messages.error(request, 
-                    "We failed to sign you in, please try again later!")
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            user_form = UserRegistrationForm(request.POST)
+            if user_form.is_valid():
+                user_form.save()
+                
+                user = auth.authenticate(
+                    request.POST.get('email'),
+                    password=request.POST.get('password1'))
+    
+                if user:
+                    auth.login(request, user)
+                    messages.success(request, 
+                        "You have successfully registered. Thank you!")
+                    return redirect(reverse('index'))
+    
+                else:
+                    messages.error(request, 
+                        "We failed to sign you in, please try again later!")
+        else:
+            user_form = UserRegistrationForm()
     else:
-        user_form = UserRegistrationForm()
+        messages.error(request,
+            "You are already logged in")
+        return redirect(reverse('index'))
     
     return render(request, 'register.html', {
         'user_form': user_form,

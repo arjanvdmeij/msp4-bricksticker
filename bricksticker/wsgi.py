@@ -11,12 +11,10 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-if os.getenv('ENVTYPE') == 'development':
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bricksticker.D_settings")
-elif os.getenv('ENVTYPE') == 'production':
+if os.getenv('ENVTYPE') == 'production':
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bricksticker.P_settings")
 else:
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bricksticker.T_settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "bricksticker.settings")
 
 
 application = get_wsgi_application()

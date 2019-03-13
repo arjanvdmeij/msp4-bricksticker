@@ -1,56 +1,53 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-        <h5 class="bss-red-text center">{{ user.first_name }}'s Account Details</h5>
-</div>
-<div class="row">
-    <div class="col s12 m10 offset-m1 l8 offset-l2 xl6 offset-xl3">
-        <div class="card border-red">
-            <div class="card-content">
-                <div class="row">
-                    <div class="col s10 offset-s1 m4 offset-m2 center">Username:<br><span class="bss-red-text">{{ user.username }}</span></div>
-                    <div class="col s10 offset-s1 m4 center">Email:<br><span class="bss-red-text">{{ user.email }}</span></div>
-                </div>
-                <div class="row">
-                    <div class="col s10 offset-s1 m4 offset-m2 center">First Name:<br><span class="bss-red-text">{{user.first_name }}</span></div>
-                    <div class="col s10 offset-s1 m4 center">Last Name:<br><span class="bss-red-text">{{ user.last_name }}</span></div>
+    <div class="col s12">
+        <div class="card-panel border-red bss-yellow-light less-padding">
+            <div class="row no-margin">
+                <div class="col s12">
+                    <div class="card-panel border-red bss-red-text less-padding no-margin">
+                        <h5 class="no-margin">Profile<span class="right">{{ user.first_name }}</span></h5>
+                    </div>    
                 </div>
             </div>
-            {% if user.is_staff %}
-            <div class="card-action">
-                <div class="row">
-                    <div class="col s10 offset-s1 m4 offset-m2 center">Staff: <span class="bss-red-text">YES</span></div>
-                    {% if user.is_superuser %}
-                    <div class="col s10 offset-s1 m4 center">Site Admin: <span class="bss-red-text">YES</span></div>
-                    {% else %}
-                    <div class="col s10 offset-s1 m4 center">Site Admin: <span class="bss-red-text">NO</span></div>
-                    {% endif %}
+            <div class="row no-margin">
+                <div class="col s12 l6">
+                    <div class="card-panel border-red less-padding card-bottom-margin" style="height:100px;">
+                        <div class="row no-margin">
+                            <div class="col s4"><b>Username:</b></div>
+                            <div class="col s8">{{ user.username }}</div>
+                            <div class="col s4"><b>First Name:</b></div>
+                            <div class="col s8">{{ user.first_name }}</div>
+                            <div class="col s4"><b>Last Name:</b></div>
+                            <div class="col s8">{{ user.last_name }}</div>
+                            <div class="col s4"><b>Email:</b></div>
+                            <div class="col s8">{{ user.email }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 l6">
+                    <div class="card-panel border-red less-padding center card-bottom-margin" style="height:100px;">
+                        <span class="bss-red-text"><sup>You can delete your account. This will remove you from the mailing list.</sup></span><br>
+                        <form method="post" action="{% url 'forgetme' %}">
+                            {% csrf_token %}
+                            <button id="delete-action" class="btn bss-red bss-white-text delete-me" type="submit" disabled="disabled">
+                                <i class="far fa-times-circle bss-yellow-text"></i>&nbsp;Delete me
+                            </button>
+                        </form>
+                        {% if not user.is_staff %}
+                        <form>
+                            <label>
+                                    <input type="checkbox" id="delete-agree">
+                                <span>I want to remove my account</span>
+                            </label>
+                        </form>
+                        {% else %}
+                        <sub>Staff members can't delete their acount</sub>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-            {% endif %}
         </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col s8 offset-s2 center">
-        Here you can opt to delete your account.<br>
-        This will remove you from our newsletter.<br>
-        This will not influence any ongoing orders.
-    </div>
-</div>
-<div class="row">
-    <div class="col s12 center">
-        <form method="post" action="{% url 'forgetme' %}">
-            {% csrf_token %}
-            {% if user.is_staff %}
-            <span class="bss-red-text"><sup>Staff members can not delete their account</sup></span><br>
-            <button class="btn bss-red bss-white-text no-border-line" type="submit" disabled>
-                <i class="far fa-times-circle bss-red-text"></i> Delete me</button>
-            {% else %}
-            <button class="btn bss-red bss-white-text" type="submit">
-                <i class="far fa-times-circle bss-yellow-text"></i> Delete me</button>
-            {% endif %}
-        </form>
     </div>
 </div>
 {% endblock %}

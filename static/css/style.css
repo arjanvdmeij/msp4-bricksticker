@@ -191,6 +191,11 @@ textarea.materialize-textarea {
     min-height: 120px;
 }
 
+[type="checkbox"]:checked+span:not(.lever):before {
+    border-right: 2px solid #c9190a;
+    border-bottom: 2px solid #c9190a;
+}
+
 .qty-cart>input[type=number]:not(.browser-default) {
     width: 60px !important;
     height: 2em;
@@ -430,6 +435,14 @@ button:focus {
     cursor: default;
     border-top: 1px solid #c9190a;
     border-left: 1px solid #c9190a;
+}
+
+.btn.delete-me:disabled,
+.btn.delete-me[disabled] {
+    pointer-events: none;
+    box-shadow: none;
+    cursor: default;
+    border: 1px solid #c9190a;
 }
 
 .no-border-line {

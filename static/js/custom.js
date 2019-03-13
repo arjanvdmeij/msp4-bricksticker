@@ -29,6 +29,17 @@ $('a[href="#top"]').on('click', function(top) {
     });
   });
 
+// have users first agree before deletion of account
+$('#delete-agree').on('click',function() {
+  var check = $('#delete-action').attr('disabled');
+  console.log(check)
+  if (check == 'disabled') {
+    $('#delete-action').removeAttr('disabled');
+  } else {
+    $('#delete-action').attr('disabled','disabled');
+  }
+}); 
+  
 $(document).ready(function(){
   $('.slider').slider({
     indicators: false,

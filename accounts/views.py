@@ -7,6 +7,7 @@ from .forms import UserLoginForm, UserRegistrationForm
 from django.template.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from checkout.models import Order, OrderItem
 import csv
 
 
@@ -63,7 +64,7 @@ def login(request):
 @login_required
 def profile(request):
     """
-    Profile view with 'delete me'
+    Profile view with 'delete me' option
     """
     return render(request, 'profile.html')
 
@@ -75,18 +76,23 @@ def forgetme(request):
     Button disabled for staff
     """
     if request.method == 'POST':
-        remove_user = request.user.id
-        try:
-            u = get_object_or_404(User, pk=remove_user)
-            u.delete()
-            messages.success(request, 
-                'Your account has successfully been removed')
-            auth.logout(request)
-            return redirect(reverse('index'))
-        except:
-            messages.error(request, 
-                'Something went wrong, please contact us through the site')
-            return render(request, 'profile.html')
+        if not request.user.is_staff:
+            remove_user = request.user.id
+            try:
+                u = get_object_or_404(User, pk=remove_user)
+                u.delete()
+                messages.success(request, 
+                    'Your account has successfully been removed')
+                auth.logout(request)
+                return redirect(reverse('index'))
+            except:
+                messages.error(request, 
+                    'Something went wrong, please contact us through the site')
+                return render(request, 'profile.html')
+        else:
+            messages.error(request,
+                'Don\'t manipulate the page to enable the button...')
+            return redirect(reverse('profile'))
     return render(request, 'profile.html')
 
 

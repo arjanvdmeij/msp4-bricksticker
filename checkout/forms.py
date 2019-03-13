@@ -14,22 +14,22 @@ class PaymentForm(forms.Form):
     
     credit_card_number = forms.CharField(
         label='Card Nr.',
-        required=False,
+        required=True,
         )
     cvv = forms.CharField(
         label='CVV', 
-        required=False,
+        required=True,
         )
     expiry_month = forms.DecimalField(
         label='Month', 
-        required=False,
+        required=True,
         initial=1,
         min_value=1,
         max_value=12,
         )
     expiry_year = forms.DecimalField(
         label='Year', 
-        required=False,
+        required=True,
         initial=current_year,
         min_value=current_year,
         max_value=end_year,

@@ -125,6 +125,7 @@
                                         <img class="center" src="{% static 'images/payment-logo-stripe.png' %}" width="150" alt="Stripe Logo (left)">
                                     </div>
                                     <div class="col s12 m8 l6 xl4 offset-xl1">
+                                        <div id="stripe-error-message" class="center bss-red-text"></div>
                                         {{ payment_form.credit_card_number | materializecss:'s9 shrink-font-size' }}
                                         {{ payment_form.cvv | materializecss:'s3 shrink-font-size' }}
                                         {{ payment_form.expiry_month | materializecss:'s6 m4 shrink-font-size' }}

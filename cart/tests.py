@@ -4,6 +4,9 @@ from .views import adjust_cart
 
 # Create your tests here.
 class CartTests(TestCase):
+    """
+    Test to see if quantity can be adjusted
+    """
     print('Running Cart Tests')
     def test_get_cart(self):
         page = self.client.get('/cart/')

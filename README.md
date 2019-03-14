@@ -107,7 +107,7 @@ The application holds a number of apps, carrying out various different tasks.
    *No actual payments can be made*  
    ***Cards that can be used in testing:***  
    | Card Number        | Card Type       | Payment?         | Show?                |
-   |:-------------------|:---------------:|:----------------:|:--------------------:|
+   |--------------------|:---------------:|:----------------:|:--------------------:|
    | 4242424242424242   | Visa            | Yes              | Yes, success banner  |
    | 5555555555554444   | Mastercard      | Yes              | Yes, success banner  |
    | 378282246310005    | AMEX            | Yes              | Yes, success banner  |

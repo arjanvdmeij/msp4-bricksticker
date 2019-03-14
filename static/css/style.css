@@ -240,7 +240,8 @@ button:focus {
 }
 
 .fixed-action-btn {
-    bottom: 78px !important;
+    right: 13px !important;
+    bottom: 13px !important;
 }
 
 .page-footer {
@@ -452,6 +453,7 @@ button:focus {
 
 .btn-to-top {
     padding: 0 8px;
+    border: 1px solid #faec06 !important;
 }
 
 .adjust-title {
@@ -474,11 +476,5 @@ button:focus {
 @media only screen and (min-width: 993px) {
     .container {
         width: 80% !important;
-    }
-}
-
-@media only screen and (min-width: 601px) and (max-width: 992px) {
-    .fixed-action-btn {
-        bottom: 132px !important;
     }
 }

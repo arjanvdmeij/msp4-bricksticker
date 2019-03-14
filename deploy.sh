@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Simple script to perform several steps in a row:
@@ -10,6 +9,10 @@
 # Created to solve collecting static files to a local directory
 # due to checks in Django settings file 
 
+clear
+echo ""
+echo ""
+echo ""
 # Change ENVTYPE
 export ENVTYPE='production'
 
@@ -19,5 +22,8 @@ python3 ~/workspace/manage.py collectstatic
 # Revert the ENVTYPE variable
 export ENVTYPE='development'
 
+echo ""
+echo ""
+echo ""
 # Perform a push to github
 git push origin master

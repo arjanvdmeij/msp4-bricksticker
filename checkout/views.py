@@ -89,14 +89,17 @@ def checkout(request):
                     messages.error(request, 
                         'Unable to take payment at this time, '
                         + 'please try again later')
+                    payment_form = PaymentForm()
                         
             except stripe.error.CardError:
                 messages.error(request, 
                     'Your payment failed, your card was declined.'
                     )
+                payment_form = PaymentForm()
         else:
             messages.error(request, 
                 'We were unable to take a payment with the card you entered')
+            payment_form = PaymentForm()
     else:
         order_form = OrderForm()
         payment_form = PaymentForm()

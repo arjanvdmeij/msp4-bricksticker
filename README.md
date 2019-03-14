@@ -167,8 +167,12 @@ Another interesting bug was trying to apply migrations to the databse after I ha
 In booting on Heroku a check was built in to perform any migrations needed, which it did. Based on the general Dev/Travis configuration. And once done, boot the application
 using the production settings. Needless to say settings are now integrated again in a single file and settings are applied based on an environment variable.  
 
-**There is currently a bug in my environment that prevents collection of static files to S3**, instead creating a 'staticfiles' directory in the root of the project. While it needs fixing, the current **workaround** is to collect the files locally, then manually putting them into the S3 bucket. I have tried to fix this problem, but to no avail so far.  
-While crude, the workaround works, and it is referenced in the additional Word Document as well in the deployment section. My apologies!
+~~**There is currently a bug in my environment that prevents collection of static files to S3**, instead creating a 'staticfiles' directory in the root of the project. While it needs fixing, the current **workaround** is to collect the files locally, then manually putting them into the S3 bucket. I have tried to fix this problem, but to no avail so far.~~  
+~~While crude, the workaround works, and it is referenced in the additional Word Document as well in the deployment section. My apologies!~~
+The above was fixed after moving generic settings for local deployment out of the environment check. They are needed in both. This caused the problems.
+The only minor problem left was that the check did occur on collecting static files, still collecting locally. This was solved with a small script that now changes the variable, runs static file collection, reverts the variable to the original and then pushes to GitHub, killing two birds with one stone. Easy deployment, never forget static files.  
+To deploy:  
+From the command line run `./deploy.sh` and follow any questions asked. That's all there's to it.
 
 Any other things I've run into were simply my fault, and corrected on-the-go whenever needed. Whenever a page was changed, adjustments were made to parts
 broken elsewhere. This mostly applies to the HTML and CSS where changes for specific screensizes would break things. I do not consider those bugs however.  

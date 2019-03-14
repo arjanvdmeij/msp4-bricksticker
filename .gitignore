@@ -3,13 +3,12 @@
 .~c9
 __pycache__/
 *.jpg
-*.png
 *.JPG
 *.PNG
-static/
 media/
 staticfiles/
 old_migrations/
 *c9_invoke*
 .old_migrations/
 P_settings.1.py
+profile.1.html

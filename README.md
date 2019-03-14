@@ -105,16 +105,20 @@ The application holds a number of apps, carrying out various different tasks.
    *should anyone want to build on those. An accompanying text file details which changes need to be made to switch to Bootstrap 4*
 - [**Stripe**'s stripe.js](https://stripe.com/) - test version used for (m/f)aking payments.  
    *No actual payments can be made*  
-   ***Cards to use in testing:***
-   | Card Number      | Card Type       | Payment?        |
-   |------------------|:---------------:|:---------------:|
-   | 4242424242424242 | Visa            | Yes             |
-   | 5555555555554444 | Mastercard      | Yes             |
-   | 378282246310005  | AMEX            | Yes             |
-   | 4000000000000127 | Visa            | No, cvc error   |
-   | 4000000000009995 | Visa            | No, funds error |  
-   In all card cases, a valid expiration should be provided.
-   
+   ***Cards that can be used in testing:***
+   | Card Number        | Card Type       | Payment?         | Show?                |
+   |--------------------|:---------------:|:----------------:|:--------------------:|
+   | 4242424242424242   | Visa            | Yes              | Yes, success banner  |
+   | 5555555555554444   | Mastercard      | Yes              | Yes, success banner  |
+   | 378282246310005    | AMEX            | Yes              | Yes, success banner  |
+   | 4000000000000127   | Visa            | No, cvc error    | No, error banner     |
+   | 4000000000009995   | Visa            | No, funds error  | No, error banner     |
+   | 4242424242424241   | Visa            | No, invalid card | No, form error       |
+   | valid card in past | Any             | No, invalid date | No, form error       |
+   | unfilled fields    | Any             | No, missing data | No, form error       |
+
+   *this list is also available in the Word document in the manual testing section*
+
 - [**JQuery**](https://jquery.com) - The project uses **JQuery** to simplify DOM manipulation.  
    *Additional javascript was used to perform some enhancements as well, like smooth scrolling to the top of the page. Most of the* 
    *jQuery in use however is through MaterializeCSS, with some settings applied, with exception of added alert-box functionality.*
@@ -126,7 +130,7 @@ Every aspect of the site was tested manually extensively, even those tests that 
 
 In the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) 
 in the root of the repository, a chapter is dedicated
-to the tests, including screenshots of manual testing, overview of automated tests and the result as Travis relays.  
+to the tests, including manual testing, overview and screenshots of automated tests and the result as Travis relays.  
 Each app contains a `tests.py` file. In order to run all tests manually instead of using Travis, 
 go to a terminal prompt, and enter `python3 manage.py test` to run all tests.  
 In order to run tests for a specific app, enter (e.g.) `python3 manage.py products` where products is the app to run the tests for.
@@ -153,15 +157,18 @@ This is something that doesn't occur for any other form within the site. There i
 It is a small bug that will need tending in time, however for the moment, it is left as is. The desktop version does not have this
 same issue at all.
 
-While 'rebooting' the site in a MaterializeCSS form, I ran into issues with stripe payments, where stripe.js wuold throw an error and not process payments.
-After (a LOT) of trial and error, it turned out that adding in the CSS class `hide` into the form template directly, which is 
-possible when using django-materializecss-form (e.g. `{{ payment_form.cvv | materializecss:'s3 hide'}}`), caused the form to fail.  
-By the time that became clear, I was on route to upgrade from Stripe v2 to Stripe v3. This needs finishing still, but hiding the form field in its own
-separate `div` solved the problem with payments.  
+While 'rebooting' the site in a MaterializeCSS framework, I ran into issues with stripe payments, where stripe.js wuold throw an error and not process payments.
+After (a LOT of) trial and error, it turned out that this is a problem with select fields in Materialize combined with Django forms which caused the form to fail. There is not a solution for that that I could find.
+By the time this became clear, I was on route to upgrade from Stripe v2 to Stripe v3. This needs finishing still, but changing the select fields for month and year to min-max decimal fields solved the problem for now.  
+*This also led me to wanting the fields set to required, leading to changes to stripe.js*  
+*Stripe by default does not return the user input to the server, instead creating a token and basically destroying the form. This was why fields were needed to be set as 'not required', which then lead to the (valid) option of not issuing the cvv code. I want all fields to be filled (and obviously valid), so I went and modified stripe.js to not return the data the user had put in to the server, but fake data along with the real stripe-generated token.*
 
 Another interesting bug was trying to apply migrations to the databse after I had split off a settings file specifically for the production environment on Heroku.
 In booting on Heroku a check was built in to perform any migrations needed, which it did. Based on the general Dev/Travis configuration. And once done, boot the application
 using the production settings. Needless to say settings are now integrated again in a single file and settings are applied based on an environment variable.  
+
+**There is currently a bug in my environment that prevents collection of static files to S3**, instead creating a 'staticfiles' directory in the root of the project. While it needs fixing, the current **workaround** is to collect the files locally, then manually putting them into the S3 bucket. I have tried to fix this problem, but to no avail so far.  
+While crude, the workaround works, and it is referenced in the additional Word Document as well in the deployment section. My apologies!
 
 Any other things I've run into were simply my fault, and corrected on-the-go whenever needed. Whenever a page was changed, adjustments were made to parts
 broken elsewhere. This mostly applies to the HTML and CSS where changes for specific screensizes would break things. I do not consider those bugs however.  
@@ -170,7 +177,7 @@ broken elsewhere. This mostly applies to the HTML and CSS where changes for spec
 
 For a description of the deployment process, see the corresponding chapter in the 
 [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of the repository.
-This chapter describes the current deployment, as well as the environment variables required in order to run the code locally, 
+This chapter describes the current deployment, as well as the environment variables required in order to run the code locally and remotely, 
 including creation of a `Staff` group within Django Admin for easy adding of staff members.
 
 ## Credits
@@ -185,3 +192,9 @@ this is my first step towards that goal, eventually applying a new look and feel
 
 Thanks bro, for handing me everything needed to make this all work!
 I owe you all the images, logos and descriptions (heck, even the prices!)
+
+### Additional Acknowledgements
+*Yes, there is more*  
+
+Many thanks as well to everyone at [**Code Institute**](https://codeinstitute.net) for their ongoing support (and sometimes swift kicks in the bee-hive) to get me here.  
+You've been a great support over the months, you guys rock! 

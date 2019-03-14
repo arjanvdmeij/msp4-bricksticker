@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',    
 ]
 
 ROOT_URLCONF = 'bricksticker.urls'
@@ -117,7 +118,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-#Added variables
+#Added general variables for DEV as well as PROD
 
 STRIPE_PK = os.getenv('STRIPE_PK')
 STRIPE_SK = os.getenv('STRIPE_SK')
@@ -125,9 +126,9 @@ STRIPE_SK = os.getenv('STRIPE_SK')
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
 #Environment check
@@ -135,44 +136,47 @@ EMAIL_PORT = 587
 if os.getenv('ENVTYPE') != 'production':
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
-    print('Running on Cloud9 <DEV> or Travis <Tests>\n\nUsing local data')
+    print('Running on Cloud9 <DEV> or Travis <Tests>\nUsing local data')
+    
     # Database local
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            }
         }
-    }
+    
     # Static files (CSS, JavaScript, Images) local
     STATIC_URL = '/static/'
     STATICFILES_DIRS =  (
         os.path.join(BASE_DIR, "static"),
         )
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-        
-        
+    
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
     
 else:
     # Running production, debug set to off
     DEBUG = False
-    print('Running on Heroku <PROD>\n\nUsing PostGres DB'
+    print('Running on Heroku <PROD>\nUsing PostGres DB'
         + '\nUsing AWS for static files')
+    
     # Database Heroku
     DATABASES = {
-    'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
-    }
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
+        }
+    
     # Static files (CSS, JavaScript, Images) AWS
     AWS_S3_OBJECT_PARAMETERS = {
-    'Expires': 'Thu, 31 Dec 2219 23:59:59 GMT',
-    'CacheControl': 'max-age=94608000',
-    }
-    AWS_STORAGE_BUCKET_NAME = 'bss-msp-4'
-    AWS_S3_REGION_NAME = 'eu-west-1'
+        'Expires': 'Thu, 31 Dec 2219 23:59:59 GMT',
+        'CacheControl': 'max-age=94608000',
+        }
+    AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+    AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-    # AWS_DEFAULT_ACL = None
+    AWS_DEFAULT_ACL = None
     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
     
     STATICFILES_LOCATION = 'static'

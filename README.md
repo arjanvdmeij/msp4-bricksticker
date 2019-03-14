@@ -1,4 +1,4 @@
-[![BrickStickerShop](https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.1.png)](https://bss-msp-4.herokuapp.com)   
+[![BrickStickerShop](https://s3-eu-west-1.amazonaws.com/bss-msp-4/static/images/logo.png)](https://bss-msp-4.herokuapp.com)   
 Travis says:  
 [![Build Status](https://travis-ci.org/arjanvdmeij/msp4-bricksticker.svg?branch=master)](https://travis-ci.org/arjanvdmeij/msp4-bricksticker)  
 The logo up here is clickable for the live site, but alternatively you can click 
@@ -32,7 +32,7 @@ downlaod a csv file for newsletter purposes. In the admin panel they can also mo
 - The superuser can do what staff members can, plus perform user management in the admin panel, as well as group management.
 
 #### Wireframe and User Stories
-For user stories and wireframe mockups created as part of this project, see the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of this repository.
+For user stories and wireframe mockups created as part of this project, see [**MSP-4-Brickstickershop.docx**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx), located in the root of this repository.
 
 ## Features
 ### Existing apps
@@ -105,9 +105,9 @@ The application holds a number of apps, carrying out various different tasks.
    *should anyone want to build on those. An accompanying text file details which changes need to be made to switch to Bootstrap 4*
 - [**Stripe**'s stripe.js](https://stripe.com/) - test version used for (m/f)aking payments.  
    *No actual payments can be made*  
-   ***Cards that can be used in testing:***
+   ***Cards that can be used in testing:***  
    | Card Number        | Card Type       | Payment?         | Show?                |
-   |--------------------|:---------------:|:----------------:|:--------------------:|
+   |:-------------------|:---------------:|:----------------:|:--------------------:|
    | 4242424242424242   | Visa            | Yes              | Yes, success banner  |
    | 5555555555554444   | Mastercard      | Yes              | Yes, success banner  |
    | 378282246310005    | AMEX            | Yes              | Yes, success banner  |
@@ -117,7 +117,7 @@ The application holds a number of apps, carrying out various different tasks.
    | valid card in past | Any             | No, invalid date | No, form error       |
    | unfilled fields    | Any             | No, missing data | No, form error       |
 
-   *this list is also available in the Word document in the manual testing section*
+   *this list is also available in the MSP-4-Brickstickershop.docx in the manual testing section*
 
 - [**JQuery**](https://jquery.com) - The project uses **JQuery** to simplify DOM manipulation.  
    *Additional javascript was used to perform some enhancements as well, like smooth scrolling to the top of the page. Most of the* 
@@ -128,7 +128,7 @@ Testing the site has been ongoing from the very start, with each and every addit
 [**Travis CI**](https://travis-ci.org/).  
 Every aspect of the site was tested manually extensively, even those tests that are automated.  
 
-In the [**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) 
+In the [**MSP-4-Brickstickershop.docx**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) 
 in the root of the repository, a chapter is dedicated
 to the tests, including manual testing, overview and screenshots of automated tests and the result as Travis relays.  
 Each app contains a `tests.py` file. In order to run all tests manually instead of using Travis, 
@@ -144,43 +144,43 @@ The site has been tested on multiple environments:
    **b.** Safari (Desktop)  
    **c.** Google Chrome (Mobile) - *installed on iPhone XR, 7+, iPad Air (1st gen) and iPad (2018)*  
    **d.** Safari (Mobile) - *installed on iPhone XR, 7+, iPad Air (1st gen) and iPad (2018)*  
-   **e.** Opera (Mobile)
+   **e.** Opera (Mobile)  
    **f.** Developer tools - *emulated versions of Pixel 2 (XL), iPhone 6/7/8(Plus) and X and iPad(Pro)*
 
-Scaling on all devices works as intended. The site does not scale well to the tiny screens of iPhone 5 and/or Galxy S5. This was
-a deliberate choice on my part, as those devices are not much used anymore by the target audience. The majority of traffic will
-be coming from desktop and/or tablet sized browsers. I therefore chose to focus on those instead of (semi-)obsolete mobile phones.
+Scaling on all devices works as intended. Below are some screenshots taken from Chrome development tools, all from the general products page.  *These are just a few screenshots, more screenshots are available* [**here**]()
+##### Screenshots
+
 
 ### Bugs encountered
-At present, there is a small 'bug' in the products page, where the search form shows as an ellips-like inputfield on iPhone.  
-This is something that doesn't occur for any other form within the site. There is however no loss of functionality. 
+ - There is a small 'bug' in the products page, where the search form shows as an ellips-like input field on iPhone that I can't solve.  
+This is also something that doesn't occur for any other form within the site. There is however no loss of functionality. 
 It is a small bug that will need tending in time, however for the moment, it is left as is. The desktop version does not have this
 same issue at all.
 
-While 'rebooting' the site in a MaterializeCSS framework, I ran into issues with stripe payments, where stripe.js wuold throw an error and not process payments.
+- While 'rebooting' the site in a MaterializeCSS framework, I ran into issues with stripe payments, where stripe.js wuold throw an error and not process payments.
 After (a LOT of) trial and error, it turned out that this is a problem with select fields in Materialize combined with Django forms which caused the form to fail. There is not a solution for that that I could find.
 By the time this became clear, I was on route to upgrade from Stripe v2 to Stripe v3. This needs finishing still, but changing the select fields for month and year to min-max decimal fields solved the problem for now.  
-*This also led me to wanting the fields set to required, leading to changes to stripe.js*  
-*Stripe by default does not return the user input to the server, instead creating a token and basically destroying the form. This was why fields were needed to be set as 'not required', which then lead to the (valid) option of not issuing the cvv code. I want all fields to be filled (and obviously valid), so I went and modified stripe.js to not return the data the user had put in to the server, but fake data along with the real stripe-generated token.*
+   - *This also led me to wanting the fields set to required, leading to changes to stripe.js*  
+*Stripe by default does not return the user input to the server, instead creating a token and basically destroying the form. This was why fields were needed to be set as 'not required', which then lead to the (valid) option of not issuing the cvv code. I want all fields to be filled (and obviously valid), so I went and modified stripe.js to not return the data the user had put in to the server, but fake data along with the real stripe-generated token, that is injected by stripe.js*
 
-Another interesting bug was trying to apply migrations to the databse after I had split off a settings file specifically for the production environment on Heroku.
-In booting on Heroku a check was built in to perform any migrations needed, which it did. Based on the general Dev/Travis configuration. And once done, boot the application
-using the production settings. Needless to say settings are now integrated again in a single file and settings are applied based on an environment variable.  
+ - Having split off a settings file specifically for the production environment on Heroku, another glitch presented itself.  
+After updating the Procfile to check for and perform any mogrations, in booting on Heroku it tried to do just that. Based on the *general Dev/Travis* configuration. This of course was not wanted at all, as the migrations were performed against a newly created SQLite database, after which the settings switched to use the (un-migrated) PostGres database..  
+Needless to say, the settings are now integrated again in a single file again, and settings are applied based on an environment variable.  
 
-~~**There is currently a bug in my environment that prevents collection of static files to S3**, instead creating a 'staticfiles' directory in the root of the project. While it needs fixing, the current **workaround** is to collect the files locally, then manually putting them into the S3 bucket. I have tried to fix this problem, but to no avail so far.~~  
-~~While crude, the workaround works, and it is referenced in the additional Word Document as well in the deployment section. My apologies!~~
-The above was fixed after moving generic settings for local deployment out of the environment check. They are needed in both. This caused the problems.
-The only minor problem left was that the check did occur on collecting static files, still collecting locally. This was solved with a small script that now changes the variable, runs static file collection, reverts the variable to the original and then pushes to GitHub, killing two birds with one stone. Easy deployment, never forget static files.  
-To deploy:  
-From the command line run `./deploy.sh` and follow any questions asked. That's all there's to it.
+- I had another bug, where I had moved settings related to all environments into the DEV section of settngs. This led to an inability to collect static files to AWS entirely and had me move files by hand into AWS. Obviously very much less than ideal.  
+The above was fixed after moving those generic settings out of the environment check and applying them for both environments.  
+The only minor problem left was that the check also occurs on collecting static files when in the development environment, where AWS is 'invisible'.  
+This was solved with a small script that now changes the variable used for the check, runs static file collection, reverts the variable to the original and then pushes to GitHub, killing two birds with one stone. Easy deployment, never forget static files.  
+To deploy, from the command line run `./deploy.sh` and follow any questions asked. That's all there's to it.  
+*if an error pops when trying to run the script, you might need to first make the file executable:*  
+`chmod a+x deploy.sh`
 
-Any other things I've run into were simply my fault, and corrected on-the-go whenever needed. Whenever a page was changed, adjustments were made to parts
-broken elsewhere. This mostly applies to the HTML and CSS where changes for specific screensizes would break things. I do not consider those bugs however.  
+
 
 ## Deployment
 
 For a description of the deployment process, see the corresponding chapter in the 
-[**Word document**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of the repository.
+[**MSP-4-Brickstickershop.docx**](https://github.com/arjanvdmeij/msp4-bricksticker/blob/master/MSP-4-Brickstickershop.docx) located in the root of the repository.
 This chapter describes the current deployment, as well as the environment variables required in order to run the code locally and remotely, 
 including creation of a `Staff` group within Django Admin for easy adding of staff members.
 

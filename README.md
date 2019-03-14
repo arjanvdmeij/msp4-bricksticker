@@ -106,16 +106,17 @@ The application holds a number of apps, carrying out various different tasks.
 - [**Stripe**'s stripe.js](https://stripe.com/) - test version used for (m/f)aking payments.  
    *No actual payments can be made*  
    ***Cards that can be used in testing:***  
-   | Card Number        | Card Type       | Payment?         | Show?                |
-   |--------------------|:---------------:|:----------------:|:--------------------:|
-   | 4242424242424242   | Visa            | Yes              | Yes, success banner  |
-   | 5555555555554444   | Mastercard      | Yes              | Yes, success banner  |
-   | 378282246310005    | AMEX            | Yes              | Yes, success banner  |
-   | 4000000000000127   | Visa            | No, cvc error    | No, error banner     |
-   | 4000000000009995   | Visa            | No, funds error  | No, error banner     |
-   | 4242424242424241   | Visa            | No, invalid card | No, form error       |
-   | valid card in past | Any             | No, invalid date | No, form error       |
-   | unfilled fields    | Any             | No, missing data | No, form error       |
+
+   Card Number|Card Type|Payment?|Show?
+   ---|:---|:---|:---|
+   4242424242424242|Visa|Yes|Yes, success banner
+   5555555555554444|Mastercard|Yes|Yes, success banner
+   378282246310005|AMEX|Yes|Yes, success banner
+   4000000000000127|Visa|No, cvc error|No, error banner
+   4000000000009995|Visa|No, funds error|No, error banner
+   4242424242424241|Visa|No, invalid card|No, form error
+   valid card in past|Any|No, invalid date|No, form error
+   unfilled fields|Any|No, missing data|No, form error
 
    *this list is also available in the MSP-4-Brickstickershop.docx in the manual testing section*
 

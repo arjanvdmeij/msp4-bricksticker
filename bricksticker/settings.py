@@ -130,6 +130,16 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
+# Static files (CSS, JavaScript, Images) generic
+STATIC_URL = '/static/'
+STATICFILES_DIRS =  (
+    os.path.join(BASE_DIR, "static"),
+    )
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 #Environment check
 
 if os.getenv('ENVTYPE') != 'production':
@@ -144,19 +154,9 @@ if os.getenv('ENVTYPE') != 'production':
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
             }
         }
-    
-    # Static files (CSS, JavaScript, Images) local
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS =  (
-        os.path.join(BASE_DIR, "static"),
-        )
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_URL = '/media/'
-    
+
 else:
-    # Running production, debug set to off
+    # Running production, debug set to off!
     DEBUG = False
     print('Running on Heroku <PROD>\nUsing PostGres DB'
         + '\nUsing AWS for static files')
@@ -180,15 +180,7 @@ else:
     
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'custom_storages.StaticStorage'
-    # STATIC_URL = 'https://%s/%s/' % (
-    #     AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-    # STATICFILES_DIRS =  (
-    #     os.path.join(BASE_DIR, "static"),
-    #     )
-    # STATIC_ROOT = (
-    #     os.path.join(BASE_DIR, 'staticfiles'),
-    #     )
-    
+
     MEDIAFILES_LOCATION = 'media'
     DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
     MEDIA_URL = 'https://%s/%s/' % (

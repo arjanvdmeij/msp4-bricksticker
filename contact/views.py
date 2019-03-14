@@ -51,7 +51,7 @@ def contact(request):
                 cc_email.content_subtype = 'html'
                 cc_email.send()
                 
-                messages.error(request, 
+                messages.success(request, 
                     'Thank you for your mail!'
                     + ' We\'ll get back to you as soon as possible!')
                 return redirect('products')

@@ -37,7 +37,7 @@
             </div>
             <div class="row no-margin">
                 {% for item in cart_items|dictsort:'product.setnumber' %}
-                <div class="col s12 m6 l4">
+                <div class="col s12 m6 xl4">
                     <div class="card border-red hoverable">
                         <div class="card-image product center">
                             <img src="{{ MEDIA_URL }}{{ item.product.image1 }}" alt="{{ item.product.name }}">

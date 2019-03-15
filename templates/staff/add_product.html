@@ -1,6 +1,9 @@
 {% extends 'staff.html' %} 
 {% load static %} 
 {% load materializecss %} 
+{% block pagetitle %}
+Staff - Add Product - BrickStickerShop
+{% endblock %}
 {% block staffcontent %}
 <form method="post" action="{% url 'add_product' %}" enctype="multipart/form-data"> {% csrf_token %}
     <div class="card-panel border-red white">

@@ -1,6 +1,9 @@
 {% extends 'base.html' %} 
 {% load static from staticfiles %} 
 {% load materializecss %} 
+{% block pagetitle %}
+Checkout - BrickStickerShop
+{% endblock %}
 {% block head_stripe_js %}
 <script src="https://js.stripe.com/v2/"></script>
 <script>
@@ -89,7 +92,7 @@
                 <i class="material-icons bss-yellow-text">monetization_on</i>ADDRESS AND PAYMENT
             </div>
             <div class="collapsible-body bss-yellow-light less-padding">
-                <form role="form" method="post" id="payment-form" action="{% url 'checkout' %}"> {% csrf_token %} 
+                <form method="post" id="payment-form" action="{% url 'checkout' %}"> {% csrf_token %} 
                     <div class="row less-margin-bottom">
                         <div class="col s12 no-padding">
                             <div class="card-panel border-red white no-margin">
@@ -126,9 +129,7 @@
                                         {{ payment_form.cvv | materializecss:'s3 shrink-font-size' }}
                                         {{ payment_form.expiry_month | materializecss:'s6 m4 shrink-font-size' }}
                                         {{ payment_form.expiry_year | materializecss:'s6 m4 shrink-font-size' }}
-                                        <div class="hide">
-                                            {{ payment_form.stripe_id | materializecss }}
-                                        </div>
+                                        {{ payment_form.stripe_id | materializecss:'hide' }}
                                     </div>
                                     <div class="col l3 xl3 offset-xl1 hide-on-med-and-down center">
                                         <img class="center" src="{% static 'images/bss-brick-cc.png' %}" width="150" alt="Figure with Credit Card (right)">

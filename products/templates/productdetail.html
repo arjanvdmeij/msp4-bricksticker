@@ -1,6 +1,9 @@
 {% extends 'base.html' %} 
 {% load static %} 
 {% load materializecss %} 
+{% block pagetitle %}
+{{product.setnumber}} - {{product.name}} - BrickStickerShop
+{% endblock %}
 {% block content %}
 <div class="row no-margin">
     <div class="left">

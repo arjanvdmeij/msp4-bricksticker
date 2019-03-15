@@ -167,7 +167,6 @@ input[type=email]:not(.browser-default):focus:not([readonly]),
 input[type=text]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
     border-bottom: 1px solid #c9190a !important;
-    -webkit-box-shadow: 0 1px 0 0 #c9190a !important;
     box-shadow: 0 1px 0 0 #c9190a !important;
 }
 
@@ -253,14 +252,10 @@ button:focus {
 /* --- custom CSS --- */
 
 .hoverable-text {
-    -webkit-transition: -webkit-text-shadow .5s;
-    transition: -webkit-text-shadow .5s;
     transition: text-shadow .5s;
-    transition: text-shadow .5s, -webkit-text-shadow .5s;
 }
 
 .hoverable-text:hover {
-    -webkit-text-shadow: 1px 4px 7px rgba(0, 0, 0, 0.4);
     text-shadow: 1px 4px 7px rgba(0, 0, 0, 0.4);
 }
 
@@ -401,7 +396,6 @@ button:focus {
 }
 
 .a-like-button a[type="button"] {
-    -webkit-appearance: none;
     line-height: .5;
     margin: 0 !important;
 }
@@ -483,6 +477,9 @@ button:focus {
     box-shadow: none !important;
 }
 
+.shrink-pw-helper ul {
+    font-size: .7rem;
+}
 
 /* --- Override Materialize Container width --- */
 

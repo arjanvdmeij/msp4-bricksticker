@@ -34,9 +34,7 @@ class PaymentForm(forms.Form):
         min_value=current_year,
         max_value=end_year,
         )
-    stripe_id = forms.CharField(
-        widget=forms.HiddenInput,
-        )
+    stripe_id = forms.CharField()
 
     
 class OrderForm(forms.ModelForm):

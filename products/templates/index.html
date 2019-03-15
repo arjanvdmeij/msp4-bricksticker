@@ -98,7 +98,7 @@
                         <div class="card-action no-padding">
                             <div class="row no-margin">
                                 <div class="col s6 no-padding">
-                                    <button class="left btn bss-red-text white product-price">&euro; {{ product.price }}</button>
+                                    <button class="left btn bss-red-text white product-price" style="width:80px!important">&euro; {{ product.price }}</button>
                                 </div>
                                 <div class="col s6 no-padding">
                                     <form method="post" action="{% url 'add_to_cart' product.id %}">

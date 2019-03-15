@@ -130,6 +130,7 @@ def register(request):
         'user_form': user_form,
     })
 
+
 @login_required
 def get_mail_csv(request):
     """ 

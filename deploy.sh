@@ -11,19 +11,17 @@
 
 clear
 echo ""
-echo ""
-echo ""
 # Change ENVTYPE
 export ENVTYPE='production'
-
 # Run collection of static files
+echo "Collecting static files (if any) and adding to AWS"
+echo ""
 python3 ~/workspace/manage.py collectstatic
-
 # Revert the ENVTYPE variable
+echo ""
 export ENVTYPE='development'
-
 echo ""
-echo ""
+echo "Pushing to GitHub"
 echo ""
 # Perform a push to github
 git push origin master

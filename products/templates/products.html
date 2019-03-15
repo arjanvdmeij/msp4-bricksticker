@@ -33,33 +33,6 @@
             </form>
         </div>
     </div>
-        <!--<div class="col s6 m4 no-padding">-->
-        <!--    <a class='btn btn-default bss-red bss-white-text dropdown-trigger' href='#' data-target='categories'><i class="fas fa-filter bss-yellow-text"></i> Categories</a>-->
-        <!--    <ul id='categories' class='dropdown-content'>-->
-        <!--        <li>-->
-        <!--            <form  action="{% url 'search' %}" method="get">-->
-        <!--                <button class="btn-small bss-white bss-red-text all-categories" name="q" type="submit" value="">All Categories</button>-->
-        <!--            </form>-->
-        <!--            {% for item in categories %}-->
-        <!--            <form class="form-inline" action="{% url 'filter_products' %}" method="get">-->
-        <!--                <button class="btn-small bss-white bss-red-text no-border" name="q" type="submit" value="{{ item.category }}">{{ item.category }}</button>-->
-        <!--            </form>-->
-        <!--            {% endfor %}-->
-        <!--        </li>-->
-        <!--    </ul>-->
-        <!--</div>-->
-        <!--<div class="col s6 m4 offset-m4 no-padding">-->
-        <!--    <form class="" action="{% url 'search' %}" method="get">-->
-        <!--        <div id="search-field" class="input-field col s12 no-margin no-padding">-->
-        <!--            <i class="material-icons prefix bss-red-text">search</i>-->
-        <!--            <label for="product-search">Search</label>-->
-        <!--            <input class="validate bss-white" id="product-search" type="search" name="q">-->
-        <!--        </div>-->
-        <!--        <div class="hide input-field col s3">-->
-        <!--            <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>-->
-        <!--        </div>-->
-        <!--    </form>-->
-        <!--</div>-->
 </div>
 {% if products %}
 <div class="card bss-yellow-light border-red less-padding">

@@ -148,13 +148,9 @@ The site has been tested on multiple environments:
    **e.** Opera (Mobile)  
    **f.** Developer tools - *emulated versions of Pixel 2 (XL), iPhone 6/7/8(Plus) and X and iPad(Pro)*
 
-Scaling on all devices works as intended. Below are some screenshots taken from Chrome development tools, all from the general products page.  *These are just a few screenshots, more screenshots are available* [**here**](https://github.com/arjanvdmeij/msp4-bricksticker/tree/master/README_screenshots)
+Scaling on all devices works as intended. Below are some screenshots taken from Chrome development tools, all from the general products page.  *Static screenshots are availabale*  [**here**](https://github.com/arjanvdmeij/msp4-bricksticker/tree/master/README_screenshots)
 ##### Screenshots
-![iPhone6/7/8Plus](https://raw.githubusercontent.com/arjanvdmeij/msp4-bricksticker/master/README_screenshots//iphone678plus-portrait.png)
-![iPad](https://raw.githubusercontent.com/arjanvdmeij/msp4-bricksticker/master/README_screenshots/ipad-landscape.png)
-![iPadPro](https://raw.githubusercontent.com/arjanvdmeij/msp4-bricksticker/master/README_screenshots/ipadpro-landscape.png)
-
-
+![Responsiveness GIF](https://raw.githubusercontent.com/arjanvdmeij/msp4-bricksticker/master/README_screenshots//bss-msp-4-responsiveness.gif)
 
 ### Bugs encountered
  - There is a small 'bug' in the products page, where the search form shows as an ellips-like input field on iPhone that I can't solve.  

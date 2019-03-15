@@ -148,8 +148,8 @@ The site has been tested on multiple environments:
    **e.** Opera (Mobile)  
    **f.** Developer tools - *emulated versions of Pixel 2 (XL), iPhone 6/7/8(Plus) and X and iPad(Pro)*
 
-Scaling on all devices works as intended. Below are some screenshots taken from Chrome development tools, all from the general products page.  *Static screenshots are availabale*  [**here**](https://github.com/arjanvdmeij/msp4-bricksticker/tree/master/README_screenshots)
-##### Screenshots
+Scaling on all devices works as intended. Below are some screenshots taken from Chrome development tools, all from the general products page.  *Static screenshots are availabale*  [**here**](https://github.com/arjanvdmeij/msp4-bricksticker/tree/master/README_screenshots)  
+
 ![Responsiveness GIF](https://raw.githubusercontent.com/arjanvdmeij/msp4-bricksticker/master/README_screenshots//bss-msp-4-responsiveness.gif)
 
 ### Bugs encountered

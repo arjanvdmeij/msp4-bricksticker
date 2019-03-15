@@ -88,8 +88,8 @@ The application holds a number of apps, carrying out various different tasks.
    **b.** full order history download  
    **c.** newsletter processing in-site
 - Further sophistication of mails sent out
-- Finish upgrade to Stripe v3
-- Add more payment options
+- Upgrade to Stripe v3  
+   Add more payment options
 
 ## Technologies Used
 - **HTML**, **CSS**, **Javascript/jQuery**, **Python** were all at the heart of things
@@ -148,7 +148,7 @@ The site has been tested on multiple environments:
    **e.** Opera (Mobile)  
    **f.** Developer tools - *emulated versions of Pixel 2 (XL), iPhone 6/7/8(Plus) and X and iPad(Pro)*
 
-Scaling on all devices works as intended. Below are some screenshots taken from Chrome development tools, all from the general products page.  *Static screenshots are availabale*  [**here**](https://github.com/arjanvdmeij/msp4-bricksticker/tree/master/README_screenshots)  
+Scaling on all devices works as intended. Below is an animated image taken from Chrome development tools, showing various screen sizes.  *Static screenshots are availabale*  [**here**](https://github.com/arjanvdmeij/msp4-bricksticker/tree/master/README_screenshots)  
 <p align="center">
    <img src="https://raw.githubusercontent.com/arjanvdmeij/msp4-bricksticker/master/README_screenshots//bss-msp-4-responsiveness.gif">
 </p>
@@ -160,8 +160,7 @@ It is a small bug that will need tending in time, however for the moment, it is 
 same issue at all.
 
 - While 'rebooting' the site in a MaterializeCSS framework, I ran into issues with stripe payments, where stripe.js wuold throw an error and not process payments.
-After (a LOT of) trial and error, it turned out that this is a problem with select fields in Materialize combined with Django forms which caused the form to fail. There is not a solution for that that I could find.
-By the time this became clear, I was on route to upgrade from Stripe v2 to Stripe v3. This needs finishing still, but changing the select fields for month and year to min-max decimal fields solved the problem for now.  
+After (a LOT of) trial and error, it turned out that this is a problem with select fields in Materialize combined with Django forms which caused the form to fail. There is not a solution for that that I could find. Changing the select fields for month and year to min-max decimal fields solved the problem for now.  
    - *This also led me to wanting the fields set to required, leading to changes to stripe.js*  
 *Stripe by default does not return the user input to the server, instead creating a token and basically destroying the form. This was why fields were needed to be set as 'not required', which then lead to the (valid) option of not issuing the cvv code. I want all fields to be filled (and obviously valid), so I went and modified stripe.js to not return the data the user had put in to the server, but fake data along with the real stripe-generated token, that is injected by stripe.js*
 
@@ -169,7 +168,7 @@ By the time this became clear, I was on route to upgrade from Stripe v2 to Strip
 After updating the Procfile to check for and perform any mogrations, in booting on Heroku it tried to do just that. Based on the *general Dev/Travis* configuration. This of course was not wanted at all, as the migrations were performed against a newly created SQLite database, after which the settings switched to use the (un-migrated) PostGres database..  
 Needless to say, the settings are now integrated again in a single file again, and settings are applied based on an environment variable.  
 
-- I had another bug, where I had moved settings related to all environments into the DEV section of settngs. This led to an inability to collect static files to AWS entirely and had me move files by hand into AWS. Obviously very much less than ideal.  
+- Another bug, was where I had moved settings related to all environments into the DEV section of settngs. This led to an inability to collect static files to AWS entirely and had me move files by hand into AWS. Obviously very much less than ideal.  
 The above was fixed after moving those generic settings out of the environment check and applying them for both environments.  
 The only minor problem left was that the check also occurs on collecting static files when in the development environment, where AWS is 'invisible'.  
 This was solved with a small script that now changes the variable used for the check, runs static file collection, reverts the variable to the original and then pushes to GitHub, killing two birds with one stone. Easy deployment, never forget static files.  
@@ -177,6 +176,11 @@ To deploy, from the command line run `./deploy.sh` and follow any questions aske
 *if an error pops when trying to run the script, you might need to first make the file executable:*  
 `chmod a+x deploy.sh`
 
+- When HTML-verifying the pages, the contact page generates a single error for there being a duplicate class attribute on the subject field. This can't be solved, as it is a generated field. A similar error is raised on the password reset page (when clicking the link from the mail sent) for a 'leftover' 'p' end-tag.  
+
+   The staff pages for adding a product and adding an FAQ item also generate the same unsolvable error that the contact page does. This is in all cases due to the textarea field.  
+   
+   The checkout page generated an error that the label for the stripe id should be availlable to a non-hidden field. This too was due to how the field was rendered in combination with MaterializeCSS. This was solved however by removing the HiddenInput widget, instead hiding the form field completely using django-materializecss-form.
 
 
 ## Deployment

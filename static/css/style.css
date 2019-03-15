@@ -266,6 +266,7 @@ button:focus {
 
 .product img {
     display: block;
+    min-height: 110px;
     max-height: 110px;
     width: auto !important;
     max-width: 100%;
@@ -379,6 +380,8 @@ button:focus {
     border-top: 1px solid #c9190a;
     border-right: 1px solid #c9190a;
     box-shadow: none !important;
+    padding: 0 !important;
+    width: 165px !important;
 }
 
 .product-price:hover {
@@ -386,8 +389,13 @@ button:focus {
     box-shadow: none !important;
 }
 
+.product-title {
+    display: inline-block;
+    height: 2.5em;
+}
+
 .product-description {
-    height: 35px;
+    height: 3em;
     display: block;
     overflow: hidden;
 }
@@ -400,6 +408,11 @@ button:focus {
 
 .width-fix-cart1 {
     width: 110px !important;
+    height: 35px !important;
+}
+
+.width-fix-qty {
+    width: 165px !important;
 }
 
 .width-fix-cart2 {

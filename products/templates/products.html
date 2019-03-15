@@ -2,52 +2,66 @@
 {% load static %}
 
 {% block content %} 
-<div class="row no-margin">
-    <div class="col s6 m4 no-padding">
-        <a class='btn btn-default bss-red bss-white-text dropdown-trigger' href='#' data-target='categories'><i class="fas fa-filter bss-yellow-text"></i> Categories</a>
-        <ul id='categories' class='dropdown-content'>
-            <li>
-                <form  action="{% url 'search' %}" method="get">
-                    <button class="btn-small bss-white bss-red-text all-categories" name="q" type="submit" value="">All Categories</button>
-                </form>
-                {% for item in categories %}
-                <form class="form-inline" action="{% url 'filter_products' %}" method="get">
-                    <button class="btn-small bss-white bss-red-text no-border" name="q" type="submit" value="{{ item.category }}">{{ item.category }}</button>
-                </form>
-                {% endfor %}
-            </li>
-        </ul>
-    </div>
-    <div class="col s6 m4 offset-m4 no-padding">
-        <form class="" action="{% url 'search' %}" method="get">
-            <div id="search-field" class="input-field col s12 no-margin no-padding">
-                <i class="material-icons prefix bss-red-text">search</i>
-                <label for="product-search">Search</label>
-                <input class="validate bss-white" id="product-search" type="search" name="q">
-            </div>
-            <div class="hide input-field col s3">
-                <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>
-            </div>
-        </form>
-    </div>
-</div>
-{% if not products %}
-<div class="row">
-    <div class="col s12 m6 offset-m3">
-        <div class="card-panel bss-yellow-light border-red less-padding">
-            <div class="card small border-red less-padding no-margin">
-                <div class="card-content">
-                    <span class="card-title bss-red-text">Oops! Nothing found..</span>
-                    <h6>Please search again!</h6>
-                    <div class="card-image right" style="width:250px">
-                        <img src="{% static 'images/sharky.png' %}" style="width:250px;margin:auto auto;">
-                    </div>
+
+<div class="card-panel border-red bss-yellow-light less-padding">
+    <div class="row no-margin valign-wrapper">
+        <div class="col s6 m4 no-padding">
+            <a class='btn btn-default bss-red bss-white-text dropdown-trigger' href='#' data-target='categories'><i class="fas fa-filter bss-yellow-text"></i> Categories</a>
+            <ul id='categories' class='dropdown-content'>
+                <li>
+                    <form  action="{% url 'search' %}" method="get">
+                        <button class="btn-small bss-white bss-red-text all-categories" name="q" type="submit" value="">All Categories</button>
+                    </form>
+                    {% for item in categories %}
+                    <form class="form-inline" action="{% url 'filter_products' %}" method="get">
+                        <button class="btn-small bss-white bss-red-text no-border" name="q" type="submit" value="{{ item.category }}">{{ item.category }}</button>
+                    </form>
+                    {% endfor %}
+                </li>
+            </ul>
+        </div>
+        <div class="col s6 m4 offset-m4 no-padding">
+            <form class="" action="{% url 'search' %}" method="get">
+                <div id="search-field" class="input-field col s12 no-margin no-padding">
+                    <i class="material-icons prefix bss-red-text">search</i>
+                    <label for="product-search">Search</label>
+                    <input class="validate bss-white" id="product-search" type="search" name="q">
                 </div>
-            </div>
+                <div class="hide input-field col s3">
+                    <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>
+                </div>
+            </form>
         </div>
     </div>
+        <!--<div class="col s6 m4 no-padding">-->
+        <!--    <a class='btn btn-default bss-red bss-white-text dropdown-trigger' href='#' data-target='categories'><i class="fas fa-filter bss-yellow-text"></i> Categories</a>-->
+        <!--    <ul id='categories' class='dropdown-content'>-->
+        <!--        <li>-->
+        <!--            <form  action="{% url 'search' %}" method="get">-->
+        <!--                <button class="btn-small bss-white bss-red-text all-categories" name="q" type="submit" value="">All Categories</button>-->
+        <!--            </form>-->
+        <!--            {% for item in categories %}-->
+        <!--            <form class="form-inline" action="{% url 'filter_products' %}" method="get">-->
+        <!--                <button class="btn-small bss-white bss-red-text no-border" name="q" type="submit" value="{{ item.category }}">{{ item.category }}</button>-->
+        <!--            </form>-->
+        <!--            {% endfor %}-->
+        <!--        </li>-->
+        <!--    </ul>-->
+        <!--</div>-->
+        <!--<div class="col s6 m4 offset-m4 no-padding">-->
+        <!--    <form class="" action="{% url 'search' %}" method="get">-->
+        <!--        <div id="search-field" class="input-field col s12 no-margin no-padding">-->
+        <!--            <i class="material-icons prefix bss-red-text">search</i>-->
+        <!--            <label for="product-search">Search</label>-->
+        <!--            <input class="validate bss-white" id="product-search" type="search" name="q">-->
+        <!--        </div>-->
+        <!--        <div class="hide input-field col s3">-->
+        <!--            <button class="btn btn-light bss-red bss-white-text no-border" type="submit"><i class="bss-yellow-text fas fa-search"></i></button>-->
+        <!--        </div>-->
+        <!--    </form>-->
+        <!--</div>-->
 </div>
-{% else %}
+{% if products %}
 <div class="card bss-yellow-light border-red less-padding">
     <div class="card-content">
         <div class="row no-margin">
@@ -66,14 +80,14 @@
         </div>
         <div class="row">
             {% for product in products|dictsort:'setnumber' %}
-            <div class="col s12 m6 xl4">
+            <div class="col s12 m6 l4 xl3">
                 <div class="card border-red hoverable white">
                     <div class="card-image product center">
                         <a class="bss-red-text hoverable-text" href="{% url 'productdetail' product.id %}">
                         <img src="{{ MEDIA_URL }}{{ product.image1 }}" alt="{{ product.name }}">Detail Page</a>
                     </div>
                     <div class="card-content">
-                        <h6><a class="bss-red-text hoverable-text" href="{% url 'productdetail' product.id %}">
+                        <h6 class="product-title"><a class="bss-red-text hoverable-text" href="{% url 'productdetail' product.id %}">
                             {{ product.setnumber }} - {{ product.name | truncatewords:4 }}</a>
                         </h6>
                         <div class="card-panel bss-blue-light no-margin less-padding border-red fixed-height">
@@ -93,7 +107,7 @@
                     <div class="card-action no-padding">
                         <div class="row no-margin">
                             <div class="col s6 no-padding">
-                                <button class="left btn bss-red-text white product-price">&euro; {{ product.price }}</button>
+                                <button class="left btn bss-red-text white product-price" style="width:80px!important">&euro; {{ product.price }}</button>
                             </div>
                             <div class="col s6 no-padding">
                                 <form method="post" action="{% url 'add_to_cart' product.id %}">
@@ -115,6 +129,22 @@
                 </div>
             </div>
             {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="card-panel bss-yellow-light border-red less-padding">
+            <div class="card small border-red less-padding no-margin">
+                <div class="card-content">
+                    <span class="card-title bss-red-text">Oops! Nothing found..</span>
+                    <h6>Please search again!</h6>
+                    <div class="card-image right" style="width:250px">
+                        <img src="{% static 'images/sharky.png' %}" style="width:250px;margin:auto auto;">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

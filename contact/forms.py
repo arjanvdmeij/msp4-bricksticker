@@ -1,7 +1,8 @@
 from django import forms
 
 class ContactForm(forms.Form):
-    """ Simple straight-forward form
+    """ 
+    Simple straight-forward form
     """
     contact_name = forms.CharField(label='Name', required=True)
     contact_email = forms.EmailField(label='Email Address', required=True)

@@ -5,8 +5,8 @@ from products.models import Product
 def cart_contents(request):
     """
     Make cart contents available when rendering any page.
-    Also provide list of product IDs to show items that 
-    were added to cart
+    Also provide list of product IDs to use for marking
+    items that were added to cart already
     """
     cart = request.session.get('cart', {})
     cart_items = []

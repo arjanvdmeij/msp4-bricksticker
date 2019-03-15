@@ -5,10 +5,12 @@ from datetime import datetime, timedelta
 class PaymentForm(forms.Form):
     """
     Form to obtain payment information for credit card.
-    Expiration motnh and year based on 'now'
+    Expiration month and year initial values based on 'now'
     """
     current_year = int(
         datetime.now().strftime("%Y"))
+    current_month = int(
+        datetime.now().strftime("%m"))
     end_year = int((
         datetime.now() + timedelta(weeks=1040)).strftime("%Y"))
     
@@ -23,14 +25,15 @@ class PaymentForm(forms.Form):
     expiry_month = forms.DecimalField(
         label='Month', 
         required=True,
-        initial=1,
+        initial=current_month,
         min_value=1,
         max_value=12,
+        
         )
     expiry_year = forms.DecimalField(
         label='Year', 
         required=True,
-        initial=current_year,
+        initial= current_year,
         min_value=current_year,
         max_value=end_year,
         )

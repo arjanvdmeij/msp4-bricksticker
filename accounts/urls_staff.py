@@ -4,6 +4,12 @@ from .views import get_mail_csv
 from checkout.views import order_handling, toggle_processed
 from infopages.views import add_faq
 
+'''
+Staff pages were grouped to appear under a common link
+/staff/
+This makes the overall page links more logical
+'''
+
 urlpatterns = [
     url(r'^$', order_handling, name='staff'),
     url(r'^orders/$', order_handling, name='orders'),

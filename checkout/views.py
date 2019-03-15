@@ -20,6 +20,7 @@ def checkout(request):
     """
     Validation and processing of the form(s) filled out
     within the checkout submission.
+    On any payment form errors, return a blank payment form
     """
     if request.method=='POST':
         order_form = OrderForm(request.POST)

@@ -2,6 +2,10 @@ from django import forms
 from .models import Product, ProductComment
 
 class ProductCommentForm(forms.ModelForm):
+    """
+    Comment form, with addional attribute to 
+    the textarea to show character counter
+    """
     class Meta:
         model = ProductComment
 

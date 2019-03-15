@@ -1,7 +1,8 @@
 from django.db import models
 from products.models import Product
 
-""" Main order containing customer information
+""" 
+Main order containing customer information
 """
 class Order(models.Model):
     full_name = models.CharField(max_length=50, blank=False)
@@ -20,7 +21,8 @@ class Order(models.Model):
         return "OrderID: {0} / Date: {1} / Processed: {2}".format(
             self.id, self.date, self.processed)
 
-""" Order items to be grouped within the order
+""" 
+Order items within the order
 """
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, null=False)

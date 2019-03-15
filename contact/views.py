@@ -19,7 +19,8 @@ def contact(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             try:
-                """ Send form to site admins
+                """ 
+                Send form to site admins
                 """
                 message = render_to_string(
                     'contact_mail.html',{
@@ -35,7 +36,8 @@ def contact(request):
                 email.content_subtype = 'html'
                 email.send()
                 
-                """ Send form data to customer as well
+                """ 
+                Send form data to customer as well
                 """
                 site = get_current_site(request)
                 cc_message = render_to_string(

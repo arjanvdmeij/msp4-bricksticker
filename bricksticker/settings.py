@@ -117,8 +117,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-#Added general variables for DEV as well as PROD
 
+#Added general variables for DEV as well as PROD
 STRIPE_PK = os.getenv('STRIPE_PK')
 STRIPE_SK = os.getenv('STRIPE_SK')
 
@@ -130,6 +130,7 @@ EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT = 587
 
+
 # Static files (CSS, JavaScript, Images) generic
 STATIC_URL = '/static/'
 STATICFILES_DIRS =  (
@@ -140,8 +141,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-#Environment check
 
+#Environment check
 if os.getenv('ENVTYPE') != 'production':
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True

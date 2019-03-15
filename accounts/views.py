@@ -135,7 +135,7 @@ def register(request):
 def get_mail_csv(request):
     """ 
     Allow admins/staff to download a csv file
-    for newsletter purposes
+    with mail addresses for newsletter purposes
     """
     if request.user.is_staff:
         response = HttpResponse(content_type='text/csv')

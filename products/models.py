@@ -1,6 +1,9 @@
 from django.db import models
 
 class Product(models.Model):
+    """ 
+    Product model, core of what's it about
+    """
     name = models.CharField(max_length=254, default='')
     setnumber = models.DecimalField(max_digits=8,decimal_places=0)
     release_year = models.CharField(max_length=10, default='')
@@ -17,6 +20,10 @@ class Product(models.Model):
                                         self.category)
 
 class ProductComment(models.Model):
+    """
+    Allow users to leave comments and link them to 
+    the products
+    """
     comment_on = models.ForeignKey(
         Product, on_delete=models.CASCADE, 
         related_name="Product_Comment")

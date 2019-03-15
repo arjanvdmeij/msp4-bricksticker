@@ -14,7 +14,7 @@ def add_to_cart(request, id):
     """
     Add a product to the cart.
     While site doesn't offer quantity at the moment,
-    option is here for re-use elsewhere
+    option is here if wanted in future
     """
     quantity=int(request.POST.get('quantity'))
     cart = request.session.get('cart', {})
